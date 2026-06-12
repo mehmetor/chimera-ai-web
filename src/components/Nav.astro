@@ -20,13 +20,21 @@ const current = Astro.url.pathname.replace(/\/$/, "") || "/";
 const pair = hreflangFor(routeKey);
 ---
 
-<nav class="nav">
+<nav class="nav" id="site-nav">
   <div class="nav-inner">
     <a class="brand-lockup" href={home} aria-label="Chimera AI — ana sayfa">
       <SealMark size={30} variant="dugum" color="var(--n-100)" />
       <span class="brand-word">CHIMERA <span class="ai">AI</span></span>
     </a>
-    <div class="nav-links">
+    <button class="nav-toggle" type="button" aria-label="Menü" aria-expanded="false" aria-controls="nav-menu">
+      <svg class="icon-menu" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h16"></path>
+      </svg>
+      <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18"></path>
+      </svg>
+    </button>
+    <div class="nav-links" id="nav-menu">
       {
         items.map((it) => (
           <a class="nav-link" href={it.href} aria-current={current === it.href.replace(/\/$/, "") ? "page" : undefined}>
@@ -42,3 +50,26 @@ const pair = hreflangFor(routeKey);
     </div>
   </div>
 </nav>
+
+<script is:inline>
+  (function () {
+    var nav = document.getElementById("site-nav");
+    if (!nav) return;
+    var btn = nav.querySelector(".nav-toggle");
+    if (!btn) return;
+    function close() {
+      nav.classList.remove("menu-open");
+      btn.setAttribute("aria-expanded", "false");
+    }
+    btn.addEventListener("click", function () {
+      var open = nav.classList.toggle("menu-open");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    nav.querySelectorAll(".nav-links a").forEach(function (a) {
+      a.addEventListener("click", close);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") close();
+    });
+  })();
+</script>

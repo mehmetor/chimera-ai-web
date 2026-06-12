@@ -293,6 +293,30 @@ a {
   color: var(--bronze-on-dark);
 }
 
+/* mobil menü düğmesi — yalnız <1020px (responsive blokta gösterilir) */
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  width: 42px;
+  height: 42px;
+  background: transparent;
+  border: var(--line-w) solid var(--n-700);
+  border-radius: var(--radius-sm);
+  color: var(--n-100);
+  cursor: pointer;
+}
+.nav-toggle .icon-close {
+  display: none;
+}
+.nav-toggle[aria-expanded="true"] .icon-menu {
+  display: none;
+}
+.nav-toggle[aria-expanded="true"] .icon-close {
+  display: block;
+}
+
 /* ---------- mühür animasyonu ---------- */
 .seal-arc {
   fill: none;
