@@ -10,11 +10,13 @@ export const SITE = {
   email: "info@chimera-ai.com.tr",
   /** DCN LinkedIn şirket sayfası — IA §4.3 (sameAs). Doldurulunca JSON-LD'ye girer. */
   linkedin: "",
-  /** Mimari Ön-Analiz formu hedefi — deploy'da .env (PUBLIC_FORM_ENDPOINT). Boşsa form mailto'ya düşer. */
+  /** Mimari Ön-Analiz formu hedefi — Cloudflare Worker route (PUBLIC_FORM_ENDPOINT). Boşsa form mailto'ya düşer. */
   formEndpoint: import.meta.env.PUBLIC_FORM_ENDPOINT ?? "",
-  /** Gizlilik-dostu analitik domaini (Plausible/Umami) — boşsa analitik yüklenmez. */
-  analyticsDomain: import.meta.env.PUBLIC_ANALYTICS_DOMAIN ?? "",
+  /** Umami self-host analitik (PUBLIC_ANALYTICS_*). İkisi de doluysa script yüklenir; çerezsiz. */
+  analyticsWebsiteId: import.meta.env.PUBLIC_ANALYTICS_WEBSITE_ID ?? "",
   analyticsSrc: import.meta.env.PUBLIC_ANALYTICS_SRC ?? "",
+  /** Google Search Console doğrulama token'ı (PUBLIC_GSC_VERIFICATION) — boşsa meta basılmaz. */
+  gscVerification: import.meta.env.PUBLIC_GSC_VERIFICATION ?? "",
 } as const;
 
 /** Site geneli Organization JSON-LD (her sayfada — GEO çapraz-doğrulama, IA §4.1). */

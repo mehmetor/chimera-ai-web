@@ -70,8 +70,8 @@ const siteHome = lang === "tr" ? "/" : "/en";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     {
-      SITE.analyticsDomain && SITE.analyticsSrc && (
-        <script is:inline defer data-domain={SITE.analyticsDomain} src={SITE.analyticsSrc} />
+      SITE.analyticsWebsiteId && SITE.analyticsSrc && (
+        <script is:inline defer data-website-id={SITE.analyticsWebsiteId} src={SITE.analyticsSrc} />
       )
     }
   </head>
