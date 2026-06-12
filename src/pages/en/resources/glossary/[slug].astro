@@ -1,0 +1,43 @@
+---
+// CHIMERA AI — Glossary term page (EN). DefinedTerm JSON-LD (GEO).
+import { render, type CollectionEntry } from "astro:content";
+import Article from "@layouts/Article.astro";
+import { getGlossary, entrySlug } from "@/lib/content";
+import { SITE } from "../../../../site";
+
+export async function getStaticPaths() {
+  const terms = await getGlossary("en");
+  return terms.map((entry) => ({ params: { slug: entrySlug(entry.id) }, props: { entry } }));
+}
+
+interface Props {
+  entry: CollectionEntry<"glossary">;
+}
+const { entry } = Astro.props as Props;
+const { Content } = await render(entry);
+const slug = entrySlug(entry.id);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  name: entry.data.term,
+  description: entry.data.summary,
+  url: `${SITE.url}/en/resources/glossary/${slug}`,
+  inDefinedTermSet: { "@type": "DefinedTermSet", name: "Chimera AI Glossary", url: `${SITE.url}/en/resources/glossary` },
+};
+const meta = entry.data.updated
+  ? `Updated: ${entry.data.updated.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`
+  : undefined;
+---
+
+<Article
+  title={entry.data.term}
+  description={entry.data.summary}
+  kicker="Glossary"
+  backHref="/en/resources/glossary"
+  backLabel="All terms"
+  meta={meta}
+  jsonLd={[jsonLd]}
+>
+  <Content />
+</Article>

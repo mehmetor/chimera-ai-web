@@ -169,6 +169,78 @@
   color: var(--n-400);
 }
 
+/* ---------- prose (markdown içerik gövdesi) ---------- */
+.prose {
+  max-width: 760px;
+  font-size: calc(17px * var(--ts));
+  line-height: 1.7;
+  color: var(--n-700);
+}
+.prose > * + * {
+  margin-top: 1.1em;
+}
+.prose h2 {
+  font-size: calc(26px * var(--ts));
+  font-weight: 600;
+  margin-top: 1.8em;
+  color: var(--n-900);
+}
+.prose h3 {
+  font-size: calc(20px * var(--ts));
+  font-weight: 600;
+  margin-top: 1.4em;
+  color: var(--n-900);
+}
+.prose a {
+  color: var(--accent-ink);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose strong {
+  color: var(--n-900);
+}
+.prose ul,
+.prose ol {
+  padding-left: 1.4em;
+}
+.prose li + li {
+  margin-top: 0.4em;
+}
+.prose blockquote {
+  border-left: var(--line-w) solid var(--accent);
+  padding: 4px 0 4px 18px;
+  color: var(--n-600);
+  font-size: calc(15.5px * var(--ts));
+}
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--bg-light-2);
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: calc(15px * var(--ts));
+}
+.prose th {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--n-500);
+  padding: 10px 14px;
+  border-bottom: var(--line-w) solid rgba(21, 19, 14, 0.3);
+}
+.prose td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(21, 19, 14, 0.12);
+  vertical-align: top;
+}
+
 /* ---------- responsive ---------- */
 @media (max-width: 1020px) {
   .grid-3 {

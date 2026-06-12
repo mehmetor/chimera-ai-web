@@ -1,0 +1,21 @@
+---
+// CHIMERA AI — Sözlük indeksi (TR). Kurumsal AI terimlerinin sade açıklamaları (GEO, IA §4.2).
+import Base from "@layouts/Base.astro";
+import GlossaryIndex from "@components/GlossaryIndex.astro";
+---
+
+<Base
+  title="Sözlük — Kurumsal yapay zeka terimleri · Chimera AI"
+  description="RAG'den kapalı devreye, KVKK'dan air-gap'e — kurumsal yapay zeka terimlerinin sade Türkçe açıklamaları."
+>
+  <section class="section on-light">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:32px">
+      <div style="max-width:680px;display:flex;flex-direction:column;gap:16px">
+        <div class="mono-label">Kaynaklar · Sözlük</div>
+        <h1 class="h-section">Kurumsal yapay zeka sözlüğü</h1>
+        <p class="lede">Terimleri sade Türkçeyle, tanım + örnekle açıklarız.</p>
+      </div>
+      <GlossaryIndex lang="tr" basePath="/kaynaklar/sozluk" />
+    </div>
+  </section>
+</Base>

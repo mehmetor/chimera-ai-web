@@ -1,0 +1,23 @@
+---
+// CHIMERA AI — sözlük indeks listesi (terim kartları → detay sayfası).
+import { getGlossary, entrySlug } from "@/lib/content";
+import type { Lang } from "@i18n/utils";
+
+interface Props {
+  lang: Lang;
+  basePath: string;
+}
+const { lang, basePath } = Astro.props;
+const terms = await getGlossary(lang);
+---
+
+<div class="grid-2">
+  {
+    terms.map((t) => (
+      <a class="card" href={`${basePath}/${entrySlug(t.id)}`} style="gap:8px;text-decoration:none;color:inherit">
+        <h3 class="h-card" style="font-size:calc(18px * var(--ts))">{t.data.term}</h3>
+        <p class="body-dim" style="font-size:calc(15px * var(--ts))">{t.data.summary}</p>
+      </a>
+    ))
+  }
+</div>

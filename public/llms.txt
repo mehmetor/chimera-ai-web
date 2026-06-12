@@ -13,6 +13,9 @@ Chimera AI çatı markadır; altında üç hat yaşar: **Platform** (kapalı dev
 - [Nasıl Başlarız](https://chimera-ai.com.tr/nasil-baslariz): Mimari Ön-Analiz → FAZ-0 pilot → kurulum (mahsup modeli).
 - [Referanslar](https://chimera-ai.com.tr/referanslar): Anonim saha vakaları.
 - [Kaynaklar](https://chimera-ai.com.tr/kaynaklar): Blog, sözlük, SSS.
+- [Sözlük](https://chimera-ai.com.tr/kaynaklar/sozluk): Kurumsal AI terimleri (kapalı devre/on-premise, RAG, air-gap, KVKK, LLM).
+- [SSS](https://chimera-ai.com.tr/kaynaklar/sss): Güvenlik, lisans, donanım, süreç.
+- [Blog](https://chimera-ai.com.tr/kaynaklar/blog): On-premise vs bulut AI, mimari yazıları.
 - [Hakkında](https://chimera-ai.com.tr/hakkinda): DC NEXTGEN.
 - [İletişim](https://chimera-ai.com.tr/iletisim): Mimari Ön-Analiz talebi.
 
@@ -20,7 +23,9 @@ Chimera AI çatı markadır; altında üç hat yaşar: **Platform** (kapalı dev
 
 - [Home (EN)](https://chimera-ai.com.tr/en): Closed-circuit enterprise AI, on-premise.
 - [Platform (EN)](https://chimera-ai.com.tr/en/platform)
-- [On-premise AI in Turkey (EN)](https://chimera-ai.com.tr/en/on-premise-ai-turkey)
+- [On-premise AI in Turkey (EN)](https://chimera-ai.com.tr/en/on-premise-ai-turkey): Definition, comparison, FAQ.
+- [Glossary (EN)](https://chimera-ai.com.tr/en/resources/glossary): on-premise AI, RAG.
+- [FAQ (EN)](https://chimera-ai.com.tr/en/resources/faq)
 
 ## Notlar
 

@@ -1,0 +1,43 @@
+---
+// CHIMERA AI — Sözlük terim sayfası (TR). DefinedTerm JSON-LD (GEO).
+import { render, type CollectionEntry } from "astro:content";
+import Article from "@layouts/Article.astro";
+import { getGlossary, entrySlug } from "@/lib/content";
+import { SITE } from "../../../site";
+
+export async function getStaticPaths() {
+  const terms = await getGlossary("tr");
+  return terms.map((entry) => ({ params: { slug: entrySlug(entry.id) }, props: { entry } }));
+}
+
+interface Props {
+  entry: CollectionEntry<"glossary">;
+}
+const { entry } = Astro.props as Props;
+const { Content } = await render(entry);
+const slug = entrySlug(entry.id);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  name: entry.data.term,
+  description: entry.data.summary,
+  url: `${SITE.url}/kaynaklar/sozluk/${slug}`,
+  inDefinedTermSet: { "@type": "DefinedTermSet", name: "Chimera AI Sözlük", url: `${SITE.url}/kaynaklar/sozluk` },
+};
+const meta = entry.data.updated
+  ? `Güncellendi: ${entry.data.updated.toLocaleDateString("tr-TR", { year: "numeric", month: "long", day: "numeric" })}`
+  : undefined;
+---
+
+<Article
+  title={entry.data.term}
+  description={entry.data.summary}
+  kicker="Sözlük"
+  backHref="/kaynaklar/sozluk"
+  backLabel="Tüm terimler"
+  meta={meta}
+  jsonLd={[jsonLd]}
+>
+  <Content />
+</Article>

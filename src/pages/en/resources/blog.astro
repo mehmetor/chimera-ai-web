@@ -1,0 +1,21 @@
+---
+// CHIMERA AI — Blog index (EN).
+import Base from "@layouts/Base.astro";
+import BlogList from "@components/BlogList.astro";
+---
+
+<Base
+  title="Blog · Chimera AI"
+  description="Monthly model and hardware benchmark notes, field observations, and architecture writing on closed-circuit AI."
+>
+  <section class="section on-light">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:32px">
+      <div style="max-width:680px;display:flex;flex-direction:column;gap:16px">
+        <div class="mono-label">Resources · Blog</div>
+        <h1 class="h-section">Blog</h1>
+        <p class="lede">Benchmark notes, field observations, and architecture writing on closed-circuit AI.</p>
+      </div>
+      <BlogList lang="en" basePath="/en/resources/blog" emptyLabel="First posts coming soon." />
+    </div>
+  </section>
+</Base>
