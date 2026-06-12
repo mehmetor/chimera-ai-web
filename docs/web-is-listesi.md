@@ -35,8 +35,9 @@ Web sitesi geliştirme + içerik hattının canlı takip dokümanı.
 
 ## 🚀 Deploy yapılandırması (içerik değil)
 
-- [ ] Form servisi seçimi + `PUBLIC_FORM_ENDPOINT` (CTA'nın çalışması v1 koşulu).
-- [ ] Gizlilik-dostu analitik (Plausible/Umami) + `PUBLIC_ANALYTICS_*`.
+- [~] **Form (CTA):** Cloudflare Worker + Email Routing seçildi — kod hazır (`cloudflare/form-worker/`, lead Workspace kutusuna, 3. taraf SaaS yok). **Bekleyen (kullanıcı):** CF Email Routing'i `chimera-ai.com.tr`'de aç + hedefi doğrula + Worker deploy + Railway `PUBLIC_FORM_ENDPOINT`. Rehber: `cloudflare/form-worker/README.md`. (Bağlanana kadar form mailto'ya düşüyor.)
+- [~] **Analitik:** Umami (self-host, çerezsiz, tek instance tüm siteler) seçildi — head snippet'i Umami formatına (`data-website-id`) geçti. **Bekleyen:** Umami örneği + `PUBLIC_ANALYTICS_WEBSITE_ID`/`_SRC`.
+- [~] **SEO:** Google Search Console meta doğrulaması bağlandı (`PUBLIC_GSC_VERIFICATION`). **Bekleyen:** GSC'de domain doğrula + sitemap gönder. (GA kullanılmıyor — SEO/GEO'ya katkısı yok + KVKK çerez yükü.)
 
 ## 📚 İçerik kaynakları (DCN — kanonik, repo dışı)
 
