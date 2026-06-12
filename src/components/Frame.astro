@@ -4,10 +4,11 @@
 interface Props {
   class?: string;
   style?: string;
+  id?: string;
 }
-const { class: className = "", style } = Astro.props;
+const { class: className = "", style, id } = Astro.props;
 ---
 
-<div class={`frame ${className}`} style={style}>
+<div class={`frame ${className}`} style={style} id={id}>
   <slot />
 </div>

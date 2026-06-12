@@ -7,8 +7,10 @@ import type { Dict } from "@i18n/tr";
 
 interface Props {
   t: Dict;
+  /** Verilirse modül başlığında "Tüm modüller →" linki gösterilir (TR /platform/moduller). */
+  modulesHref?: string;
 }
-const { t } = Astro.props;
+const { t, modulesHref } = Astro.props;
 type ModCode = "M0" | "M1" | "M2" | "M3" | "M4" | "M5" | "M6";
 ---
 
@@ -28,9 +30,12 @@ type ModCode = "M0" | "M1" | "M2" | "M3" | "M4" | "M5" | "M6";
       <ClosedCircuitDiagram t={t.platform.diagram} dark={false} />
     </Frame>
 
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <h3 class="h-card" style="font-size:calc(26px * var(--ts))">{t.platform.modulesH}</h3>
-      <p class="body-dim" style="max-width:560px">{t.platform.modulesLede}</p>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <h3 class="h-card" style="font-size:calc(26px * var(--ts))">{t.platform.modulesH}</h3>
+        <p class="body-dim" style="max-width:560px">{t.platform.modulesLede}</p>
+      </div>
+      {modulesHref && <a class="btn-line" href={modulesHref}>Tüm modüller →</a>}
     </div>
     <div>
       {

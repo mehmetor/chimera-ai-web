@@ -60,7 +60,7 @@ const breadcrumb = {
 ---
 
 <Base title={title} description={desc} translated={true} routeKey={routeKey} jsonLd={[breadcrumb]}>
-  {routeKey === "platform" && <Platform t={t} />}
+  {routeKey === "platform" && <Platform t={t} modulesHref={lang === "tr" ? "/platform/moduller" : undefined} />}
   {routeKey === "devops" && <DevOps t={t} />}
   {routeKey === "app" && <App t={t} />}
   {routeKey === "start" && <Start t={t} ctaHref={contactSlug(lang)} />}
