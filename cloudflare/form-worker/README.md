@@ -22,7 +22,7 @@ Ziyaretçi → form POST → Cloudflare Worker (chimera-ai.com.tr/api/on-analiz)
 ## Önkoşullar
 
 - `chimera-ai.com.tr` Cloudflare'de ve **proxy'li** (turuncu bulut). Site Railway'de origin olarak kalır; bu kurulum yalnız e-posta (MX) ve `/api/on-analiz` route'unu etkiler.
-- `chimera-ai.com.tr`'nin **başka e-posta ihtiyacı olmamalı** (Email Routing onun MX'ini devralır). Eğer bu domain'de Workspace/başka mail varsa önce bana söyle — `LEAD_FROM` domain'ini değiştiririz.
+- **`chimera-ai.com.tr` için posta kutusu (mailbox) GEREKMEZ — bu ideal durum.** Email Routing bir kutu değil, yönlendiricidir; `form@chimera-ai.com.tr` sanal bir gönderen adresidir (kutu gerektirmez) ve lead'ler senin `dcnextgen.com.tr` Workspace kutuna düşer. Tek koşul: bu domain'de **zaten çalışan başka** bir mail servisi (Workspace vb.) OLMAMALI — yoksa Email Routing MX'i devralırken çakışır. Kutu yokluğu = çakışma yok. (Bu domain'de başka mail varsa söyle, `LEAD_FROM` domain'ini değiştiririz.)
 
 ## Adımlar
 
