@@ -22,7 +22,11 @@ Web sitesi geliştirme + içerik hattının canlı takip dokümanı.
 
 ## ⏳ DCN içeriği / karar bekleyen
 
-- [ ] **İlk GEO makaleleri** (IA §4.2). **Haziran 2026 raporu** aday (`2026-06-...-karsilastirma-raporu.md`) — uzun; muhtemelen özetlenip ayrı bir "rapor/benchmark" sayfası gerekir. → **Yaklaşım sonra konuşulacak.**
+- [ ] **İlk GEO makaleleri** (IA §4.2). **Haziran 2026 raporu** aday → **karar bekliyor (aşağıdaki öneri).**
+
+  **Haziran raporu — değerlendirme (368 satır, ~4.100 kelime; 8 bölüm: karşılaştırma tablosu, benchmark, Türkçe performans, donanım eşleşmesi, model aileleri, tavsiye, ihtiyaç→çözüm matrisi).**
+  - Public-uygunluk: büyük ölçüde uygun (benchmark/karşılaştırma = alıntılanabilir GEO içeriği). Yayın öncesi düzenlenecek: tüketici GPU sokak fiyatları bölümü (değişken — göreceli rehbere indir), iç referanslar ("Mayıs sim", müşteri/dosya yolu) anonimleştir, "Haziran 2026 itibarıyla" tarih + yöntem notu ekle. **Demet onayı gerekir.**
+  - **Öneri (Option 1 → sonra 2):** Önce blog yazısı değil, **ayrı bir tarihli "Benchmark Raporu" sayfası** (`/kaynaklar/rapor/2026-06`): özet + ana tablolar + donanım matrisi + tavsiye. Bu, sitenin "her ay yayımlanan benchmark raporu" iddiasının **kanonik dayanağı** olur. Sonra rapordan 2–3 odaklı blog yazısı türetilir (IA §4.2 #5 LLM hazır mı / #6 donanım seçimi / #9 en iyi Türkçe LLM). Rapor = rapor; bloglar = damıtım.
 - [ ] Gerçek saha fotoğrafları (duotone slot'lar: hero, referanslar).
 - [ ] Referans vaka detayları (anonim — onaya bağlı).
 
