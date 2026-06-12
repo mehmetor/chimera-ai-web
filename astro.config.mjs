@@ -28,23 +28,7 @@ export default defineConfig({
       },
     }),
   ],
-  // Eski yapı → Dokümanlar bölgesi (köklü nav değişikliği). Henüz deploy olmadı;
-  // güvenlik için 301'ler. Dinamik detay yolları (sözlük/blog/rapor) az dış-linklidir,
-  // ana/section URL'leri kapsanıyor.
-  redirects: {
-    "/platform/moduller": "/dokumanlar/platform/moduller",
-    "/platform/nasil-calisir": "/dokumanlar/platform/nasil-calisir",
-    "/platform/guvenlik": "/dokumanlar/platform/guvenlik",
-    "/kaynaklar": "/dokumanlar",
-    "/kaynaklar/sozluk": "/dokumanlar/sozluk",
-    "/kaynaklar/sss": "/dokumanlar/sss",
-    "/kaynaklar/rapor": "/dokumanlar/rapor",
-    "/kaynaklar/blog": "/dokumanlar/blog",
-    "/en/resources": "/en/docs",
-    "/en/resources/glossary": "/en/docs/glossary",
-    "/en/resources/faq": "/en/docs/faq",
-    "/en/resources/blog": "/en/docs",
-  },
+  // NOT: Eski URL → Dokümanlar 301'leri lansmanda eklenecek (henüz kimse ziyaret etmedi).
   // GEO/SEO: temiz URL'ler (IA §4.1 "temiz URL")
   trailingSlash: "never",
   build: { format: "directory" },
