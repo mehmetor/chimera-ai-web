@@ -28,5 +28,5 @@ external services such as OpenAI, Microsoft or Google.
 - When a permanent asset is preferred over an ongoing subscription.
 
 An on-premise deployment is typically grounded in the organization's own knowledge via
-[RAG](/en/resources/glossary/rag), and in the strictest scenarios fully isolated from
+[RAG](/en/docs/glossary/rag), and in the strictest scenarios fully isolated from
 external networks via an air gap.

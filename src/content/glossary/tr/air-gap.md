@@ -14,7 +14,7 @@ altına alınan yollarla (örn. onaylı aktarım süreçleri) taşınır.
 
 ## Yapay zeka bağlamında
 
-En yüksek gizlilik gerektiren senaryolarda, [kapalı devre](/kaynaklar/sozluk/kapali-devre-on-premise)
+En yüksek gizlilik gerektiren senaryolarda, [kapalı devre](/dokumanlar/sozluk/kapali-devre-on-premise)
 bir AI kurulumu air-gap'li bir ağda çalıştırılabilir: model, belgeler ve kullanıcı
 etkileşimleri dış ağa hiç ulaşmaz. Bu, savunma, kritik altyapı ve hassas Ar-Ge gibi
 alanlarda tercih edilir.
@@ -26,4 +26,4 @@ alanlarda tercih edilir.
   disiplin şarttır.
 
 Air-gap bir "her şey ya da hiç" değildir; çoğu kurum için tam yalıtım yerine sıkı ağ
-sınırlandırması ([kapalı devre](/kaynaklar/sozluk/kapali-devre-on-premise)) yeterli olur.
+sınırlandırması ([kapalı devre](/dokumanlar/sozluk/kapali-devre-on-premise)) yeterli olur.

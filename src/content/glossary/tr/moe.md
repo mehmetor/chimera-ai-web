@@ -17,4 +17,4 @@ kısmı (düşük **aktif parametre**) işler.
 **Neden önemli (on-premise):** bellek transfer yükü düştüğü için, bant genişliği kısıtlı
 kompakt donanımlarda (mini-PC, birleşik bellek) MoE modeller yoğun (dense) modellere göre
 **~3 kata kadar** daha yüksek hıza ulaşır — kurum sunucusunda daha az donanımla daha akıcı
-[yapay zeka](/kaynaklar/sozluk/llm) demektir.
+[yapay zeka](/dokumanlar/sozluk/llm) demektir.

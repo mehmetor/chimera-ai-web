@@ -1,9 +1,9 @@
 ---
-// CHIMERA AI — Benchmark Raporu detay (TR). TechArticle JSON-LD (GEO).
+// CHIMERA AI — Dokümanlar · Benchmark Raporu detay (TR). DocsShell + TechArticle JSON-LD (GEO).
 import { render, type CollectionEntry } from "astro:content";
-import Article from "@layouts/Article.astro";
+import DocsShell from "@layouts/DocsShell.astro";
 import { getReports, entrySlug } from "@/lib/content";
-import { SITE } from "../../../site";
+import { SITE } from "@/site";
 
 export async function getStaticPaths() {
   const reports = await getReports("tr");
@@ -16,7 +16,7 @@ interface Props {
 const { entry } = Astro.props as Props;
 const { Content } = await render(entry);
 const slug = entrySlug(entry.id);
-const url = `${SITE.url}/kaynaklar/rapor/${slug}`;
+const url = `${SITE.url}/dokumanlar/rapor/${slug}`;
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -32,16 +32,21 @@ const jsonLd = {
   mainEntityOfPage: url,
   url,
 };
+
+const meta = `Geçerlilik: ${entry.data.validity}`;
 ---
 
-<Article
-  title={entry.data.title}
+<DocsShell
+  title={`${entry.data.title} · Chimera AI`}
   description={entry.data.summary}
-  kicker="Benchmark Raporu"
-  backHref="/kaynaklar/rapor"
-  backLabel="Tüm raporlar"
-  meta={`Geçerlilik: ${entry.data.validity}`}
+  crumb={entry.data.title}
+  ogType="article"
   jsonLd={[jsonLd]}
 >
-  <Content />
-</Article>
+  <div class="mono-label">Benchmark Raporu</div>
+  <h1 style="margin-top:12px">{entry.data.title}</h1>
+  <p style="font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.05em;color:var(--n-500);margin-top:10px">{meta}</p>
+  <article class="prose" style="margin-top:24px">
+    <Content />
+  </article>
+</DocsShell>

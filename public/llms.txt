@@ -12,10 +12,14 @@ Chimera AI çatı markadır; altında üç hat yaşar: **Platform** (kapalı dev
 - [App](https://chimera-ai.com.tr/app): Fikirden ürüne 5 fazlı geliştirme süreci.
 - [Nasıl Başlarız](https://chimera-ai.com.tr/nasil-baslariz): Mimari Ön-Analiz → FAZ-0 pilot → kurulum (mahsup modeli).
 - [Referanslar](https://chimera-ai.com.tr/referanslar): Anonim saha vakaları.
-- [Kaynaklar](https://chimera-ai.com.tr/kaynaklar): Blog, sözlük, SSS.
-- [Sözlük](https://chimera-ai.com.tr/kaynaklar/sozluk): Kurumsal AI terimleri (kapalı devre/on-premise, RAG, embedding, reranker, vektör veritabanı, MoE, quantization, MCP, fine-tuning/LoRA, guardrail, air-gap, KVKK, LLM).
-- [SSS](https://chimera-ai.com.tr/kaynaklar/sss): Güvenlik, lisans, donanım, süreç.
-- [Blog](https://chimera-ai.com.tr/kaynaklar/blog): On-premise vs bulut AI, mimari yazıları.
+- [Dokümanlar](https://chimera-ai.com.tr/dokumanlar): Teknik dokümanlar (sidebar'lı): platform, sözlük, SSS, raporlar, blog.
+- [Platform · Modüller](https://chimera-ai.com.tr/dokumanlar/platform/moduller): M0–M6 modül kataloğu, teslim kriterleri, dürüst sınırlar.
+- [Platform · Nasıl çalışır](https://chimera-ai.com.tr/dokumanlar/platform/nasil-calisir): Akıl (LLM) + Hafıza (RAG) teslim, El (MCP) yol haritası.
+- [Platform · Güvenlik](https://chimera-ai.com.tr/dokumanlar/platform/guvenlik): Sıfır dış veri çıkışı, air-gap, KVKK.
+- [Sözlük](https://chimera-ai.com.tr/dokumanlar/sozluk): Kurumsal AI terimleri (kapalı devre/on-premise, RAG, embedding, reranker, vektör veritabanı, MoE, quantization, MCP, fine-tuning/LoRA, guardrail, air-gap, KVKK, LLM).
+- [SSS](https://chimera-ai.com.tr/dokumanlar/sss): Güvenlik, lisans, donanım, süreç.
+- [Benchmark Raporu](https://chimera-ai.com.tr/dokumanlar/rapor): Aylık açık kaynak LLM + donanım karşılaştırması.
+- [Blog](https://chimera-ai.com.tr/dokumanlar/blog): On-premise vs bulut AI, mimari yazıları.
 - [Hakkında](https://chimera-ai.com.tr/hakkinda): DC NEXTGEN.
 - [İletişim](https://chimera-ai.com.tr/iletisim): Mimari Ön-Analiz talebi.
 
@@ -24,8 +28,8 @@ Chimera AI çatı markadır; altında üç hat yaşar: **Platform** (kapalı dev
 - [Home (EN)](https://chimera-ai.com.tr/en): Closed-circuit enterprise AI, on-premise.
 - [Platform (EN)](https://chimera-ai.com.tr/en/platform)
 - [On-premise AI in Turkey (EN)](https://chimera-ai.com.tr/en/on-premise-ai-turkey): Definition, comparison, FAQ.
-- [Glossary (EN)](https://chimera-ai.com.tr/en/resources/glossary): on-premise AI, RAG.
-- [FAQ (EN)](https://chimera-ai.com.tr/en/resources/faq)
+- [Glossary (EN)](https://chimera-ai.com.tr/en/docs/glossary): on-premise AI, RAG.
+- [FAQ (EN)](https://chimera-ai.com.tr/en/docs/faq)
 
 ## Notlar
 

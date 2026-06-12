@@ -4,6 +4,7 @@
 import SealMark from "./SealMark.astro";
 import type { Lang } from "@i18n/utils";
 import { navItems, contactSlug, homeSlug, hreflangFor, type RouteKey } from "@i18n/routes";
+import { docsHome } from "@i18n/docsNav";
 import type { Dict } from "@i18n/tr";
 
 interface Props {
@@ -18,6 +19,8 @@ const items = navItems(lang);
 const cta = contactSlug(lang);
 const current = Astro.url.pathname.replace(/\/$/, "") || "/";
 const pair = hreflangFor(routeKey);
+const docs = docsHome(lang);
+const docsLabel = lang === "tr" ? "Dokümanlar" : "Docs";
 ---
 
 <nav class="nav" id="site-nav">
@@ -42,6 +45,7 @@ const pair = hreflangFor(routeKey);
           </a>
         ))
       }
+      <a class="nav-link" href={docs.slug}>{docsLabel}</a>
       <a class="nav-cta" href={cta} style="margin-left:8px">{t.nav.cta}</a>
       <div class="lang-switch">
         <a class={lang === "tr" ? "active" : ""} href={pair.tr} hreflang="tr">TR</a>

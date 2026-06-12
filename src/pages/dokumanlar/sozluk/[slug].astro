@@ -1,7 +1,7 @@
 ---
-// CHIMERA AI — Sözlük terim sayfası (TR). DefinedTerm JSON-LD (GEO).
+// CHIMERA AI — Dokümanlar · Sözlük terim sayfası (TR). DocsShell + DefinedTerm JSON-LD.
 import { render, type CollectionEntry } from "astro:content";
-import Article from "@layouts/Article.astro";
+import DocsShell from "@layouts/DocsShell.astro";
 import { getGlossary, entrySlug } from "@/lib/content";
 import { SITE } from "../../../site";
 
@@ -22,22 +22,19 @@ const jsonLd = {
   "@type": "DefinedTerm",
   name: entry.data.term,
   description: entry.data.summary,
-  url: `${SITE.url}/kaynaklar/sozluk/${slug}`,
-  inDefinedTermSet: { "@type": "DefinedTermSet", name: "Chimera AI Sözlük", url: `${SITE.url}/kaynaklar/sozluk` },
+  url: `${SITE.url}/dokumanlar/sozluk/${slug}`,
+  inDefinedTermSet: { "@type": "DefinedTermSet", name: "Chimera AI Sözlük", url: `${SITE.url}/dokumanlar/sozluk` },
 };
 const meta = entry.data.updated
   ? `Güncellendi: ${entry.data.updated.toLocaleDateString("tr-TR", { year: "numeric", month: "long", day: "numeric" })}`
   : undefined;
 ---
 
-<Article
-  title={entry.data.term}
-  description={entry.data.summary}
-  kicker="Sözlük"
-  backHref="/kaynaklar/sozluk"
-  backLabel="Tüm terimler"
-  meta={meta}
-  jsonLd={[jsonLd]}
->
-  <Content />
-</Article>
+<DocsShell title={`${entry.data.term} · Chimera AI`} description={entry.data.summary} crumb={entry.data.term} jsonLd={[jsonLd]}>
+  <div class="mono-label">Sözlük</div>
+  <h1 style="margin-top:12px">{entry.data.term}</h1>
+  {meta && <p style="font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.05em;color:var(--n-500);margin-top:10px">{meta}</p>}
+  <article class="prose" style="margin-top:24px">
+    <Content />
+  </article>
+</DocsShell>

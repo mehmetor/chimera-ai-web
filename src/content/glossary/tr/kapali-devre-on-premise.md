@@ -27,6 +27,6 @@ gibi dış servislere veri gönderilmez.
 - Mevzuat verinin yurt içinde/kurum içinde kalmasını gerektiriyorsa.
 - Uzun vadede abonelik yerine kalıcı bir varlık isteniyorsa.
 
-Kapalı devre kurulum genellikle [RAG](/kaynaklar/sozluk/rag) ile kurumun kendi bilgisinden
-beslenir ve en katı senaryolarda [air-gap](/kaynaklar/sozluk/air-gap) ile dış ağdan tümüyle
+Kapalı devre kurulum genellikle [RAG](/dokumanlar/sozluk/rag) ile kurumun kendi bilgisinden
+beslenir ve en katı senaryolarda [air-gap](/dokumanlar/sozluk/air-gap) ile dış ağdan tümüyle
 yalıtılır.

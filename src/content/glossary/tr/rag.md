@@ -25,7 +25,7 @@ yanıt verir ve **kaynak gösterebilir**.
 - **Güncellik:** modeli yeniden eğitmeden yeni belge eklenebilir.
 - **Doğrulanabilirlik:** yanıt kaynağa bağlı olduğu için kontrol edilebilir; halüsinasyon
   mimariyle yönetilir.
-- **Gizlilik:** [kapalı devre](/kaynaklar/sozluk/kapali-devre-on-premise) kurulumda belgeler
+- **Gizlilik:** [kapalı devre](/dokumanlar/sozluk/kapali-devre-on-premise) kurulumda belgeler
   kurum sınırından çıkmaz.
 
-RAG, bir [LLM](/kaynaklar/sozluk/llm) ile kurumun bilgi tabanını birleştiren katmandır.
+RAG, bir [LLM](/dokumanlar/sozluk/llm) ile kurumun bilgi tabanını birleştiren katmandır.

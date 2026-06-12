@@ -9,7 +9,6 @@ export type RouteKey =
   | "app"
   | "start"
   | "references"
-  | "resources"
   | "about"
   | "contact";
 
@@ -41,7 +40,6 @@ export const ROUTES: RouteDef[] = [
   { key: "app", section: "app", inNav: true, group: "lines", tr: { slug: "/app", label: "App" }, en: { slug: "/en/app", label: "App" } },
   { key: "start", section: "nasil-baslariz", inNav: true, group: "company", tr: { slug: "/nasil-baslariz", label: "Nasıl Başlarız" }, en: { slug: "/en/how-we-start", label: "How We Start" } },
   { key: "references", section: "referanslar", inNav: false, group: "company", tr: { slug: "/referanslar", label: "Referanslar" }, en: { slug: "/en/references", label: "References" } },
-  { key: "resources", section: "kaynaklar", inNav: false, group: "company", tr: { slug: "/kaynaklar", label: "Kaynaklar" }, en: { slug: "/en/resources", label: "Resources" } },
   { key: "about", section: "hakkinda", inNav: false, group: "company", tr: { slug: "/hakkinda", label: "Hakkında" }, en: { slug: "/en/about", label: "About" } },
   { key: "contact", section: "iletisim", inNav: false, group: "company", tr: { slug: "/iletisim", label: "İletişim" }, en: { slug: "/en/contact", label: "Contact" } },
 ];

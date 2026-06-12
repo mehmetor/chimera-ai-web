@@ -1,0 +1,18 @@
+---
+// CHIMERA AI — Dokümanlar · Blog indeksi (TR). DocsShell.
+import DocsShell from "@layouts/DocsShell.astro";
+import BlogList from "@components/BlogList.astro";
+---
+
+<DocsShell
+  title="Blog · Chimera AI"
+  description="Aylık model ve donanım benchmark notları, saha gözlemleri ve kapalı devre yapay zeka üzerine mimari yazılar."
+  translated={false}
+>
+  <div class="mono-label">Blog</div>
+  <h1 style="margin-top:14px">Blog</h1>
+  <p class="lede" style="margin-top:16px;max-width:640px">Benchmark notları, saha gözlemleri ve kapalı devre AI üzerine mimari yazılar.</p>
+  <div style="margin-top:32px">
+    <BlogList lang="tr" basePath="/dokumanlar/blog" emptyLabel="Yakında ilk yazılar yayımlanacak." />
+  </div>
+</DocsShell>

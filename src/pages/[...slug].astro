@@ -8,7 +8,6 @@ import DevOps from "@components/sections/DevOps.astro";
 import App from "@components/sections/App.astro";
 import Start from "@components/sections/Start.astro";
 import Refs from "@components/sections/Refs.astro";
-import Resources from "@components/sections/Resources.astro";
 import About from "@components/sections/About.astro";
 import Contact from "@components/sections/Contact.astro";
 import { useTranslations, type Lang } from "@i18n/utils";
@@ -40,7 +39,6 @@ const SECTION_KEY: Record<RouteKey, keyof typeof t> = {
   app: "app",
   start: "start",
   references: "refs",
-  resources: "resources",
   about: "about",
   contact: "contact",
 };
@@ -64,9 +62,9 @@ const breadcrumb = {
     routeKey === "platform" && (
       <Platform
         t={t}
-        modulesHref={lang === "tr" ? "/platform/moduller" : undefined}
-        howHref={lang === "tr" ? "/platform/nasil-calisir" : undefined}
-        securityHref={lang === "tr" ? "/platform/guvenlik" : undefined}
+        modulesHref={lang === "tr" ? "/dokumanlar/platform/moduller" : "/en/docs/platform/modules"}
+        howHref={lang === "tr" ? "/dokumanlar/platform/nasil-calisir" : "/en/docs/platform/how-it-works"}
+        securityHref={lang === "tr" ? "/dokumanlar/platform/guvenlik" : "/en/docs/platform/security"}
       />
     )
   }
@@ -74,7 +72,6 @@ const breadcrumb = {
   {routeKey === "app" && <App t={t} />}
   {routeKey === "start" && <Start t={t} ctaHref={contactSlug(lang)} />}
   {routeKey === "references" && <Refs t={t} />}
-  {routeKey === "resources" && <Resources t={t} />}
   {routeKey === "about" && <About t={t} />}
   {routeKey === "contact" && <Contact t={t} />}
 </Base>

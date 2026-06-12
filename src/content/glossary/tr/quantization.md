@@ -16,5 +16,5 @@ kaybı ihmal edilebilir düzeydedir.
 ("ş, ç, ğ, ü, ö, ı") bozulabilir ve kelime anlamı değişebilir. Bu yüzden kurumsal Türkçe
 kurulumlarda **Q4_K_M altına inilmez**; sıkıştırma seviyesi kuruluma özel test edilir.
 
-Quantization, [MoE](/kaynaklar/sozluk/moe) mimarisiyle birlikte, [açık kaynak modelleri](/kaynaklar/sozluk/llm)
+Quantization, [MoE](/dokumanlar/sozluk/moe) mimarisiyle birlikte, [açık kaynak modelleri](/dokumanlar/sozluk/llm)
 kapalı devre donanımına sığdırmanın iki temel kaldıracından biridir.

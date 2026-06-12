@@ -61,7 +61,6 @@ export function buildSidebar(lang: Lang): (SidebarLeaf | SidebarGroup)[] {
   const out: (SidebarLeaf | SidebarGroup)[] = [];
   for (const n of DOCS_NAV) {
     if (isGroup(n)) {
-      const items = n.items.map((it) => it[lang]).filter(Boolean) as DocsLocale[];
       const keyed = n.items.filter((it) => it[lang]).map((it) => ({ key: it.key, ...(it[lang] as DocsLocale) }));
       if (keyed.length) out.push({ label: n.group[lang], items: keyed });
     } else {

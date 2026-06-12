@@ -8,7 +8,7 @@ tags: ["on-premise", "veri-egemenligi", "kvkk", "mimari"]
 
 Kurumlar yapay zekayı benimserken ilk kararlardan biri **nerede çalışacağı**dır: dış bir
 bulut servisinde mi, yoksa kurumun kendi sınırları içinde ([on-premise / kapalı
-devre](/kaynaklar/sozluk/kapali-devre-on-premise)) mi? Bu, yalnızca teknik değil; veri
+devre](/dokumanlar/sozluk/kapali-devre-on-premise)) mi? Bu, yalnızca teknik değil; veri
 egemenliği, uyum ve mülkiyet kararıdır.
 
 ## Karşılaştırma
@@ -16,10 +16,10 @@ egemenliği, uyum ve mülkiyet kararıdır.
 | Eksen | Bulut AI | On-premise AI |
 |---|---|---|
 | Verinin konumu | Sağlayıcının sunucuları | Kurumun kendi sunucuları |
-| Uyum ([KVKK](/kaynaklar/sozluk/kvkk-yapay-zeka)) | Aktarım/rıza yükü | İşleme kurum denetiminde |
+| Uyum ([KVKK](/dokumanlar/sozluk/kvkk-yapay-zeka)) | Aktarım/rıza yükü | İşleme kurum denetiminde |
 | Maliyet yapısı | Yinelenen abonelik | Kalıcı kurulum (mülk) |
 | Bağımlılık | İnternet + sağlayıcı | Kurulu sistem, çevrimdışı çalışabilir |
-| Kuruma uyarlama | Sınırlı | Kurumun bilgisiyle ([RAG](/kaynaklar/sozluk/rag)) |
+| Kuruma uyarlama | Sınırlı | Kurumun bilgisiyle ([RAG](/dokumanlar/sozluk/rag)) |
 
 ## Nasıl karar verilir
 

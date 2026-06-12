@@ -180,9 +180,9 @@ const en: Dict = {
     label: "08 · Resources",
     h2: "Read, ask, compare.",
     items: [
-      ["Blog", "Monthly model and hardware benchmark report, field notes, architecture writing.", "/en/resources/blog"],
-      ["Glossary", "From RAG to closed circuit — plain-language explanations of enterprise AI terms.", "/en/resources/glossary"],
-      ["FAQ", "The most frequent questions on security, licensing, hardware and process.", "/en/resources/faq"],
+      ["Glossary", "From RAG to closed circuit — plain-language explanations of enterprise AI terms.", "/en/docs/glossary"],
+      ["FAQ", "The most frequent questions on security, licensing, hardware and process.", "/en/docs/faq"],
+      ["Documentation", "Platform modules, architecture and security — the full technical docs.", "/en/docs"],
     ],
     linkLabel: "Explore",
   },

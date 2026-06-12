@@ -25,7 +25,7 @@ memory alone — and it can **cite its sources**.
 - **Freshness:** new documents can be added without retraining the model.
 - **Verifiability:** because the answer is tied to a source, it can be checked; hallucination
   is managed by architecture.
-- **Privacy:** in an [on-premise](/en/resources/glossary/on-premise-ai) deployment, documents
+- **Privacy:** in an [on-premise](/en/docs/glossary/on-premise-ai) deployment, documents
   never leave the organization's boundary.
 
 RAG is the layer that combines a large language model with the organization's knowledge base.

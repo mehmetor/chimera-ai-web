@@ -28,5 +28,5 @@ sınırlılık ilkeleri).
 > Bu sayfa bilgilendirme amaçlıdır, hukuki görüş değildir. Uyum değerlendirmesi için
 > kurumunuzun hukuk birimine danışın.
 
-İlgili: [kapalı devre yapay zeka](/kaynaklar/sozluk/kapali-devre-on-premise),
-[air-gap](/kaynaklar/sozluk/air-gap).
+İlgili: [kapalı devre yapay zeka](/dokumanlar/sozluk/kapali-devre-on-premise),
+[air-gap](/dokumanlar/sozluk/air-gap).

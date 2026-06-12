@@ -14,7 +14,7 @@ tekniktir.
 
 ## RAG mı, fine-tune mı?
 
-Çoğu kurumsal "AI bizim bilgimizi bilsin" ihtiyacında önce [RAG](/kaynaklar/sozluk/rag)
+Çoğu kurumsal "AI bizim bilgimizi bilsin" ihtiyacında önce [RAG](/dokumanlar/sozluk/rag)
 denenir — çünkü RAG belgeleri yeniden eğitim olmadan ekler, günceller ve kaynak gösterir.
 
 Fine-tune ise daha çok **biçim/ton/özel dil** gerektiren durumlarda (örn. kurumsal yazım tonu,

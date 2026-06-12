@@ -1,0 +1,19 @@
+---
+// CHIMERA AI — Dokümanlar · Sözlük indeksi (TR). DocsShell.
+import DocsShell from "@layouts/DocsShell.astro";
+import GlossaryIndex from "@components/GlossaryIndex.astro";
+---
+
+<DocsShell
+  title="Sözlük — Kurumsal yapay zeka terimleri · Chimera AI"
+  description="RAG'den kapalı devreye, embedding'den MCP'ye — kurumsal yapay zeka terimlerinin sade Türkçe açıklamaları."
+  translated={true}
+  altPair={{ tr: "/dokumanlar/sozluk", en: "/en/docs/glossary" }}
+>
+  <div class="mono-label">Kavramlar · Sözlük</div>
+  <h1 style="margin-top:14px">Kurumsal yapay zeka sözlüğü</h1>
+  <p class="lede" style="margin-top:16px;max-width:640px">Terimleri sade Türkçeyle, tanım + örnekle açıklarız.</p>
+  <div style="margin-top:32px">
+    <GlossaryIndex lang="tr" basePath="/dokumanlar/sozluk" />
+  </div>
+</DocsShell>

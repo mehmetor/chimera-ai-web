@@ -1,9 +1,9 @@
 ---
-// CHIMERA AI — Blog makalesi (TR). BlogPosting JSON-LD (GEO, IA §4.1).
+// CHIMERA AI — Dokümanlar · Blog makalesi (TR). DocsShell + BlogPosting JSON-LD.
 import { render, type CollectionEntry } from "astro:content";
-import Article from "@layouts/Article.astro";
+import DocsShell from "@layouts/DocsShell.astro";
 import { getBlog, entrySlug } from "@/lib/content";
-import { SITE } from "../../../site";
+import { SITE } from "@/site";
 
 export async function getStaticPaths() {
   const posts = await getBlog("tr");
@@ -16,7 +16,7 @@ interface Props {
 const { entry } = Astro.props as Props;
 const { Content } = await render(entry);
 const slug = entrySlug(entry.id);
-const url = `${SITE.url}/kaynaklar/blog/${slug}`;
+const url = `${SITE.url}/dokumanlar/blog/${slug}`;
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -34,14 +34,11 @@ const jsonLd = {
 const meta = entry.data.pubDate.toLocaleDateString("tr-TR", { year: "numeric", month: "long", day: "numeric" });
 ---
 
-<Article
-  title={entry.data.title}
-  description={entry.data.description}
-  kicker="Blog"
-  backHref="/kaynaklar/blog"
-  backLabel="Tüm yazılar"
-  meta={meta}
-  jsonLd={[jsonLd]}
->
-  <Content />
-</Article>
+<DocsShell title={`${entry.data.title} · Chimera AI`} description={entry.data.description} crumb={entry.data.title} ogType="article" jsonLd={[jsonLd]}>
+  <div class="mono-label">Blog</div>
+  <h1 style="margin-top:12px">{entry.data.title}</h1>
+  {meta && <p style="font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.05em;color:var(--n-500);margin-top:10px">{meta}</p>}
+  <article class="prose" style="margin-top:24px">
+    <Content />
+  </article>
+</DocsShell>

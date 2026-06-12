@@ -15,12 +15,12 @@ kod yazma gibi işleri tek bir genel amaçlı modelle yapabilir.
 
 - **Kapalı (API) modeller:** sağlayıcının sunucusunda çalışır; veri dışarı gider.
 - **Açık kaynak modeller:** ağırlıkları indirilebilir, kurum kendi sunucusunda çalıştırabilir
-  — [kapalı devre](/kaynaklar/sozluk/kapali-devre-on-premise) kurulumun temelidir.
+  — [kapalı devre](/dokumanlar/sozluk/kapali-devre-on-premise) kurulumun temelidir.
 
 ## Sınırları ve yönetimi
 
 LLM'ler bazen kendinden emin ama yanlış yanıt üretebilir (halüsinasyon). Bu, mimariyle
-yönetilir: [RAG](/kaynaklar/sozluk/rag) ile yanıtı kurumun belgelerine bağlamak ve kaynak
+yönetilir: [RAG](/dokumanlar/sozluk/rag) ile yanıtı kurumun belgelerine bağlamak ve kaynak
 göstermek, doğruluğu belirgin biçimde artırır.
 
 Bir LLM'in kuruma faydalı olması için onu **kurumun kendi bilgisiyle** birleştirmek gerekir;

@@ -1,6 +1,6 @@
 ---
-// CHIMERA AI — SSS (TR). Görünür Q&A + FAQPage JSON-LD (GEO, IA §4.1).
-import Base from "@layouts/Base.astro";
+// CHIMERA AI — Dokümanlar · SSS (TR). Görünür Q&A + FAQPage JSON-LD (GEO, IA §4.1). DocsShell.
+import DocsShell from "@layouts/DocsShell.astro";
 import FaqList from "@components/FaqList.astro";
 import { getFaq } from "@/lib/content";
 
@@ -22,19 +22,17 @@ const faqLd = {
 };
 ---
 
-<Base
+<DocsShell
   title="Sıkça Sorulan Sorular · Chimera AI"
   description="Güvenlik, lisans, donanım ve süreç hakkında en sık sorulan sorular ve yanıtları."
+  translated={true}
+  altPair={{ tr: "/dokumanlar/sss", en: "/en/docs/faq" }}
   jsonLd={[faqLd]}
 >
-  <section class="section on-light">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:32px">
-      <div style="max-width:680px;display:flex;flex-direction:column;gap:16px">
-        <div class="mono-label">Kaynaklar · SSS</div>
-        <h1 class="h-section">Sıkça sorulan sorular</h1>
-        <p class="lede">Güvenlik, lisans, donanım ve süreç hakkında en sık gelen sorular.</p>
-      </div>
-      <FaqList lang="tr" />
-    </div>
-  </section>
-</Base>
+  <div class="mono-label">SSS</div>
+  <h1 style="margin-top:14px">Sıkça sorulan sorular</h1>
+  <p class="lede" style="margin-top:16px;max-width:680px">Güvenlik, lisans, donanım ve süreç hakkında en sık gelen sorular.</p>
+  <div style="margin-top:32px">
+    <FaqList lang="tr" />
+  </div>
+</DocsShell>

@@ -11,8 +11,8 @@ seeAlso: ["rag", "vektor-veritabani", "reranker"]
 çeviren modeldir. Anlamca yakın metinler, vektör uzayında da birbirine yakın düşer; böylece
 "şu cümleye en yakın anlam hangi belgede?" sorusu matematiksel olarak yanıtlanabilir.
 
-[RAG](/kaynaklar/sozluk/rag) mimarisinin temelidir: kurum belgeleri embedding'e çevrilip bir
-[vektör veritabanında](/kaynaklar/sozluk/vektor-veritabani) saklanır, kullanıcı sorusu da
+[RAG](/dokumanlar/sozluk/rag) mimarisinin temelidir: kurum belgeleri embedding'e çevrilip bir
+[vektör veritabanında](/dokumanlar/sozluk/vektor-veritabani) saklanır, kullanıcı sorusu da
 embedding'e çevrilip en yakın parçalar getirilir.
 
 Türkçe semantik aramada çok dilli gömme modelleri (ör. `multilingual-e5-large`) yüksek

@@ -3,6 +3,7 @@
 // dahil tüm site burada erişilebilir. Kaynak: chimera-sections-b.jsx (SiteFooter)
 import SealMark from "./SealMark.astro";
 import { footerGroup } from "@i18n/routes";
+import { docsHome } from "@i18n/docsNav";
 import type { Dict } from "@i18n/tr";
 import type { Lang } from "@i18n/utils";
 
@@ -38,6 +39,7 @@ const groupLabel = {
         </div>
         <div class="footer-col">
           <span class="footer-col-head">{groupLabel.company}</span>
+          <a href={docsHome(lang).slug} class="footer-link">{lang === "tr" ? "Dokümanlar" : "Docs"}</a>
           {company.map((it) => <a href={it.href} class="footer-link">{it.label}</a>)}
         </div>
       </nav>

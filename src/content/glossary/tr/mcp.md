@@ -14,10 +14,10 @@ entegrasyon yazmak yerine ortak bir arayüz.
 
 ## Neden önemli
 
-[RAG](/kaynaklar/sozluk/rag) modelin kurum bilgisini **okumasını** sağlar; MCP ise modelin
+[RAG](/dokumanlar/sozluk/rag) modelin kurum bilgisini **okumasını** sağlar; MCP ise modelin
 kurum sistemlerinde **iş yapmasını** sağlar (kayıt oluşturma, sorgu çalıştırma, süreç
 tetikleme). Chimera AI mimarisinde bu, **"El"** katmanıdır.
 
 > **Dürüst not:** Chimera AI'da bugün teslim edilen yetenekler Akıl (LLM) + Hafıza (RAG) +
 > Güvenli Kod Asistanı'dır. **El (MCP / iç sistem entegrasyonu) yol haritasında ileri fazda
-> gelir** — bugünün teslimi gibi sunulmaz. Bkz. [Nasıl çalışır](/platform/nasil-calisir).
+> gelir** — bugünün teslimi gibi sunulmaz. Bkz. [Nasıl çalışır](/dokumanlar/platform/nasil-calisir).
