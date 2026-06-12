@@ -40,7 +40,7 @@ export const DOCS_NAV: DocsNode[] = [
   { key: "sozluk", tr: { slug: "/dokumanlar/sozluk", label: "Kavramlar (Sözlük)" }, en: { slug: "/en/docs/glossary", label: "Concepts (Glossary)" } },
   { key: "sss", tr: { slug: "/dokumanlar/sss", label: "SSS" }, en: { slug: "/en/docs/faq", label: "FAQ" } },
   { key: "rapor", tr: { slug: "/dokumanlar/rapor", label: "Benchmark Raporları" }, en: null },
-  { key: "blog", tr: { slug: "/dokumanlar/blog", label: "Blog" }, en: null },
+  { key: "blog", tr: { slug: "/blog", label: "Blog" }, en: null },
 ];
 
 export function docsHome(lang: Lang): DocsLocale {

@@ -22,7 +22,7 @@ Modelin kurumu tanıması içinse ayrı bir katman gerekir. Çıplak bir model s
 
 ## Buluttan farkı, kısaca
 
-İki yaklaşım dört eksende ayrışır: verinin konumu, çevrimdışı çalışabilme, mülkiyet ve uyum denetimi. Her birini gerçek senaryolar ve detaylı kıyas tablosuyla [on-premise AI vs bulut AI](/dokumanlar/blog/on-premise-ai-vs-bulut) yazısında açtık. Burada tanımda kalalım.
+İki yaklaşım dört eksende ayrışır: verinin konumu, çevrimdışı çalışabilme, mülkiyet ve uyum denetimi. Her birini gerçek senaryolar ve detaylı kıyas tablosuyla [on-premise AI vs bulut AI](/blog/on-premise-ai-vs-bulut) yazısında açtık. Burada tanımda kalalım.
 
 ## Ne zaman kapalı devre seçilir?
 

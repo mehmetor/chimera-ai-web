@@ -16,7 +16,7 @@ interface Props {
 const { entry } = Astro.props as Props;
 const { Content } = await render(entry);
 const slug = entrySlug(entry.id);
-const url = `${SITE.url}/dokumanlar/blog/${slug}`;
+const url = `${SITE.url}/blog/${slug}`;
 
 const jsonLd = {
   "@context": "https://schema.org",

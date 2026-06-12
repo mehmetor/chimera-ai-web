@@ -33,7 +33,7 @@ Tablo tek bir şeyi gösteriyor. Model değişmedi, soru değişmedi, değişen 
 
 Tek bir sihirli düğme yok; birbirini tamamlayan birkaç katman var. Her biri farklı bir hata tipini hedefler.
 
-**RAG modeli kurum dokümanına bağlar.** Model ezberinden konuşmak yerine getirdiği belgeden alıntılar ve cevabı kaynakla işaretler. Uydurmak yerine okur. KEP örneğindeki farkı yaratan da budur; ayrıntısı için [RAG nedir](/dokumanlar/blog/rag-nedir) yazısına bakın.
+**RAG modeli kurum dokümanına bağlar.** Model ezberinden konuşmak yerine getirdiği belgeden alıntılar ve cevabı kaynakla işaretler. Uydurmak yerine okur. KEP örneğindeki farkı yaratan da budur; ayrıntısı için [RAG nedir](/blog/rag-nedir) yazısına bakın.
 
 **Guardrail kapsam dışını kapatır.** Müşteriye açık bir botta her soru cevaplanmaz. Yasaklı ya da kapsam dışı konuda model serbestçe tahmin yürütmez, önceden tanımlı güvenli bir yanıt döner. Bu, M5 chatbot modülündeki [guardrail](/dokumanlar/sozluk/guardrail) filtresinin işidir; halüsinasyonun en görünür olduğu yer dışa açık botlardır, orada filtre olmadan sistem devreye alınmaz.
 
@@ -45,11 +45,11 @@ Salt-okunur erişim ise hatanın zarar vermesini engeller. Veriyle konuşan bir 
 
 Bunu net söylemek gerekiyor, çünkü piyasada tersini ima eden çok ses var. RAG modeli kaynağa bağlar, ama yanlış belgeyi getirebilir ya da doğru belgeyi yanlış yorumlayabilir. Guardrail kapsamı daraltır, her kenar durumu yakalamaz. Bunların hiçbiri modelin asla yanılmayacağını garanti etmez.
 
-Bizim iddiamız da bu değil. Halüsinasyon yok demiyoruz, mimariyle yönetiyoruz diyoruz. Aradaki fark küçük değil. Yönetmek, hatayı bağladığı kaynakla görünür kılmak, kapsam dışını kapatmak, yanlışın zarar verebileceği yolları baştan kesmek ve olduğunda izini sürebilmek demektir. Yönetilir, sıfırlanmaz. Asıl kazanım, hata olduğunda onu fark edebiliyor ve nereden geldiğini bulabiliyor olmanızdır; kapalı bir kutuda sessizce yanlış üreten bir sistemde bu ikisi de elinizde değildir. [Açık kaynak bir LLM'in kuruma hazır olup olmadığı](/dokumanlar/blog/acik-kaynak-llm-kuruma-hazir-mi) sorusu da büyük ölçüde bu yönetilebilirlik etrafında döner.
+Bizim iddiamız da bu değil. Halüsinasyon yok demiyoruz, mimariyle yönetiyoruz diyoruz. Aradaki fark küçük değil. Yönetmek, hatayı bağladığı kaynakla görünür kılmak, kapsam dışını kapatmak, yanlışın zarar verebileceği yolları baştan kesmek ve olduğunda izini sürebilmek demektir. Yönetilir, sıfırlanmaz. Asıl kazanım, hata olduğunda onu fark edebiliyor ve nereden geldiğini bulabiliyor olmanızdır; kapalı bir kutuda sessizce yanlış üreten bir sistemde bu ikisi de elinizde değildir. [Açık kaynak bir LLM'in kuruma hazır olup olmadığı](/blog/acik-kaynak-llm-kuruma-hazir-mi) sorusu da büyük ölçüde bu yönetilebilirlik etrafında döner.
 
 ## Neden bu önce kapalı devrede anlamlı?
 
-Halüsinasyonu yönetmek için hatayı görebilmeniz gerekir. Bunun için de cevabın hangi belgeye dayandığını, sorgunun ne döndürdüğünü ve sistemin ne yaptığını izleyebilmeniz şart. [Kapalı devre](/dokumanlar/blog/kapali-devre-yapay-zeka-nedir) kurulum bu izlenebilirliği baştan verir: model, veri ve denetim kayıtları kurumun kendi sınırı içindedir, üçüncü tarafın kara kutusuna bağlı değildir. Kaynağı sizde olan bir cevabın doğruluğunu denetleyebilirsiniz; başkasının sunucusunda üretilen bir cevabın izini süremezsiniz.
+Halüsinasyonu yönetmek için hatayı görebilmeniz gerekir. Bunun için de cevabın hangi belgeye dayandığını, sorgunun ne döndürdüğünü ve sistemin ne yaptığını izleyebilmeniz şart. [Kapalı devre](/blog/kapali-devre-yapay-zeka-nedir) kurulum bu izlenebilirliği baştan verir: model, veri ve denetim kayıtları kurumun kendi sınırı içindedir, üçüncü tarafın kara kutusuna bağlı değildir. Kaynağı sizde olan bir cevabın doğruluğunu denetleyebilirsiniz; başkasının sunucusunda üretilen bir cevabın izini süremezsiniz.
 
 Bu yüzden halüsinasyon yönetimi tek bir modülün özelliği değil, mimarinin tümünden çıkan bir sonuçtur. RAG bağlar, guardrail sınırlar, salt-okunur erişim korur, denetim kayıtları görünür kılar, insan kritik kararda durur. Beşi birlikte çalıştığında modelin yanılması felaket olmaktan çıkıp izlenebilir bir olaya dönüşür.
 

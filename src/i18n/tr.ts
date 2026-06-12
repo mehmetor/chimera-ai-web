@@ -183,7 +183,7 @@ const tr = {
       ["Benchmark Raporu", "Her ay yenilenen açık kaynak LLM ve donanım karşılaştırması — model/donanım tavsiyesinin kanonik dayanağı.", "/dokumanlar/rapor"],
       ["Sözlük", "RAG'den kapalı devreye — kurumsal AI terimlerinin sade Türkçe açıklamaları.", "/dokumanlar/sozluk"],
       ["SSS", "Güvenlik, lisans, donanım ve süreç hakkında en sık sorulan sorular.", "/dokumanlar/sss"],
-      ["Blog", "Saha notları ve kapalı devre AI üzerine mimari yazıları.", "/dokumanlar/blog"],
+      ["Blog", "Saha notları ve kapalı devre AI üzerine mimari yazıları.", "/blog"],
     ],
     linkLabel: "İncele",
   },

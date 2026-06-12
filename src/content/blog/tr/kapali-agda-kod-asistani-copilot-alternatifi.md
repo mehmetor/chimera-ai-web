@@ -24,7 +24,7 @@ Editör tarafında açık kaynak bir eklenti (Continue.dev ya da Tabby) buluta d
 
 ## Hangi model, hangi makine
 
-Kod senaryosunda açık ağırlıklı modeller olgunlaştı. Repo seviyesi bağlamda — modelin açık dosyayı değil deponun yapısını gördüğü işlerde — Qwen3-Coder ailesi önde (büyük dağıtımda 480B-A35B, mütevazı donanımda Flash-30B-A3B). DeepSeek-Coder-V2 yakın ikinci. Codestral 22B'yi kurumsal ortamda öngörülebilirliği için tercih edenler var. Türkçe yorum ve değişken adlandırma tarafında bu modellerin kod uygunluğu 10 üzerinden 8,5 bandında; ölçümün tamamı [Haziran 2026 raporu](/dokumanlar/rapor/2026-06) içinde, dil tarafının ayrıntısı için [Türkçe için en iyi açık kaynak LLM](/dokumanlar/blog/turkce-icin-en-iyi-acik-kaynak-llm) yazısına bakabilirsiniz.
+Kod senaryosunda açık ağırlıklı modeller olgunlaştı. Repo seviyesi bağlamda — modelin açık dosyayı değil deponun yapısını gördüğü işlerde — Qwen3-Coder ailesi önde (büyük dağıtımda 480B-A35B, mütevazı donanımda Flash-30B-A3B). DeepSeek-Coder-V2 yakın ikinci. Codestral 22B'yi kurumsal ortamda öngörülebilirliği için tercih edenler var. Türkçe yorum ve değişken adlandırma tarafında bu modellerin kod uygunluğu 10 üzerinden 8,5 bandında; ölçümün tamamı [Haziran 2026 raporu](/dokumanlar/rapor/2026-06) içinde, dil tarafının ayrıntısı için [Türkçe için en iyi açık kaynak LLM](/blog/turkce-icin-en-iyi-acik-kaynak-llm) yazısına bakabilirsiniz.
 
 Flash sınıfı bir model 24 GB tek kartta (RTX 4090) ya da 32 GB birleşik bellekli Mac mini M4 Pro üzerinde döner; ekibin paylaştığı ortak bir yerel sunucuya kurulur. Modeli sıfırdan eğitmek gerekmez; hazır ağırlık kendi ağınızda çalıştırılır.
 

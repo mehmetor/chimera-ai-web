@@ -4,7 +4,7 @@ Web sitesi geliştirme + içerik hattının canlı takip dokümanı.
 **Public repo disiplini:** bu dosyada ve sitede **fiyat / müşteri adı / a-g efor / iç satış notu / NDA içeriği YOK.**
 
 > **Demet onayı geldi** (DCN içeriği — moduller/rapor/nasil-calisir/guvenlik deploy'a hazır).
-> **Navigasyon köklü değişti:** İki bölge — Pazarlama (üst nav + footer) ve **Dokümanlar** (`/dokumanlar`, sol sidebar'lı docs shell). Teknik + referans + blog dokümanlar bölgesine taşındı; eski URL'ler 301'lendi. EN: `/en/docs`. Kırık iç link: 0.
+> **Navigasyon:** İki bölge — Pazarlama (üst nav + footer) ve **Dokümanlar** (`/dokumanlar`, sol sidebar'lı docs shell: platform · sözlük · SSS · rapor). **Blog köke alındı:** `/dokumanlar/blog/*` → **`/blog/*`** (URL temizliği; blog DocsShell + knowledge-sidebar'da kalır ama temiz top-level URL). Eski blog yolları `astro.config` `redirects` ile (slug listesi içerik dizininden otomatik üretilir) yönlendirilir; true-301 için Cloudflare kuralı önerilir (aşağıda). EN: `/en/docs`. Kırık iç link: 0.
 
 ---
 
