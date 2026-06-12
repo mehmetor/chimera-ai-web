@@ -45,4 +45,20 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { glossary, faq, blog };
+// Aylık benchmark raporları — "her ay yayımlanan rapor" iddiasının kanonik dayanağı.
+const reports = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/reports" }),
+  schema: z.object({
+    title: z.string(),
+    lang,
+    /** Dönem anahtarı (slug + sıralama): "2026-06" */
+    period: z.string(),
+    /** İnsan-okur geçerlilik: "Haziran 2026" */
+    validity: z.string(),
+    date: z.coerce.date(),
+    summary: z.string(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { glossary, faq, blog, reports };

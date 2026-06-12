@@ -220,9 +220,12 @@
   border-radius: 3px;
 }
 .prose table {
-  width: 100%;
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow-x: auto;
   border-collapse: collapse;
-  font-size: calc(15px * var(--ts));
+  font-size: calc(14.5px * var(--ts));
 }
 .prose th {
   font-family: var(--font-mono);

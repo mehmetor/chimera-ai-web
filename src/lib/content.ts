@@ -22,3 +22,8 @@ export async function getBlog(lang: Lang, includeDrafts = false): Promise<Collec
   const all = await getCollection("blog", (e) => e.data.lang === lang && (includeDrafts || !e.data.draft));
   return all.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 }
+
+export async function getReports(lang: Lang, includeDrafts = false): Promise<CollectionEntry<"reports">[]> {
+  const all = await getCollection("reports", (e) => e.data.lang === lang && (includeDrafts || !e.data.draft));
+  return all.sort((a, b) => b.data.period.localeCompare(a.data.period));
+}

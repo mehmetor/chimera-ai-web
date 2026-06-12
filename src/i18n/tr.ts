@@ -180,9 +180,10 @@ const tr = {
     label: "08 · Kaynaklar",
     h2: "Okuyun, sorun, karşılaştırın.",
     items: [
-      ["Blog", "Aylık model ve donanım benchmark raporu, saha notları, mimari yazıları.", "/kaynaklar/blog"],
+      ["Benchmark Raporu", "Her ay yenilenen açık kaynak LLM ve donanım karşılaştırması — model/donanım tavsiyesinin kanonik dayanağı.", "/kaynaklar/rapor"],
       ["Sözlük", "RAG'den kapalı devreye — kurumsal AI terimlerinin sade Türkçe açıklamaları.", "/kaynaklar/sozluk"],
       ["SSS", "Güvenlik, lisans, donanım ve süreç hakkında en sık sorulan sorular.", "/kaynaklar/sss"],
+      ["Blog", "Saha notları ve kapalı devre AI üzerine mimari yazıları.", "/kaynaklar/blog"],
     ],
     linkLabel: "İncele",
   },
