@@ -35,9 +35,9 @@ Web sitesi geliştirme + içerik hattının canlı takip dokümanı.
 
 ## 🚀 Deploy yapılandırması (içerik değil)
 
-- [~] **Form (CTA):** Cloudflare Worker + Email Routing seçildi — kod hazır (`cloudflare/form-worker/`, lead Workspace kutusuna, 3. taraf SaaS yok). **Bekleyen (kullanıcı):** CF Email Routing'i `chimera-ai.com.tr`'de aç + hedefi doğrula + Worker deploy + Railway `PUBLIC_FORM_ENDPOINT`. Rehber: `cloudflare/form-worker/README.md`. (Bağlanana kadar form mailto'ya düşüyor.)
+- [x] **Form (CTA) — CANLI.** Cloudflare Worker + Email Routing (`cloudflare/form-worker/`). Uçtan uca test edildi: form → Worker (`/api/on-analiz`, 200 `{ok:true}`) → `send_email` → Workspace kutusu (`lead@dcnextgen.com.tr`); mail geliyor. Lead 3. taraf SaaS'a düşmüyor. Spam'e düşerse "spam değil" + filtre.
 - [~] **Analitik:** Umami (self-host, çerezsiz, tek instance tüm siteler) seçildi — head snippet'i Umami formatına (`data-website-id`) geçti. **Bekleyen:** Umami örneği + `PUBLIC_ANALYTICS_WEBSITE_ID`/`_SRC`.
-- [~] **SEO:** Google Search Console meta doğrulaması bağlandı (`PUBLIC_GSC_VERIFICATION`). **Bekleyen:** GSC'de domain doğrula + sitemap gönder. (GA kullanılmıyor — SEO/GEO'ya katkısı yok + KVKK çerez yükü.)
+- [x] **SEO — Search Console kuruldu.** Domain property `chimera-ai.com.tr` Cloudflare DNS ile otomatik doğrulandı; `sitemap-index.xml` gönderildi ("Başarılı"). Sıradaki (ops.): URL İnceleme ile ana sayfayı dürt, Bing Webmaster Tools import (ChatGPT/Copilot Bing indeksini kullanır). `PUBLIC_GSC_VERIFICATION` meta'sı atıl yedek olarak duruyor. (GA kullanılmıyor.)
 
 ## 📚 İçerik kaynakları (DCN — kanonik, repo dışı)
 
