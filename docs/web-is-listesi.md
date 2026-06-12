@@ -28,7 +28,7 @@ Web sitesi geliştirme + içerik hattının canlı takip dokümanı.
 ## ⏳ DCN içeriği / karar bekleyen
 
 - [x] **Benchmark Raporu sayfası** (`/kaynaklar/rapor/2026-06`) — Haziran raporundan **public-safe damıtım** yapıldı: `reports` koleksiyonu + indeks + detay (TechArticle JSON-LD), ana sayfa Kaynaklar'a kart. Tüketici GPU sokak fiyatı göreceli rehbere indirildi, LaTeX düzeltildi, "her ay yayımlanan rapor" iddiasının **kanonik dayanağı** kuruldu. ⚠️ **Yayın (deploy) öncesi Demet onayı gerekir.**
-- [~] **Rapordan odaklı blog yazıları** (IA §4.2): **#9 en iyi Türkçe LLM ✅** · **#6 donanım seçimi ✅** (`/dokumanlar/blog/{turkce-icin-en-iyi-acik-kaynak-llm, on-premise-llm-donanim-secimi}`); sırada #5 LLM hazır mı. Tüm Türkçe içerik global `tr-humanizer` skill'iyle yazılır (doğal Türkçe + AI-tell temizliği; noktadan-sonra-bağlaç kuralı dahil).
+- [x] **Rapordan odaklı blog yazıları** (IA §4.2): **#9 en iyi Türkçe LLM · #6 donanım seçimi · #5 LLM hazır mı ✅** (`/dokumanlar/blog/{turkce-icin-en-iyi-acik-kaynak-llm, on-premise-llm-donanim-secimi, acik-kaynak-llm-kuruma-hazir-mi}`). Tüm Türkçe içerik global `tr-humanizer` skill'iyle yazıldı (doğal Türkçe + AI-tell temizliği; noktadan-sonra-bağlaç kuralı dahil; her biri 3 mercekli adversaryal incelemeden geçti).
 - [ ] Diğer GEO makaleleri (IA §4.2 kalan başlıklar).
 - [ ] Gerçek saha fotoğrafları (duotone slot'lar: hero, referanslar).
 - [ ] Referans vaka detayları (anonim — onaya bağlı).
