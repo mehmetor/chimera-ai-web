@@ -1,0 +1,36 @@
+---
+// CHIMERA AI — Documentation home (EN).
+import DocsShell from "@layouts/DocsShell.astro";
+
+const cards = [
+  { label: "Platform · Modules", href: "/en/docs/platform/modules", desc: "M0–M6 module catalog: what each does, what it includes, delivery criteria and honest limits." },
+  { label: "Platform · How it works", href: "/en/docs/platform/how-it-works", desc: "The three-part architecture: Reasoning (LLM) + Memory (RAG) shipped today, Hands (MCP) on the roadmap." },
+  { label: "Platform · Security", href: "/en/docs/platform/security", desc: "Zero external data egress, access control, air-gapped deployment and compliance." },
+  { label: "Concepts (Glossary)", href: "/en/docs/glossary", desc: "Plain-English explanations of enterprise AI terms: RAG, embedding, MoE, MCP…" },
+  { label: "FAQ", href: "/en/docs/faq", desc: "The most common questions about security, licensing, hardware and process." },
+];
+---
+
+<DocsShell
+  title="Documentation · Chimera AI"
+  description="Chimera AI technical documentation: platform modules, architecture, security, concept glossary and FAQ."
+  translated={true}
+  altPair={{ tr: "/dokumanlar", en: "/en/docs" }}
+>
+  <div class="mono-label">Documentation</div>
+  <h1 style="margin-top:14px">Chimera AI in depth.</h1>
+  <p class="lede" style="margin-top:16px;max-width:680px">
+    Platform modules, architecture, security and concepts. Browse from the menu on the left or
+    start below.
+  </p>
+  <div class="grid-2" style="margin-top:36px">
+    {
+      cards.map((c) => (
+        <a class="card" href={c.href} style="gap:8px;text-decoration:none;color:inherit">
+          <h2 class="h-card" style="font-size:calc(18px * var(--ts))">{c.label}</h2>
+          <p class="body-dim" style="font-size:calc(14.5px * var(--ts))">{c.desc}</p>
+        </a>
+      ))
+    }
+  </div>
+</DocsShell>

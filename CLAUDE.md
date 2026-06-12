@@ -13,12 +13,36 @@ Depo herkese açıktır. Commit etmeden önce **her zaman** kontrol et:
 
 Yeni içerik eklerken "bu satır public internette görünse sorun olur mu?" sorusunu geçemeyen şey commit edilmez.
 
-## Deponun durumu: henüz üretim kodu YOK
+## Stack ve komutlar
 
-Bu, üretim sitesinin **geliştirme evidir** ama şu an sadece tasarım handoff'u + dokümanlar var. Build/lint/test sistemi, paket yöneticisi, CI **yok**. `design/prototype/` dışında çalıştırılacak bir şey yok.
+Üretim sitesi **Astro 5 (SSG) + TypeScript (strict)**. Kararlar: Tailwind yok (prototipin CSS-değişken token sistemi birebir taşındı); fontlar self-host (OFL); 4 tema CSS-değişkeniyle, **Alaşım kilitli varsayılan**, diğer 3 yalnız `?theme=gece|patine|volkanik` ile iç karşılaştırma (public switcher yok).
 
-- **Üretim stack'i henüz seçilmedi.** IA planı SSG öneriyor (Astro/Next, CMS'siz, içerik markdown'dan) — bkz. `docs/bilgi-mimarisi-seo-geo.md` §5. Karar Simetri'nin; stack kurarken bu öneriyi başlangıç noktası al ama kullanıcıyla doğrula.
-- Üretim kodu yazmaya başlamadan önce belirsizlikleri kullanıcıya sor (handoff talimatı `design/README-handoff.md`).
+```bash
+npm install        # bağımlılıklar
+npm run dev        # geliştirme sunucusu (localhost:4321)
+npm run build      # astro check (tip) + statik build → dist/
+npm run preview    # build çıktısını sun
+npm run check      # yalnız tip/diagnostik
+npm run format     # prettier
+```
+
+Build **her zaman `astro check`'ten geçmeli** (sıfır hata). Yeni bağımlılık eklerken "en stabil/mainstream" tercih et.
+
+### Proje yapısı
+- `src/styles/` — `tokens.css` (`:root`=Alaşım + 3 tema bloğu) · `base.css` · `components.css` (chimera.css'ten porte).
+- `src/components/` — `SealMark.astro` (mühür; geometri **build-time**, animasyon saf CSS, 0 client-JS), `ClosedCircuitDiagram`, `ModuleIcon`, `Nav`/`Footer`/`Frame`/`Seo`/`Base`; `sections/*` ana sayfa bölümleri.
+- `src/i18n/` — `tr.ts` (tek doğruluk kaynağı, `Dict` tipini export eder) · `en.ts` (Dict'e uymak zorunda) · `routes.ts` (**merkezî route haritası**: nav + hreflang + sayfa üretimi; yerelleştirilmiş slug'lar TR `/nasil-baslariz` ↔ EN `/en/how-we-start`) · `utils.ts`.
+- `src/pages/` — `index.astro` (TR ana) · `en/index.astro` (EN ana) · `[...slug].astro` (tüm iç sayfaları route haritasından üretir) · `en/on-premise-ai-turkey.astro` (EN GEO landing).
+- `src/site.ts` — merkezî config (alan adı, kurum, e-posta, `PUBLIC_FORM_ENDPOINT`/analitik env). Gizli değer tutmaz.
+- `public/` — `robots.txt` (AI botları izinli), `llms.txt`, `favicon.svg`.
+
+### Yeni sayfa/link eklerken
+- Linkleri elle yazma; **`@i18n/routes`** kullan (nav, CTA, hreflang oradan beslenir). Yeni nav sayfası = `ROUTES`'a bir satır.
+- hreflang için sayfaya `routeKey` ver (Base prop'u); EN/TR çifti varsa `translated={true}`.
+- Bölüm metnini i18n sözlüğünden al; **üretim gövde metnini uydurma** (DCN'den gelir).
+
+### Henüz yapılmadı (yol haritası)
+İç sayfalar şimdilik ana sayfa bölümünü gövde olarak yeniden kullanan **iskelelerdir**. Sırada: içerik koleksiyonları (blog/sözlük/SSS, zod şemalı), `/platform` alt sayfaları (moduller/guvenlik/nasil-calisir), form servisi bağlama, gizlilik-dostu analitik, OG görseli, CI. Plan: `~/.claude/plans/federated-drifting-pillow.md`.
 
 ## `design/prototype/` — referans, üretim değil
 

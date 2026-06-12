@@ -1,0 +1,19 @@
+---
+// CHIMERA AI — Docs · Glossary index (EN). DocsShell.
+import DocsShell from "@layouts/DocsShell.astro";
+import GlossaryIndex from "@components/GlossaryIndex.astro";
+---
+
+<DocsShell
+  title="Glossary — Enterprise AI terms · Chimera AI"
+  description="From RAG to air-gapped, from embeddings to MCP — key enterprise AI terms explained in plain language."
+  translated={true}
+  altPair={{ tr: "/dokumanlar/sozluk", en: "/en/docs/glossary" }}
+>
+  <div class="mono-label">Concepts · Glossary</div>
+  <h1 style="margin-top:14px">Enterprise AI glossary</h1>
+  <p class="lede" style="margin-top:16px;max-width:640px">Key terms explained in plain language — definition plus examples.</p>
+  <div style="margin-top:32px">
+    <GlossaryIndex lang="en" basePath="/en/docs/glossary" />
+  </div>
+</DocsShell>

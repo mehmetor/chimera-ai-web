@@ -2,3 +2,23 @@
 # Diskte tutulur (geliştirme referansı), takibe alınmaz.
 docs/girdi-paketi-2026-06.pdf
 docs/girdi-paketi-extracted.txt
+
+# --- build / bağımlılıklar ---
+node_modules/
+dist/
+.astro/
+.output/
+.vercel/
+.netlify/
+
+# --- ortam değişkenleri (form endpoint, analitik anahtarı vb.) ---
+.env
+.env.*
+!.env.example
+
+# --- editör / OS ---
+.DS_Store
+*.log
+npm-debug.log*
+.vscode/*
+!.vscode/extensions.json

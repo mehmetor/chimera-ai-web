@@ -1,0 +1,116 @@
+---
+// CHIMERA AI — Docs · Platform · Security (EN). DocsShell. Source: ozellik-katalogu.md (M0 security, air-gap 3-phase, KVKK/GDPR).
+import DocsShell from "@layouts/DocsShell.astro";
+import Frame from "@components/Frame.astro";
+import { contactSlug } from "@i18n/routes";
+import { SITE } from "@/site";
+
+const pillars = [
+  {
+    k: "01",
+    t: "Zero external data egress",
+    d: "The system is configured to a closed-network rule: TLS/SSL, access logs, and confirmation that no data is sent to any external service. Conversations, documents, and code stay within the organization's boundary.",
+  },
+  {
+    k: "02",
+    t: "Access control",
+    d: "Local accounts and role definitions; LDAP/AD integration on request. Role-based information isolation: only HR sees the HR document, only legal sees the regulation.",
+  },
+  {
+    k: "03",
+    t: "Monitoring & logging",
+    d: "Resource usage, response time, query and active-user counts, and error logs in the organization's panel. Who accessed what is tracked — auditability stays within the organization's own policy.",
+  },
+  {
+    k: "04",
+    t: "Data integrity",
+    d: "Data analysis runs over a read-only connection (no write access is granted). Strict guardrails on externally exposed chatbots; static analysis before compilation is mandatory for generated code.",
+  },
+];
+
+const airgap = [
+  ["1 · Preparation", "With internet access (on the DC NEXTGEN side)", "Docker images are pulled into a local registry; model weights and packages are placed in an offline cache."],
+  ["2 · Installation", "On the closed network (the organization's site)", "Operating system + Docker + GPU toolkit; all services via docker-compose; reverse proxy + TLS."],
+  ["3 · Verification", "On the closed network", "Model response tests, LDAP/AD test, performance test, monitoring panel, and confirmation of zero data egress to external services."],
+];
+
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Chimera AI", item: SITE.url },
+    { "@type": "ListItem", position: 2, name: "Docs", item: `${SITE.url}/en/docs` },
+    { "@type": "ListItem", position: 3, name: "Security", item: `${SITE.url}/en/docs/platform/security` },
+  ],
+};
+---
+
+<DocsShell
+  title="Security & Data Sovereignty · Chimera AI Platform"
+  description="Closed network, zero external data egress, role-based access, air-gapped deployment, and KVKK/GDPR. In Chimera AI, security is not a feature — it is the foundation of the architecture."
+  translated={true}
+  altPair={{ tr: "/dokumanlar/platform/guvenlik", en: "/en/docs/platform/security" }}
+  jsonLd={[breadcrumb]}
+>
+  <div style="display:flex;flex-direction:column;gap:36px">
+    <div style="max-width:720px;display:flex;flex-direction:column;gap:16px">
+      <div class="mono-label">Platform · Security</div>
+      <h1>Security is not a feature — it is the foundation of the architecture.</h1>
+      <p class="lede">
+        Data sovereignty is not a setting bolted on afterwards; it is the design of the system
+        itself. Data never leaves the organization's boundary — we guarantee this through
+        configuration, monitoring, and verification.
+      </p>
+    </div>
+
+    <div class="grid-2">
+      {
+        pillars.map((p) => (
+          <div class="card" style="gap:10px">
+            <span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.08em;color:var(--bronze-ink)">{p.k}</span>
+            <h2 class="h-card" style="font-size:calc(19px * var(--ts))">{p.t}</h2>
+            <p class="body-dim" style="font-size:calc(15px * var(--ts))">{p.d}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    {/* Air-gap deployment */}
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <h2 class="h-card" style="font-size:calc(24px * var(--ts))">Air-gapped deployment: three phases</h2>
+      <p class="body-dim" style="max-width:720px;font-size:calc(16px * var(--ts))">
+        In the strictest scenario, the system is fully isolated from the internet (an air gap).
+        Installation is carried out in three phases, with no data ever leaving the boundary:
+      </p>
+      <table class="spec-table" style="max-width:860px">
+        <thead>
+          <tr><th>Phase</th><th>Environment</th><th>Contents</th></tr>
+        </thead>
+        <tbody>
+          {airgap.map(([f, o, i]) => <tr><td style="font-weight:600;white-space:nowrap">{f}</td><td>{o}</td><td>{i}</td></tr>)}
+        </tbody>
+      </table>
+    </div>
+
+    {/* KVKK / GDPR */}
+    <Frame style="padding:28px 30px;display:flex;flex-direction:column;gap:12px;background:var(--card-light)">
+      <span class="mono-label" style="color:var(--bronze-ink)">KVKK / GDPR</span>
+      <p style="font-size:calc(16px * var(--ts));color:var(--n-800)">
+        Because data does not leave the country, the cross-border transfer problem is largely
+        eliminated; and because processing stays under the organization's control, accountability
+        and data minimization are easier to demonstrate.
+      </p>
+      <p class="body-dim" style="font-size:calc(14.5px * var(--ts))">
+        <strong style="color:var(--n-900)">The honest limit:</strong> the technical infrastructure
+        is compliant; the organization is the data controller, and legal assessment is the
+        organization's responsibility.
+      </p>
+    </Frame>
+
+    {/* CTA */}
+    <div style="display:flex;gap:14px;flex-wrap:wrap">
+      <a class="btn btn-primary" href={contactSlug("en")}>Request an Architecture Pre-Analysis</a>
+      <a class="btn btn-ghost" href="/en/docs/platform/how-it-works">How it works</a>
+    </div>
+  </div>
+</DocsShell>

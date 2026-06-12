@@ -1,0 +1,41 @@
+---
+// CHIMERA AI — Kaynaklar. Kaynak: chimera-sections-b.jsx (ResourcesSection)
+// Uyarlama: kartlar artık ilgili sayfaya LİNK'tir (çok-sayfa mimarisi); rozet = linkLabel.
+import type { Dict } from "@i18n/tr";
+import type { Lang } from "@i18n/utils";
+interface Props {
+  t: Dict;
+  lang?: Lang;
+  /** Verilirse başlıkta "Tüm kaynaklar →" linki gösterilir (ana sayfada /kaynaklar'a yönlendirme). */
+  hubHref?: string;
+}
+const { t, lang = "tr", hubHref } = Astro.props;
+const hubLabel = lang === "tr" ? "Tüm kaynaklar" : "All resources";
+---
+
+<section id="kaynaklar" class="section on-light" style="padding-top:0">
+  <div class="wrap" style="display:flex;flex-direction:column;gap:32px">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="mono-label">{t.resources.label}</div>
+        <h2 class="h-section" style="font-size:calc(30px * var(--ts))">{t.resources.h2}</h2>
+      </div>
+      {hubHref && <a class="btn-line" href={hubHref}>{hubLabel} →</a>}
+    </div>
+    <div class="grid-3">
+      {
+        t.resources.items.map(([name, desc, href]) => (
+          <a class="card" href={href} style="gap:8px;text-decoration:none;color:inherit">
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <h3 class="h-card" style="font-size:calc(17.5px * var(--ts))">{name}</h3>
+              <span style="font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--n-500);border:1.5px solid rgba(21,19,14,0.18);border-radius:3px;padding:3px 8px">
+                {t.resources.linkLabel}
+              </span>
+            </div>
+            <p class="body-dim" style="font-size:calc(14.5px * var(--ts))">{desc}</p>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

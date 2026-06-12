@@ -1,0 +1,142 @@
+---
+// CHIMERA AI — Docs · Platform · How It Works (EN). Honest architecture narrative.
+// Reasoning (LLM) + Memory (RAG) shipped today · Hands (MCP) on the roadmap.
+import DocsShell from "@layouts/DocsShell.astro";
+import Frame from "@components/Frame.astro";
+import ClosedCircuitDiagram from "@components/ClosedCircuitDiagram.astro";
+import { useTranslations } from "@i18n/utils";
+import { contactSlug } from "@i18n/routes";
+import { SITE } from "../../../../site";
+
+const t = useTranslations("en");
+
+const layers = [
+  {
+    layer: "Reasoning",
+    tech: "LLM",
+    href: null,
+    status: "Shipped today",
+    state: "ok",
+    desc: "An open-source large language model running on the organization's own servers. It understands questions, generates text and writes code — all inside the organization's boundary. It never connects to an external cloud.",
+  },
+  {
+    layer: "Memory",
+    tech: "RAG",
+    href: "/en/docs/glossary/rag",
+    status: "Shipped today",
+    state: "ok",
+    desc: "Turns the organization's documents (procedures, contracts, archives) into the AI's “open book”. The model answers from the organization's real knowledge — with source references — rather than from what it memorized in training.",
+  },
+  {
+    layer: "Hands",
+    tech: "MCP",
+    href: null,
+    status: "Roadmap",
+    state: "roadmap",
+    desc: "The layer where the model connects to enterprise systems (ERP, databases) and gets work done. This capability arrives in a later phase on the roadmap — we do not present it as something shipped today.",
+  },
+];
+
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Chimera AI", item: `${SITE.url}/en` },
+    { "@type": "ListItem", position: 2, name: "Docs", item: `${SITE.url}/en/docs` },
+    { "@type": "ListItem", position: 3, name: "How It Works", item: `${SITE.url}/en/docs/platform/how-it-works` },
+  ],
+};
+---
+
+<DocsShell
+  title="How It Works — Reasoning, Memory, Hands · Chimera AI Platform"
+  description="Chimera AI's three-part architecture: Reasoning (LLM) + Memory (RAG) are shipped today, Hands (MCP) is on the roadmap. Data never leaves the organization's boundary; accuracy comes from architecture, not from the model alone."
+  translated={true}
+  altPair={{ tr: "/dokumanlar/platform/nasil-calisir", en: "/en/docs/platform/how-it-works" }}
+  jsonLd={[breadcrumb]}
+>
+  <div style="display:flex;flex-direction:column;gap:44px">
+    <div style="max-width:720px;display:flex;flex-direction:column;gap:16px">
+      <div class="mono-label">Platform · How It Works</div>
+      <h1>Reasoning, Memory, Hands — and which one is ready today.</h1>
+      <p class="lede">
+        The Chimera AI story is three layers. Let's be honest: two of them are shipped today, one is
+        on the roadmap. This is engineering talk, not marketing.
+      </p>
+    </div>
+
+    {/* Three-part architecture — layer cards */}
+    <div class="grid-3">
+      {
+        layers.map((l) => (
+          <Frame style="padding:28px;display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+              <span style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--bronze-ink)">
+                {l.tech}
+              </span>
+              <span style={`font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;padding:3px 9px;border-radius:3px;border:1.5px solid ${l.state === "ok" ? "var(--ok)" : "var(--terra)"};color:${l.state === "ok" ? "var(--ok)" : "var(--terra-ink)"}`}>
+                {l.status}
+              </span>
+            </div>
+            <h2 class="h-card" style="font-size:calc(22px * var(--ts))">{l.layer}</h2>
+            <p class="body-dim" style="font-size:calc(15px * var(--ts));flex:1">{l.desc}</p>
+            {l.href && <a class="btn-line" href={l.href} style="font-size:calc(14.5px * var(--ts))">What is {l.tech}? →</a>}
+          </Frame>
+        ))
+      }
+    </div>
+
+    <p class="body-dim" style="max-width:760px;font-size:calc(15.5px * var(--ts))">
+      Shipped today: <strong style="color:var(--n-900)">Reasoning + Memory + a secure code assistant</strong>.
+      {" "}Hands (MCP / internal system integration) arrives in a later phase on the roadmap — we do not present it as today's delivery.
+    </p>
+
+    {/* Closed circuit */}
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <h2 class="h-card" style="font-size:calc(24px * var(--ts))">Data never leaves the organization's boundary</h2>
+      <p class="body-dim" style="max-width:720px;font-size:calc(16px * var(--ts))">
+        The model, the organization's knowledge and the user conversations all live inside the
+        organization's boundary. The link to the external cloud is severed — in the strictest scenario
+        the system is fully isolated from the internet (air-gap).
+      </p>
+      <Frame style="padding:32px 28px;background:var(--card-light)">
+        <ClosedCircuitDiagram t={t.platform.diagram} dark={false} />
+      </Frame>
+    </div>
+
+    {/* Accuracy comes from architecture — KEP proof */}
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <h2 class="h-card" style="font-size:calc(24px * var(--ts))">Accuracy comes from the architecture, not the model</h2>
+      <p class="body-dim" style="max-width:720px;font-size:calc(16px * var(--ts))">
+        A model on its own is not reliable on Turkish enterprise acronyms. Same model, same question,
+        with <a href="/en/docs/glossary/rag" style="color:var(--bronze-ink);text-decoration:underline">RAG</a> and without it:
+      </p>
+      <table class="spec-table" style="max-width:820px">
+        <thead>
+          <tr><th>Setup</th><th>Answer to “What is KEP?”</th><th>Result</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Model alone (no RAG)</td>
+            <td>“KEP = Public Official Electronic Mail” (invented)</td>
+            <td style="color:var(--terra-ink);font-weight:600">Wrong — hallucination</td>
+          </tr>
+          <tr>
+            <td>Model + RAG (organization's document)</td>
+            <td>“KEP = Registered Electronic Mail (Kayıtlı Elektronik Posta)…” + source reference</td>
+            <td style="color:var(--ok);font-weight:600">Correct</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="max-width:720px;font-size:calc(16.5px * var(--ts));font-weight:600">
+        We sell the architecture, not the model. We don't claim “zero hallucination” — we manage it by architecture.
+      </p>
+    </div>
+
+    {/* CTA */}
+    <div style="display:flex;gap:14px;flex-wrap:wrap">
+      <a class="btn btn-primary" href={contactSlug("en")}>Request an Architecture Pre-Analysis</a>
+      <a class="btn btn-ghost" href="/en/docs/platform/modules">Explore the modules</a>
+    </div>
+  </div>
+</DocsShell>

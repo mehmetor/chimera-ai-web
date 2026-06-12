@@ -1,0 +1,36 @@
+---
+// CHIMERA AI — içerik detay layout'u (sözlük terimi / blog yazısı).
+// Base üzerine: kicker + başlık + meta + geri linki + prose gövde.
+import Base from "./Base.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Üst etiket (mono-label): "Sözlük" / "Blog" vb. */
+  kicker: string;
+  /** İndekse dönüş linki */
+  backHref: string;
+  backLabel: string;
+  /** Küçük meta satırı (güncelleme/yayın tarihi vb.) */
+  meta?: string;
+  ogType?: "website" | "article";
+  jsonLd?: Record<string, unknown>[];
+}
+const { title, description, kicker, backHref, backLabel, meta, ogType = "article", jsonLd = [] } = Astro.props;
+---
+
+<Base title={`${title} · Chimera AI`} description={description} ogType={ogType} jsonLd={jsonLd}>
+  <section class="section on-light">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:24px">
+      <a class="btn-line" href={backHref} style="align-self:flex-start">← {backLabel}</a>
+      <div style="display:flex;flex-direction:column;gap:14px;max-width:760px">
+        <div class="mono-label">{kicker}</div>
+        <h1 class="h-section">{title}</h1>
+        {meta && <span style="font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.05em;color:var(--n-500)">{meta}</span>}
+      </div>
+      <article class="prose">
+        <slot />
+      </article>
+    </div>
+  </section>
+</Base>

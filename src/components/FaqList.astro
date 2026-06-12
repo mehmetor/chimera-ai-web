@@ -1,0 +1,26 @@
+---
+// CHIMERA AI — SSS listesi (görünür soru/cevap; FAQPage JSON-LD sayfada kurulur).
+import { render } from "astro:content";
+import { getFaq } from "@/lib/content";
+import type { Lang } from "@i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const entries = await getFaq(lang);
+const rendered = await Promise.all(entries.map(async (e) => ({ e, Content: (await render(e)).Content })));
+---
+
+<div style="display:flex;flex-direction:column;gap:16px;max-width:820px">
+  {
+    rendered.map(({ e, Content }) => (
+      <div class="card" style="gap:10px">
+        <h3 class="h-card" style="font-size:calc(18px * var(--ts))">{e.data.question}</h3>
+        <div class="prose" style="max-width:none;font-size:calc(15.5px * var(--ts))">
+          <Content />
+        </div>
+      </div>
+    ))
+  }
+</div>

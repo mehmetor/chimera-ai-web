@@ -1,0 +1,33 @@
+# Chimera AI — chimera-ai.com.tr
+# GEO ilkesi (IA §4.1): AI asistanlarının içeriği kaynak göstermesi için
+# tarayıcı/indeksleyici botlarına açık erişim.
+
+User-agent: *
+Allow: /
+
+# AI asistanları / indeksleyiciler (açıkça izinli)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://chimera-ai.com.tr/sitemap-index.xml

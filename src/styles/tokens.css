@@ -1,0 +1,154 @@
+/* ============================================================
+   CHIMERA AI — tasarım token'ları + renk temaları
+   Konsept: "Alaşım — Mühürlü Devre" (Brief v2, kilitli)
+   Kaynak: design/prototype/chimera.css (birebir taşındı)
+
+   Slot adları sabittir: --bronze = Platform, --steel = DevOps,
+   --terra = App aksanı. Temalar yalnız değerleri yeniden eşler.
+   theme-alasim = :root varsayılanları (public'te kilitli).
+   Diğer 3 tema yalnız iç/karşılaştırma (?theme=) içindir.
+   ============================================================ */
+
+:root {
+  /* -- Zemin -- */
+  --bg-dark: #15130e; /* Obsidyen */
+  --bg-dark-2: #1c1913; /* Obsidyen yüzey (kart) */
+  --bg-light: #f4f1ea; /* Kağıt */
+  --bg-light-2: #ece8de; /* Kağıt yüzey */
+
+  /* -- Grafit skalası (Obsidyen ↔ Kağıt) -- */
+  --n-900: #15130e;
+  --n-800: #262219;
+  --n-700: #3b362a;
+  --n-600: #57503f;
+  --n-500: #736b58;
+  --n-400: #948b76;
+  --n-300: #b5ac97;
+  --n-200: #d6cfbe;
+  --n-100: #e8e3d7;
+
+  /* -- Aksanlar (mat, desature) — koyu/açık tema eşlemeli -- */
+  --bronze: #a87b3d; /* referans — yalnız grafik/dolgu, küçük metinde KULLANILMAZ */
+  --bronze-deep: #6f4e22; /* CTA dolgusu — açık metinle ≥6.5:1 */
+  --bronze-on-dark: #c99e63; /* koyu zeminde metin/çizgi — 12-14px mono için kalibre (≥6.5:1) */
+  --bronze-ink: #7a5a2c; /* açık zeminde metin (AA) */
+  --steel: #5c6b73;
+  --steel-on-dark: #93a5ae;
+  --steel-ink: #46545b;
+  --terra: #9c5239;
+  --terra-on-dark: #c17e64;
+  --terra-ink: #7e4029;
+
+  /* -- Durum (yalnız UI) -- */
+  --ok: #5e7d5a;
+  --warn: #9c7b2f;
+
+  /* -- Tema yüzeyleri -- */
+  --card-light: #fbf9f4; /* açık zemin kartı/form yüzeyi */
+  --duo-tint: #a87b3d; /* duotone reçetesinin renk katmanı */
+
+  /* -- Tip -- */
+  --font-sans: "Inter Variable", "Inter", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --ts: 0.85; /* tip ölçeği — kilitli varsayılan (prototip TWEAK_DEFAULTS) */
+
+  /* -- Çizgi sistemi -- */
+  --line-w: 1.5px;
+  --radius: 8px;
+  --radius-sm: 4px;
+  --frame-line-dark: rgba(232, 227, 215, 0.22);
+  --frame-line-light: rgba(21, 19, 14, 0.22);
+  --frame-alpha: 0.5; /* çeper görünürlüğü — kilitli varsayılan */
+}
+
+/* ============================================================
+   RENK TEMALARI — tümü mat ve desature, aynı kontrast kalibrasyonuyla
+   (on-dark ≥ ~6:1 küçük mono, ink ≥ 4.5:1 açık zemin).
+   ============================================================ */
+
+/* -- Gece Çeliği: soğuk grafit zemin · mavi çelik / nikel / bakır -- */
+body.theme-gece {
+  --bg-dark: #11151a;
+  --bg-dark-2: #171c23;
+  --bg-light: #eff1f3;
+  --bg-light-2: #e5e8ec;
+  --card-light: #fafbfc;
+  --n-900: #11151a;
+  --n-800: #1d232b;
+  --n-700: #2f3843;
+  --n-600: #49545f;
+  --n-500: #65707b;
+  --n-400: #87919b;
+  --n-300: #acb5bd;
+  --n-200: #d0d6dc;
+  --n-100: #e6eaee;
+  --bronze: #587a94;
+  --bronze-on-dark: #97b6cc;
+  --bronze-ink: #3e5a70;
+  --bronze-deep: #36546c;
+  --steel: #6e7b72;
+  --steel-on-dark: #a3b2a8;
+  --steel-ink: #515c55;
+  --terra: #a05c38;
+  --terra-on-dark: #c68b66;
+  --terra-ink: #7c4628;
+  --duo-tint: #587a94;
+}
+
+/* -- Patine: yeşile çalan obsidyen · patina / pirinç / oksit -- */
+body.theme-patine {
+  --bg-dark: #101411;
+  --bg-dark-2: #161c17;
+  --bg-light: #f1f2eb;
+  --bg-light-2: #e7e9df;
+  --card-light: #fafbf5;
+  --n-900: #101411;
+  --n-800: #1b211c;
+  --n-700: #2d362f;
+  --n-600: #475247;
+  --n-500: #636e63;
+  --n-400: #859084;
+  --n-300: #aab4a8;
+  --n-200: #cfd6cc;
+  --n-100: #e5eae2;
+  --bronze: #5e8268;
+  --bronze-on-dark: #97bca2;
+  --bronze-ink: #41604a;
+  --bronze-deep: #3e6049;
+  --steel: #a18348;
+  --steel-on-dark: #c4a76c;
+  --steel-ink: #755e30;
+  --terra: #a4553c;
+  --terra-on-dark: #c8826a;
+  --terra-ink: #7e4029;
+  --duo-tint: #5e8268;
+}
+
+/* -- Volkanik: nötr grafit · oksit kırmızı / kül mavisi / okra -- */
+body.theme-volkanik {
+  --bg-dark: #151414;
+  --bg-dark-2: #1c1a1a;
+  --bg-light: #f3f0ed;
+  --bg-light-2: #eae6e1;
+  --card-light: #fbf9f7;
+  --n-900: #151414;
+  --n-800: #232020;
+  --n-700: #393434;
+  --n-600: #554e4e;
+  --n-500: #716968;
+  --n-400: #928a88;
+  --n-300: #b4acaa;
+  --n-200: #d6cfcc;
+  --n-100: #e8e3e0;
+  --bronze: #a8503a;
+  --bronze-on-dark: #d08a75;
+  --bronze-ink: #843e2c;
+  --bronze-deep: #7b3826;
+  --steel: #66707b;
+  --steel-on-dark: #9aa6b1;
+  --steel-ink: #4c545e;
+  --terra: #9a7b33;
+  --terra-on-dark: #bfa059;
+  --terra-ink: #6f5824;
+  --duo-tint: #a8503a;
+}

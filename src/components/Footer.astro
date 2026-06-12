@@ -1,0 +1,98 @@
+---
+// CHIMERA AI — site footer. Nav'da olmayan sayfalar (Referanslar, Hakkında)
+// dahil tüm site burada erişilebilir. Kaynak: chimera-sections-b.jsx (SiteFooter)
+import SealMark from "./SealMark.astro";
+import { footerGroup } from "@i18n/routes";
+import { docsHome } from "@i18n/docsNav";
+import type { Dict } from "@i18n/tr";
+import type { Lang } from "@i18n/utils";
+
+interface Props {
+  lang: Lang;
+  t: Dict;
+}
+const { lang, t } = Astro.props;
+
+const lines = footerGroup("lines", lang);
+const company = footerGroup("company", lang);
+const groupLabel = {
+  lines: lang === "tr" ? "Hatlar" : "Lines",
+  company: lang === "tr" ? "Kurumsal" : "Company",
+};
+---
+
+<footer class="footer">
+  <div class="wrap" style="display:flex;flex-direction:column;gap:36px">
+    <div class="footer-top">
+      <div style="display:flex;flex-direction:column;gap:14px;max-width:300px">
+        <div class="brand-lockup">
+          <SealMark size={28} variant="dugum" color="var(--n-300)" />
+          <span class="brand-word" style="font-size:15px;color:var(--n-200)">CHIMERA <span class="ai">AI</span></span>
+        </div>
+        <span class="endorsement">{t.footer.endorsement}</span>
+      </div>
+
+      <nav class="footer-cols" aria-label="Footer">
+        <div class="footer-col">
+          <span class="footer-col-head">{groupLabel.lines}</span>
+          {lines.map((it) => <a href={it.href} class="footer-link">{it.label}</a>)}
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-head">{groupLabel.company}</span>
+          <a href={docsHome(lang).slug} class="footer-link">{lang === "tr" ? "Dokümanlar" : "Docs"}</a>
+          {company.map((it) => <a href={it.href} class="footer-link">{it.label}</a>)}
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-base">
+      <span style="font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.05em;color:var(--n-400)">{t.footer.domain}</span>
+      <span style="font-size:13px;color:var(--n-500)">{t.footer.note}</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+  .footer-cols {
+    display: flex;
+    gap: 64px;
+    flex-wrap: wrap;
+  }
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer-col-head {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--n-500);
+    margin-bottom: 2px;
+  }
+  .footer-link {
+    font-size: 14.5px;
+    color: var(--n-300);
+    text-decoration: none;
+    transition: color 150ms ease;
+  }
+  .footer-link:hover {
+    color: var(--n-100);
+  }
+  .footer-base {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-top: 1px solid rgba(232, 227, 215, 0.1);
+    padding-top: 20px;
+  }
+</style>

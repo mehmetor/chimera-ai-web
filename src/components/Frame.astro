@@ -1,0 +1,14 @@
+---
+// CHIMERA AI — çeper çerçevesi (ince KAPALI çizgi, Brief §3.3; köşe düğümü yok)
+// Kaynak: design/prototype/chimera-sections-a.jsx (Frame)
+interface Props {
+  class?: string;
+  style?: string;
+  id?: string;
+}
+const { class: className = "", style, id } = Astro.props;
+---
+
+<div class={`frame ${className}`} style={style} id={id}>
+  <slot />
+</div>

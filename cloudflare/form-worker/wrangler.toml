@@ -1,0 +1,22 @@
+# CHIMERA AI — form Worker yapılandırması. Kurulum: README.md
+name = "chimera-form"
+main = "src/worker.js"
+compatibility_date = "2024-11-01"
+
+# Worker'ı bu path'te çalıştırır; istek Railway origin'ine GİTMEDEN yakalanır.
+# chimera-ai.com.tr Cloudflare'de proxy'li (turuncu bulut) olmalı.
+routes = [
+  { pattern = "chimera-ai.com.tr/api/on-analiz", zone_name = "chimera-ai.com.tr" }
+]
+
+# Email Routing "send_email" binding'i.
+# destination_address: lead'lerin düşeceği DOĞRULANMIŞ adres = senin Google Workspace
+# gelen kutun (dcnextgen.com.tr). Cloudflare panelinde bir kez onaylanır; dcnextgen MX'i DEĞİŞMEZ.
+# !!! Aşağıdaki iki "GELEN_KUTUSU@dcnextgen.com.tr" satırını gerçek adresle değiştir.
+[[send_email]]
+name = "LEAD"
+destination_address = "GELEN_KUTUSU@dcnextgen.com.tr"
+
+[vars]
+LEAD_FROM = "form@chimera-ai.com.tr"
+LEAD_TO = "GELEN_KUTUSU@dcnextgen.com.tr"

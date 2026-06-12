@@ -1,0 +1,71 @@
+---
+// CHIMERA AI — Platform (Bronz aksanı). Kaynak: chimera-sections-a.jsx (PlatformSection)
+import ClosedCircuitDiagram from "../ClosedCircuitDiagram.astro";
+import ModuleIcon from "../ModuleIcon.astro";
+import Frame from "../Frame.astro";
+import type { Dict } from "@i18n/tr";
+
+interface Props {
+  t: Dict;
+  /** Verilirse modül başlığında "Tüm modüller →" linki gösterilir (TR /platform/moduller). */
+  modulesHref?: string;
+  /** Verilirse diyagram altında "Bu mimari nasıl çalışır? →" linki (TR /platform/nasil-calisir). */
+  howHref?: string;
+  /** Verilirse diyagram altında "Güvenlik →" linki (TR /platform/guvenlik). */
+  securityHref?: string;
+}
+const { t, modulesHref, howHref, securityHref } = Astro.props;
+type ModCode = "M0" | "M1" | "M2" | "M3" | "M4" | "M5" | "M6";
+---
+
+<section
+  id="platform"
+  class="section on-light"
+  style="--accent:var(--bronze);--accent-ink:var(--bronze-ink);--accent-on-dark:var(--bronze-on-dark)"
+>
+  <div class="wrap" style="display:flex;flex-direction:column;gap:48px">
+    <div style="max-width:680px;display:flex;flex-direction:column;gap:18px">
+      <div class="mono-label">{t.platform.label}</div>
+      <h2 class="h-section">{t.platform.h2}</h2>
+      <p class="lede">{t.platform.lede}</p>
+    </div>
+
+    <Frame style="padding:36px 32px;background:var(--card-light)">
+      <ClosedCircuitDiagram t={t.platform.diagram} dark={false} />
+    </Frame>
+    {
+      (howHref || securityHref) && (
+        <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:-24px">
+          {howHref && <a class="btn-line" href={howHref}>Bu mimari nasıl çalışır? →</a>}
+          {securityHref && <a class="btn-line" href={securityHref}>Güvenlik →</a>}
+        </div>
+      )
+    }
+
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <h3 class="h-card" style="font-size:calc(26px * var(--ts))">{t.platform.modulesH}</h3>
+        <p class="body-dim" style="max-width:560px">{t.platform.modulesLede}</p>
+      </div>
+      {modulesHref && <a class="btn-line" href={modulesHref}>Tüm modüller →</a>}
+    </div>
+    <div>
+      {
+        t.platform.modules.map(([code, name, desc]) => (
+          <div class="module-row">
+            <div class="icon-tile">
+              <ModuleIcon code={code as ModCode} />
+            </div>
+            <div>
+              <div class="module-code">{code}</div>
+              <div style="font-weight:600;font-size:calc(16.5px * var(--ts))">{name}</div>
+            </div>
+            <p class="body-dim module-desc" style="font-size:calc(15px * var(--ts))">
+              {desc}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

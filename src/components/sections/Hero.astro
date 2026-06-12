@@ -1,0 +1,85 @@
+---
+// CHIMERA AI — Hero. Kaynak: design/prototype/chimera-sections-a.jsx (Hero)
+// Kilitli varsayılanlar (TWEAK_DEFAULTS): variant=diyagram, markVariant=dugum, dose=standart.
+import SealMark from "../SealMark.astro";
+import ClosedCircuitDiagram from "../ClosedCircuitDiagram.astro";
+import Frame from "../Frame.astro";
+import type { Dict } from "@i18n/tr";
+
+interface Props {
+  t: Dict;
+  variant?: "tipografik" | "diyagram" | "fotograf";
+  markVariant?: "denge" | "cimasi" | "dugum";
+  dose?: "olculu" | "standart" | "yuksek";
+}
+const { t, variant = "diyagram", markVariant = "dugum", dose = "standart" } = Astro.props;
+const big = variant === "tipografik";
+const h1bColor = dose === "yuksek" ? "var(--bronze-on-dark)" : "inherit";
+const tickColor = dose === "olculu" ? "var(--n-500)" : "var(--bronze)";
+---
+
+<header
+  id="hero"
+  class="section"
+  style="padding-top:calc(72px * var(--ts));padding-bottom:calc(88px * var(--ts))"
+>
+  <div
+    class="wrap hero-grid"
+    style={`display:grid;grid-template-columns:${big ? "1.35fr 0.65fr" : "1.05fr 0.95fr"};gap:56px;align-items:center`}
+  >
+    <div style="display:flex;flex-direction:column;gap:26px">
+      <div class="mono-label">{t.hero.label}</div>
+      <h1 class="h-display" style={`font-size:${big ? "calc(64px * var(--ts))" : "calc(50px * var(--ts))"}`}>
+        {t.hero.h1a}{" "}
+        <span class="hero-h1b" style={`color:${h1bColor}`}>{t.hero.h1b}</span>
+      </h1>
+      <p class="lede" style="max-width:560px">{t.hero.lede}</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:6px">
+        <a class="btn btn-primary" href="#iletisim">{t.hero.cta1}</a>
+        <a class="btn btn-ghost" href="#uc-hat">{t.hero.cta2}</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2, minmax(0, max-content));column-gap:28px;row-gap:12px;margin-top:10px">
+        {
+          t.hero.ticks.map((s) => (
+            <span style="font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.07em;text-transform:uppercase;color:var(--n-400);display:inline-flex;align-items:center;gap:8px">
+              <span style={`width:6px;height:6px;background:${tickColor};flex:none`} />
+              {s}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:center">
+      {variant === "tipografik" && <SealMark size={300} variant={markVariant} color="var(--n-100)" animate={true} />}
+      {
+        variant === "diyagram" && (
+          <Frame style="padding:28px 22px;width:100%">
+            <ClosedCircuitDiagram t={t.platform.diagram} dark={true} animate={true} />
+          </Frame>
+        )
+      }
+      {
+        variant === "fotograf" && (
+          <div style="position:relative;width:100%">
+            <div class="duotone" style="width:100%">
+              <div class="duo-placeholder" style="height:420px">{t.hero.photoPlaceholder}</div>
+              <span class="duo-caption">{t.hero.photoCaption}</span>
+            </div>
+            <div style="position:absolute;top:-26px;right:-16px;background:var(--bg-dark);border-radius:50%;padding:10px;z-index:2">
+              <SealMark size={92} variant={markVariant} color="var(--n-100)" animate={true} />
+            </div>
+          </div>
+        )
+      }
+    </div>
+  </div>
+</header>
+
+<style>
+  @media (max-width: 1020px) {
+    .hero-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

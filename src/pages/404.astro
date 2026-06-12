@@ -1,0 +1,25 @@
+---
+// CHIMERA AI — 404. Markalı, eşleşmeyen yollarda gösterilir.
+import Base from "@layouts/Base.astro";
+import SealMark from "@components/SealMark.astro";
+---
+
+<Base
+  title="Sayfa bulunamadı (404) · Chimera AI"
+  description="Aradığınız sayfa bulunamadı."
+  noindex={true}
+>
+  <section class="section" style="min-height:60vh;display:flex;align-items:center">
+    <div class="wrap" style="display:flex;flex-direction:column;align-items:flex-start;gap:24px;max-width:640px">
+      <SealMark size={84} variant="dugum" color="var(--n-400)" />
+      <div class="mono-label">Hata · 404</div>
+      <h1 class="h-display" style="font-size:calc(44px * var(--ts))">Bu sayfa kurum sınırının dışında.</h1>
+      <p class="lede">Aradığınız sayfayı bulamadık. Bağlantı taşınmış ya da hiç var olmamış olabilir.</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap">
+        <a class="btn btn-primary" href="/">Ana sayfa</a>
+        <a class="btn btn-ghost" href="/dokumanlar">Dokümanlar</a>
+        <a class="btn btn-ghost" href="/en">English</a>
+      </div>
+    </div>
+  </section>
+</Base>
