@@ -2,17 +2,25 @@
 // CHIMERA AI — Kaynaklar. Kaynak: chimera-sections-b.jsx (ResourcesSection)
 // Uyarlama: kartlar artık ilgili sayfaya LİNK'tir (çok-sayfa mimarisi); rozet = linkLabel.
 import type { Dict } from "@i18n/tr";
+import type { Lang } from "@i18n/utils";
 interface Props {
   t: Dict;
+  lang?: Lang;
+  /** Verilirse başlıkta "Tüm kaynaklar →" linki gösterilir (ana sayfada /kaynaklar'a yönlendirme). */
+  hubHref?: string;
 }
-const { t } = Astro.props;
+const { t, lang = "tr", hubHref } = Astro.props;
+const hubLabel = lang === "tr" ? "Tüm kaynaklar" : "All resources";
 ---
 
 <section id="kaynaklar" class="section on-light" style="padding-top:0">
   <div class="wrap" style="display:flex;flex-direction:column;gap:32px">
-    <div style="display:flex;flex-direction:column;gap:14px">
-      <div class="mono-label">{t.resources.label}</div>
-      <h2 class="h-section" style="font-size:calc(30px * var(--ts))">{t.resources.h2}</h2>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="mono-label">{t.resources.label}</div>
+        <h2 class="h-section" style="font-size:calc(30px * var(--ts))">{t.resources.h2}</h2>
+      </div>
+      {hubHref && <a class="btn-line" href={hubHref}>{hubLabel} →</a>}
     </div>
     <div class="grid-3">
       {

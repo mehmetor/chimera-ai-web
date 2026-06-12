@@ -19,24 +19,31 @@ interface LocaleRoute {
   /** Nav etiketi. */
   label: string;
 }
+export type RouteGroup = "lines" | "company";
+
 export interface RouteDef {
   key: RouteKey;
   /** Ana sayfada bu route'a karşılık gelen bölüm id'si (anchor) — varsa nav kıyaslamasında kullanılır. */
   section: string;
+  /** Üst nav'da görünür mü? (false → yalnız footer + doğrudan URL) */
   inNav: boolean;
+  /** Footer gruplaması. */
+  group: RouteGroup;
   tr: LocaleRoute;
   en: LocaleRoute;
 }
 
+// Üç hat üstte görünür (markanın yapısal imzası). Referanslar + Hakkında
+// kalabalığı azaltmak için yalnız footer'da (sayfalar yine üretilir/erişilir).
 export const ROUTES: RouteDef[] = [
-  { key: "platform", section: "platform", inNav: true, tr: { slug: "/platform", label: "Platform" }, en: { slug: "/en/platform", label: "Platform" } },
-  { key: "devops", section: "devops", inNav: true, tr: { slug: "/devops", label: "DevOps" }, en: { slug: "/en/devops", label: "DevOps" } },
-  { key: "app", section: "app", inNav: true, tr: { slug: "/app", label: "App" }, en: { slug: "/en/app", label: "App" } },
-  { key: "start", section: "nasil-baslariz", inNav: true, tr: { slug: "/nasil-baslariz", label: "Nasıl Başlarız" }, en: { slug: "/en/how-we-start", label: "How We Start" } },
-  { key: "references", section: "referanslar", inNav: true, tr: { slug: "/referanslar", label: "Referanslar" }, en: { slug: "/en/references", label: "References" } },
-  { key: "resources", section: "kaynaklar", inNav: true, tr: { slug: "/kaynaklar", label: "Kaynaklar" }, en: { slug: "/en/resources", label: "Resources" } },
-  { key: "about", section: "hakkinda", inNav: true, tr: { slug: "/hakkinda", label: "Hakkında" }, en: { slug: "/en/about", label: "About" } },
-  { key: "contact", section: "iletisim", inNav: false, tr: { slug: "/iletisim", label: "İletişim" }, en: { slug: "/en/contact", label: "Contact" } },
+  { key: "platform", section: "platform", inNav: true, group: "lines", tr: { slug: "/platform", label: "Platform" }, en: { slug: "/en/platform", label: "Platform" } },
+  { key: "devops", section: "devops", inNav: true, group: "lines", tr: { slug: "/devops", label: "DevOps" }, en: { slug: "/en/devops", label: "DevOps" } },
+  { key: "app", section: "app", inNav: true, group: "lines", tr: { slug: "/app", label: "App" }, en: { slug: "/en/app", label: "App" } },
+  { key: "start", section: "nasil-baslariz", inNav: true, group: "company", tr: { slug: "/nasil-baslariz", label: "Nasıl Başlarız" }, en: { slug: "/en/how-we-start", label: "How We Start" } },
+  { key: "references", section: "referanslar", inNav: false, group: "company", tr: { slug: "/referanslar", label: "Referanslar" }, en: { slug: "/en/references", label: "References" } },
+  { key: "resources", section: "kaynaklar", inNav: false, group: "company", tr: { slug: "/kaynaklar", label: "Kaynaklar" }, en: { slug: "/en/resources", label: "Resources" } },
+  { key: "about", section: "hakkinda", inNav: false, group: "company", tr: { slug: "/hakkinda", label: "Hakkında" }, en: { slug: "/en/about", label: "About" } },
+  { key: "contact", section: "iletisim", inNav: false, group: "company", tr: { slug: "/iletisim", label: "İletişim" }, en: { slug: "/en/contact", label: "Contact" } },
 ];
 
 const BY_KEY: Record<RouteKey, RouteDef> = Object.fromEntries(
@@ -54,6 +61,11 @@ export function homeSlug(lang: Lang): string {
 /** Nav öğeleri (etiket + yol), aktif dile göre. */
 export function navItems(lang: Lang) {
   return ROUTES.filter((r) => r.inNav).map((r) => ({ key: r.key, href: r[lang].slug, label: r[lang].label }));
+}
+
+/** Footer linkleri, gruba göre (tüm sayfalar — nav'da olmayanlar dahil). */
+export function footerGroup(group: RouteGroup, lang: Lang) {
+  return ROUTES.filter((r) => r.group === group).map((r) => ({ key: r.key, href: r[lang].slug, label: r[lang].label }));
 }
 
 export function contactSlug(lang: Lang): string {
