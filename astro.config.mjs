@@ -32,4 +32,15 @@ export default defineConfig({
   trailingSlash: "never",
   build: { format: "directory" },
   prefetch: { defaultStrategy: "viewport" },
+  // Prod statik servis Railway'de `astro preview` ile yapılır; preview sunucusu
+  // bilinmeyen Host header'larını bloklar (Astro bunu `server.allowedHosts`'tan okur,
+  // vite.preview'den değil — bkz. astro/core/preview/static-preview-server.js).
+  // Cloudflare proxy arkasındaki kanonik alan adı + Railway iç alan adına izin ver.
+  server: {
+    allowedHosts: [
+      "chimera-ai.com.tr",
+      "www.chimera-ai.com.tr",
+      ".up.railway.app",
+    ],
+  },
 });
