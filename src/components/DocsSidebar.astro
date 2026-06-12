@@ -1,0 +1,41 @@
+---
+// CHIMERA AI — Dokümanlar sol sidebar (nav ağacı + aktif vurgu).
+import { buildSidebar, isSidebarGroup, activeLeaf, docsHome } from "@i18n/docsNav";
+import type { Lang } from "@i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const home = docsHome(lang);
+const nodes = buildSidebar(lang);
+const active = activeLeaf(Astro.url.pathname, lang);
+const homeActive = path === home.slug.replace(/\/$/, "");
+const isActive = (slug: string) => !!active && active.slug === slug;
+---
+
+<nav class="docs-sb" aria-label="Dokümanlar">
+  <a class:list={["docs-sb-link", "docs-sb-home", { active: homeActive }]} href={home.slug} aria-current={homeActive ? "page" : undefined}>
+    {home.label}
+  </a>
+  {
+    nodes.map((n) =>
+      isSidebarGroup(n) ? (
+        <div class="docs-sb-group">
+          <span class="docs-sb-grouplabel">{n.label}</span>
+          {n.items.map((it) => (
+            <a class:list={["docs-sb-link", { active: isActive(it.slug) }]} href={it.slug} aria-current={isActive(it.slug) ? "page" : undefined}>
+              {it.label}
+            </a>
+          ))}
+        </div>
+      ) : (
+        <a class:list={["docs-sb-link", { active: isActive(n.slug) }]} href={n.slug} aria-current={isActive(n.slug) ? "page" : undefined}>
+          {n.label}
+        </a>
+      ),
+    )
+  }
+</nav>

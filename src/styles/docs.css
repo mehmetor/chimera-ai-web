@@ -1,0 +1,222 @@
+/* ============================================================
+   CHIMERA AI — Dokümanlar kabuğu (docs site düzeni)
+   Obsidyen chrome (üst-bar + sidebar) + Kağıt içerik yüzeyi.
+   ============================================================ */
+
+:root {
+  --docs-topbar-h: 60px;
+  --docs-sidebar-w: 268px;
+}
+
+/* ---------- üst-bar ---------- */
+.docs-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: var(--docs-topbar-h);
+  padding: 0 20px;
+  background: var(--bg-dark);
+  border-bottom: 1px solid rgba(232, 227, 215, 0.12);
+}
+.docs-badge {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--n-400);
+  border: 1.5px solid var(--n-700);
+  border-radius: var(--radius-sm);
+  padding: 4px 10px;
+}
+.docs-sb-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: var(--line-w) solid var(--n-700);
+  border-radius: var(--radius-sm);
+  color: var(--n-100);
+  cursor: pointer;
+}
+.docs-sb-toggle .icon-close {
+  display: none;
+}
+.docs-sb-toggle[aria-expanded="true"] .icon-menu {
+  display: none;
+}
+.docs-sb-toggle[aria-expanded="true"] .icon-close {
+  display: block;
+}
+
+/* ---------- düzen ---------- */
+.docs-layout {
+  display: grid;
+  grid-template-columns: var(--docs-sidebar-w) minmax(0, 1fr);
+  align-items: start;
+}
+
+/* ---------- sidebar ---------- */
+.docs-sidebar {
+  position: sticky;
+  top: var(--docs-topbar-h);
+  height: calc(100vh - var(--docs-topbar-h));
+  overflow-y: auto;
+  background: var(--bg-dark);
+  border-right: 1px solid rgba(232, 227, 215, 0.12);
+  padding: 28px 18px 40px;
+}
+.docs-sb {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.docs-sb-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 22px;
+}
+.docs-sb-grouplabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--n-500);
+  padding: 6px 12px;
+}
+.docs-sb-link {
+  display: block;
+  font-size: 14.5px;
+  color: var(--n-300);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border-left: 2px solid transparent;
+  transition:
+    color 150ms ease,
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+.docs-sb-link:hover {
+  color: var(--n-100);
+  background: rgba(232, 227, 215, 0.06);
+}
+.docs-sb-link.active {
+  color: var(--bronze-on-dark);
+  background: rgba(201, 158, 99, 0.1);
+  border-left-color: var(--bronze-on-dark);
+  font-weight: 600;
+}
+.docs-sb-home {
+  margin-bottom: 4px;
+}
+
+.docs-scrim {
+  display: none;
+}
+
+/* ---------- içerik (Kağıt yüzey) ---------- */
+.docs-main {
+  min-height: calc(100vh - var(--docs-topbar-h));
+  background: var(--bg-light);
+  color: var(--n-800);
+  padding: 28px clamp(20px, 5vw, 64px) 80px;
+}
+.docs-crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  color: var(--n-500);
+  margin-bottom: 28px;
+}
+.docs-crumbs a {
+  color: var(--n-600);
+  text-decoration: none;
+}
+.docs-crumbs a:hover {
+  color: var(--bronze-ink);
+}
+.docs-crumbs [aria-current="page"] {
+  color: var(--n-800);
+}
+.docs-crumb-sep {
+  color: var(--n-400);
+}
+.docs-content {
+  max-width: 880px;
+}
+.docs-content h1 {
+  font-size: calc(40px * var(--ts));
+  font-weight: 600;
+  color: var(--n-900);
+  letter-spacing: -0.015em;
+}
+
+/* docs içeriği açık zemin → bileşenlerin on-light varyantları */
+.docs-content .mono-label {
+  color: var(--accent-ink);
+}
+.docs-content .lede {
+  color: var(--n-700);
+}
+.docs-content .body-dim {
+  color: var(--n-600);
+}
+.docs-content .card {
+  background: var(--card-light);
+  border-color: rgba(21, 19, 14, calc(0.18 * var(--frame-alpha)));
+}
+.docs-content .frame {
+  border-color: rgba(21, 19, 14, calc(0.25 * var(--frame-alpha)));
+}
+.docs-content h2,
+.docs-content h3 {
+  color: var(--n-900);
+}
+
+/* ---------- mobil: sidebar off-canvas drawer ---------- */
+@media (max-width: 900px) {
+  .docs-sb-toggle {
+    display: inline-flex;
+  }
+  .docs-layout {
+    grid-template-columns: 1fr;
+  }
+  .docs-sidebar {
+    position: fixed;
+    top: var(--docs-topbar-h);
+    left: 0;
+    bottom: 0;
+    width: min(82vw, var(--docs-sidebar-w));
+    height: auto;
+    z-index: 65;
+    transform: translateX(-100%);
+    transition: transform 200ms ease;
+  }
+  .docs-sidebar-open .docs-sidebar {
+    transform: translateX(0);
+  }
+  .docs-sidebar-open .docs-scrim {
+    display: block;
+    position: fixed;
+    inset: var(--docs-topbar-h) 0 0 0;
+    z-index: 64;
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .docs-sidebar {
+    transition: none;
+  }
+}

@@ -1,0 +1,148 @@
+---
+// CHIMERA AI — Dokümanlar kabuğu (sol sidebar'lı, dokümantasyon sitesi düzeni).
+// Pazarlama shell'inden (Base) ayrı: üst-bar + kalıcı sidebar + breadcrumb + mobil drawer.
+import "@styles/tokens.css";
+import "@styles/base.css";
+import "@styles/components.css";
+import "@styles/docs.css";
+import "@fontsource-variable/inter";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
+import "@fontsource/ibm-plex-mono/600.css";
+
+import Seo from "@components/Seo.astro";
+import SealMark from "@components/SealMark.astro";
+import DocsSidebar from "@components/DocsSidebar.astro";
+import { getLangFromUrl } from "@i18n/utils";
+import { docsHome, buildSidebar, isSidebarGroup, activeLeaf, DOCS_HOME } from "@i18n/docsNav";
+import { SITE, organizationSchema } from "../site";
+
+interface Props {
+  title: string;
+  description: string;
+  translated?: boolean;
+  /** hreflang çifti (docs leaf'in tr/en slug'ları) */
+  altPair?: { tr: string; en: string };
+  /** Detay sayfalarında son breadcrumb (terim/yazı adı) */
+  crumb?: string;
+  image?: string;
+  ogType?: "website" | "article";
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown>[];
+}
+
+const lang = getLangFromUrl(Astro.url);
+const { title, description, translated = false, altPair, crumb, image, ogType, noindex, jsonLd = [] } = Astro.props;
+const allJsonLd = [organizationSchema(), ...jsonLd];
+
+const home = docsHome(lang);
+const active = activeLeaf(Astro.url.pathname, lang);
+let groupLabel: string | null = null;
+for (const n of buildSidebar(lang)) {
+  if (isSidebarGroup(n) && active && n.items.some((i) => i.key === active.key)) groupLabel = n.label;
+}
+const docsLabel = lang === "tr" ? "Dokümanlar" : "Docs";
+const crumbs: { label: string; href?: string }[] = [{ label: docsLabel, href: home.slug }];
+if (groupLabel) crumbs.push({ label: groupLabel });
+if (active) crumbs.push({ label: active.label, href: active.slug });
+if (crumb) crumbs.push({ label: crumb });
+
+const trHref = altPair?.tr ?? DOCS_HOME.tr.slug;
+const enHref = altPair?.en ?? (DOCS_HOME.en?.slug ?? "/en/docs");
+const skipLabel = lang === "tr" ? "İçeriğe geç" : "Skip to content";
+const siteHome = lang === "tr" ? "/" : "/en";
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <Seo
+      title={title}
+      description={description}
+      lang={lang}
+      translated={translated}
+      altPair={altPair}
+      image={image}
+      ogType={ogType}
+      noindex={noindex}
+      jsonLd={allJsonLd}
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {
+      SITE.analyticsDomain && SITE.analyticsSrc && (
+        <script is:inline defer data-domain={SITE.analyticsDomain} src={SITE.analyticsSrc} />
+      )
+    }
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{skipLabel}</a>
+
+    <header class="docs-topbar" id="docs-topbar">
+      <button class="docs-sb-toggle" type="button" aria-label="Menü" aria-expanded="false" aria-controls="docs-sidebar">
+        <svg class="icon-menu" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+        <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+      </button>
+      <a class="brand-lockup" href={siteHome} aria-label="Chimera AI — ana sayfa">
+        <SealMark size={28} variant="dugum" color="var(--n-100)" />
+        <span class="brand-word">CHIMERA <span class="ai">AI</span></span>
+      </a>
+      <span class="docs-badge">{docsLabel}</span>
+      <div class="lang-switch" style="margin-left:auto">
+        <a class={lang === "tr" ? "active" : ""} href={trHref} hreflang="tr">TR</a>
+        <a class={lang === "en" ? "active" : ""} href={enHref} hreflang="en">EN</a>
+      </div>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-sidebar" id="docs-sidebar">
+        <DocsSidebar lang={lang} />
+      </aside>
+      <div class="docs-scrim" id="docs-scrim" hidden></div>
+
+      <main class="docs-main" id="main">
+        <nav class="docs-crumbs" aria-label="Breadcrumb">
+          {
+            crumbs.map((c, i) => (
+              <Fragment>
+                {i > 0 && <span class="docs-crumb-sep">/</span>}
+                {c.href && i < crumbs.length - 1 ? <a href={c.href}>{c.label}</a> : <span aria-current="page">{c.label}</span>}
+              </Fragment>
+            ))
+          }
+        </nav>
+        <div class="docs-content">
+          <slot />
+        </div>
+      </main>
+    </div>
+
+    <script is:inline>
+      (function () {
+        var body = document.body;
+        var btn = document.querySelector(".docs-sb-toggle");
+        var scrim = document.getElementById("docs-scrim");
+        function setOpen(open) {
+          body.classList.toggle("docs-sidebar-open", open);
+          if (btn) btn.setAttribute("aria-expanded", open ? "true" : "false");
+          if (scrim) scrim.hidden = !open;
+        }
+        if (btn) btn.addEventListener("click", function () { setOpen(!body.classList.contains("docs-sidebar-open")); });
+        if (scrim) scrim.addEventListener("click", function () { setOpen(false); });
+        document.querySelectorAll("#docs-sidebar a").forEach(function (a) {
+          a.addEventListener("click", function () { setOpen(false); });
+        });
+        document.addEventListener("keydown", function (e) { if (e.key === "Escape") setOpen(false); });
+      })();
+    </script>
+    <script is:inline>
+      (function () {
+        try {
+          var p = new URLSearchParams(location.search).get("theme");
+          var ok = ["gece", "patine", "volkanik"];
+          if (p && ok.indexOf(p) >= 0) document.body.classList.add("theme-" + p);
+        } catch (e) {}
+      })();
+    </script>
+  </body>
+</html>

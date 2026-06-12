@@ -1,0 +1,38 @@
+---
+// CHIMERA AI — Dokümanlar ana sayfa (TR).
+import DocsShell from "@layouts/DocsShell.astro";
+
+const cards = [
+  { label: "Platform · Modüller", href: "/dokumanlar/platform/moduller", desc: "M0–M6 modül kataloğu: ne yapar, neyi içerir, teslim kriterleri ve dürüst sınırlar." },
+  { label: "Platform · Nasıl çalışır", href: "/dokumanlar/platform/nasil-calisir", desc: "Üçlü mimari: Akıl (LLM) + Hafıza (RAG) bugün teslim, El (MCP) yol haritasında." },
+  { label: "Platform · Güvenlik", href: "/dokumanlar/platform/guvenlik", desc: "Sıfır dış veri çıkışı, erişim denetimi, air-gap kurulum ve KVKK." },
+  { label: "Kavramlar (Sözlük)", href: "/dokumanlar/sozluk", desc: "Kurumsal AI terimlerinin sade Türkçe açıklamaları: RAG, embedding, MoE, MCP…" },
+  { label: "SSS", href: "/dokumanlar/sss", desc: "Güvenlik, lisans, donanım ve süreç hakkında en sık sorulan sorular." },
+  { label: "Benchmark Raporları", href: "/dokumanlar/rapor", desc: "Her ay yenilenen açık kaynak LLM ve donanım karşılaştırması." },
+  { label: "Blog", href: "/dokumanlar/blog", desc: "Saha notları ve kapalı devre AI üzerine mimari yazılar." },
+];
+---
+
+<DocsShell
+  title="Dokümanlar · Chimera AI"
+  description="Chimera AI teknik dokümanları: platform modülleri, mimari, güvenlik, kavram sözlüğü, SSS, benchmark raporları ve blog."
+  translated={true}
+  altPair={{ tr: "/dokumanlar", en: "/en/docs" }}
+>
+  <div class="mono-label">Dokümanlar</div>
+  <h1 style="margin-top:14px">Chimera AI'ı derinlemesine.</h1>
+  <p class="lede" style="margin-top:16px;max-width:680px">
+    Platform modülleri, mimari, güvenlik, kavramlar ve raporlar. Soldaki menüden gezinin ya da
+    aşağıdan başlayın.
+  </p>
+  <div class="grid-2" style="margin-top:36px">
+    {
+      cards.map((c) => (
+        <a class="card" href={c.href} style="gap:8px;text-decoration:none;color:inherit">
+          <h2 class="h-card" style="font-size:calc(18px * var(--ts))">{c.label}</h2>
+          <p class="body-dim" style="font-size:calc(14.5px * var(--ts))">{c.desc}</p>
+        </a>
+      ))
+    }
+  </div>
+</DocsShell>

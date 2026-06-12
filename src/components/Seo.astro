@@ -12,6 +12,8 @@ interface Props {
   translated?: boolean;
   /** hreflang slug eşlemesi için route anahtarı (yerelleştirilmiş slug'lar). */
   routeKey?: RouteKey | "home";
+  /** Route haritası dışı sayfalar (docs) için doğrudan hreflang çifti. */
+  altPair?: { tr: string; en: string };
   image?: string;
   ogType?: "website" | "article";
   noindex?: boolean;
@@ -25,6 +27,7 @@ const {
   lang,
   translated = false,
   routeKey = "home",
+  altPair,
   image = "/og/default.png",
   ogType = "website",
   noindex = false,
@@ -35,8 +38,8 @@ const site = Astro.site ?? new URL("https://chimera-ai.com.tr");
 const canonical = new URL(Astro.url.pathname, site).href.replace(/\/$/, "") || site.href;
 const ogImage = new URL(image, site).href;
 
-// hreflang çiftleri — route haritasından (yerelleştirilmiş slug'lar)
-const pair = hreflangFor(routeKey);
+// hreflang çiftleri — docs için altPair, değilse route haritasından
+const pair = altPair ?? hreflangFor(routeKey);
 const alts = translated
   ? [
       { hreflang: "tr", href: new URL(pair.tr, site).href.replace(/\/$/, "") || site.href },
