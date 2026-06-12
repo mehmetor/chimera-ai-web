@@ -15,8 +15,8 @@ Web sitesi geliştirme + içerik hattının canlı takip dokümanı.
 ## 🔜 Sırada (az/hiç DCN kaynağı gerektirmeyen)
 
 - [ ] **`/platform/moduller`** — özellik kataloğundan modül kataloğu (ne yapar / kime / bileşenler / teslim / sınırlar). *Kaynak: `ozellik-katalogu.md`.*
-- [ ] **`/platform/nasil-calisir`** — **"Akıl (LLM) + Hafıza (RAG) var / El (MCP) = yol haritası"** dürüst mimari anlatımı. *Kaynak: katalog dürüstlük notu + mimari doc.*
-- [ ] **Sözlük genişletme** — katalog Kısa Sözlük'ten: embedding, reranker, vektör veritabanı, MoE, quantization, MCP, LoRA/fine-tuning, guardrail, STT/TTS.
+- [x] **`/platform/nasil-calisir`** — üçlü mimari dürüst anlatımı (Akıl/Hafıza=teslim, El/MCP=yol haritası) + kapalı devre diyagramı + KEP kanıtı.
+- [x] **Sözlük genişletme** — 8 yeni terim: embedding, reranker, vektör veritabanı, MoE, quantization, MCP, fine-tuning/LoRA, guardrail. (STT/TTS ileride eklenebilir.) Toplam 13 TR terim.
 - [ ] **Mobil nav menüsü** (linkler 1020px altında gizleniyor, hamburger yok).
 - [ ] `/platform/guvenlik` — güvenlik / KVKK / air-gap. *Kaynak: data-security içeriği.*
 
