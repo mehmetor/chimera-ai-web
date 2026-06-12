@@ -1,0 +1,70 @@
+---
+// CHIMERA AI — EN GEO landing: "On-premise AI in Turkey" (IA §2 EN çekirdek set).
+// EN-only (TR çifti yok → hreflang yayılmaz). İçerik onaylı ana sayfa kopyasından
+// türetilir (uydurma yok); FAQ görünür + FAQPage JSON-LD (GEO, IA §4.1).
+import Base from "@layouts/Base.astro";
+import Problem from "@components/sections/Problem.astro";
+import Platform from "@components/sections/Platform.astro";
+import { useTranslations } from "@i18n/utils";
+import { contactSlug } from "@i18n/routes";
+
+const t = useTranslations("en");
+
+const faqs = [
+  { q: "What is on-premise (closed-circuit) AI?", a: t.hero.lede },
+  { q: "Where does my data go with Chimera AI?", a: t.problem.items[0].d },
+  { q: "Is Chimera AI a subscription?", a: t.problem.items[2].d },
+  { q: "Does it support Turkish and KVKK/GDPR compliance?", a: t.platform.lede },
+];
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+---
+
+<Base
+  title="On-premise AI in Turkey — Chimera AI"
+  description="Closed-circuit, on-premise enterprise AI for organizations in Turkey: runs on your own servers, leaks no data to external clouds, Turkish + KVKK/GDPR aware. Built on an open-source stack — your permanent property."
+  translated={false}
+  ogType="article"
+  jsonLd={[faqLd]}
+>
+  <section class="section">
+    <div class="wrap" style="max-width:760px;display:flex;flex-direction:column;gap:22px">
+      <div class="mono-label">On-premise Enterprise AI · Turkey</div>
+      <h1 class="h-display" style="font-size:calc(48px * var(--ts))">
+        AI that stays inside your building.
+      </h1>
+      <p class="lede">{t.hero.lede}</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:4px">
+        <a class="btn btn-primary" href={contactSlug("en")}>{t.hero.cta1}</a>
+        <a class="btn btn-ghost" href="/en/platform">{t.lines.items[0].link}</a>
+      </div>
+    </div>
+  </section>
+
+  <Problem t={t} />
+  <Platform t={t} />
+
+  <section class="section">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:28px">
+      <h2 class="h-section" style="font-size:calc(30px * var(--ts))">Frequently asked questions</h2>
+      <div style="display:flex;flex-direction:column;gap:16px;max-width:780px">
+        {
+          faqs.map((f) => (
+            <div class="card">
+              <h3 class="h-card" style="font-size:calc(18px * var(--ts))">{f.q}</h3>
+              <p class="body-dim" style="font-size:calc(15.5px * var(--ts))">{f.a}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>

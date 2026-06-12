@@ -1,6 +1,5 @@
 ---
-// CHIMERA AI — ana sayfa (TR). Prototipin uzun sayfasının birebir karşılığı.
-// Kaynak: design/prototype/index.html (App) — bölüm sırası korundu.
+// CHIMERA AI — homepage (EN). Same sections, English dictionary.
 import Base from "@layouts/Base.astro";
 import Hero from "@components/sections/Hero.astro";
 import Problem from "@components/sections/Problem.astro";
@@ -14,11 +13,10 @@ import Resources from "@components/sections/Resources.astro";
 import About from "@components/sections/About.astro";
 import Contact from "@components/sections/Contact.astro";
 import { useTranslations } from "@i18n/utils";
-import { SITE } from "../site";
+import { SITE } from "../../site";
 
-const t = useTranslations("tr");
+const t = useTranslations("en");
 
-// Ana sayfa Product/Service JSON-LD (üç hat) — GEO (IA §4.1).
 const productLd = {
   "@context": "https://schema.org",
   "@type": "Product",
@@ -26,9 +24,9 @@ const productLd = {
   brand: { "@type": "Brand", name: SITE.name },
   manufacturer: { "@type": "Organization", name: SITE.org },
   description:
-    "Kurumun kendi sunucularında çalışan, dış buluta veri sızdırmayan, açık kaynak yığını üzerine kurulu kapalı devre kurumsal yapay zeka platformu.",
+    "A closed-circuit enterprise AI platform that runs on your own servers, leaks no data to external clouds, and is built on an open-source stack.",
   category: "Enterprise AI Platform",
-  url: SITE.url,
+  url: `${SITE.url}/en`,
   hasVariant: t.lines.items.map((l) => ({
     "@type": "Product",
     name: `Chimera AI ${l.name}`,
@@ -38,14 +36,15 @@ const productLd = {
 ---
 
 <Base
-  title="Chimera AI — Yapay zeka. Sizin sınırlarınızda, sizin denetiminizde."
-  description="Kurumunuzun kendi sunucularında çalışan, dış buluta veri sızdırmayan kapalı devre kurumsal yapay zeka platformu. Abonelik değil — kalıcı mülkünüz."
+  title="Chimera AI — Artificial intelligence. Within your boundaries, under your control."
+  description="A closed-circuit enterprise AI platform that runs on your own servers, leaks no data to external clouds, and feeds on your organization's own knowledge. Not a subscription — your permanent property."
   translated={true}
+  routeKey="home"
   jsonLd={[productLd]}
 >
   <Hero t={t} />
   <Problem t={t} />
-  <Lines t={t} lang="tr" />
+  <Lines t={t} lang="en" />
   <Platform t={t} />
   <DevOps t={t} />
   <App t={t} />

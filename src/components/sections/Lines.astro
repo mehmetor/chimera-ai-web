@@ -4,12 +4,15 @@
 import SealMark from "../SealMark.astro";
 import Frame from "../Frame.astro";
 import type { Dict } from "@i18n/tr";
+import type { Lang } from "@i18n/utils";
+import { route } from "@i18n/routes";
 
 interface Props {
   t: Dict;
+  lang?: Lang;
   markVariant?: "denge" | "cimasi" | "dugum";
 }
-const { t, markVariant = "dugum" } = Astro.props;
+const { t, lang = "tr", markVariant = "dugum" } = Astro.props;
 
 const accents = [
   { id: "platform", on: "var(--bronze-on-dark)", ink: "var(--bronze-ink)" },
@@ -44,7 +47,7 @@ const accents = [
             <p class="body-dim" style="font-size:calc(15.5px * var(--ts));flex:1">
               {it.d}
             </p>
-            <a class="btn-line" href={`/${accents[i].id}`} style={`color:${accents[i].on}`}>
+            <a class="btn-line" href={route(accents[i].id)[lang].slug} style={`color:${accents[i].on}`}>
               {it.link} →
             </a>
           </Frame>

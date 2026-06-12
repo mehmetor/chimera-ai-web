@@ -13,12 +13,14 @@ import Seo from "@components/Seo.astro";
 import Nav from "@components/Nav.astro";
 import Footer from "@components/Footer.astro";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import type { RouteKey } from "@i18n/routes";
 import { SITE, organizationSchema } from "../site";
 
 interface Props {
   title: string;
   description: string;
   translated?: boolean;
+  routeKey?: RouteKey | "home";
   image?: string;
   ogType?: "website" | "article";
   noindex?: boolean;
@@ -27,7 +29,16 @@ interface Props {
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const { title, description, translated = false, image, ogType, noindex, jsonLd = [] } = Astro.props;
+const {
+  title,
+  description,
+  translated = false,
+  routeKey = "home",
+  image,
+  ogType,
+  noindex,
+  jsonLd = [],
+} = Astro.props;
 const allJsonLd = [organizationSchema(), ...jsonLd];
 const skipLabel = lang === "tr" ? "İçeriğe geç" : "Skip to content";
 ---
@@ -40,6 +51,7 @@ const skipLabel = lang === "tr" ? "İçeriğe geç" : "Skip to content";
       description={description}
       lang={lang}
       translated={translated}
+      routeKey={routeKey}
       image={image}
       ogType={ogType}
       noindex={noindex}
@@ -55,7 +67,7 @@ const skipLabel = lang === "tr" ? "İçeriğe geç" : "Skip to content";
   </head>
   <body>
     <a class="skip-link" href="#main">{skipLabel}</a>
-    <Nav lang={lang} t={t} />
+    <Nav lang={lang} t={t} routeKey={routeKey} />
     <main id="main">
       <slot />
     </main>

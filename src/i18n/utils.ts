@@ -21,18 +21,6 @@ export function useTranslations(lang: Lang): Dict {
   return dicts[lang] ?? dicts[defaultLang];
 }
 
-/** İç yolu aktif dile göre prefixler (tr → prefixsiz, en → /en/...). */
-export function localizePath(path: string, lang: Lang): string {
-  const clean = "/" + path.replace(/^\/+/, "");
-  if (lang === defaultLang) return clean === "/" ? "/" : clean.replace(/\/$/, "");
-  return ("/" + lang + clean).replace(/\/$/, "") || "/" + lang;
-}
-
-/** Bu URL'nin diğer dildeki karşılığı (hreflang/lang-switch için). */
-export function alternateUrl(url: URL, to: Lang): string {
-  const current = getLangFromUrl(url);
-  if (current === to) return url.pathname;
-  let rest = url.pathname;
-  if (current !== defaultLang) rest = rest.replace(new RegExp(`^/${current}`), "") || "/";
-  return to === defaultLang ? rest : ("/" + to + rest).replace(/\/$/, "");
-}
+// NOT: Yol yerelleştirme ve hreflang eşlemesi artık @i18n/routes (route haritası)
+// üzerinden yapılır — yerelleştirilmiş slug'ları (TR /nasil-baslariz ↔ EN
+// /en/how-we-start) doğru eşleyebilmek için. Naif prefix-swap yardımcıları kaldırıldı.

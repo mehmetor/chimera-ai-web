@@ -1,0 +1,71 @@
+---
+// CHIMERA AI — iç sayfalar (TR + EN) tek kaynaktan üretilir (route haritası).
+// Faz 3 iskelesi: her sayfa ilgili bölümü gövde olarak yeniden kullanır;
+// Faz 4'te DCN içeriği + alt sayfalar (/platform/moduller…) ile zenginleşir.
+import Base from "@layouts/Base.astro";
+import Platform from "@components/sections/Platform.astro";
+import DevOps from "@components/sections/DevOps.astro";
+import App from "@components/sections/App.astro";
+import Start from "@components/sections/Start.astro";
+import Refs from "@components/sections/Refs.astro";
+import Resources from "@components/sections/Resources.astro";
+import About from "@components/sections/About.astro";
+import Contact from "@components/sections/Contact.astro";
+import { useTranslations, type Lang } from "@i18n/utils";
+import { ROUTES, contactSlug, homeSlug, type RouteKey } from "@i18n/routes";
+import { SITE } from "../site";
+
+export function getStaticPaths() {
+  const langs: Lang[] = ["tr", "en"];
+  return ROUTES.flatMap((r) =>
+    langs.map((lang) => ({
+      params: { slug: r[lang].slug.replace(/^\//, "") },
+      props: { routeKey: r.key, lang, label: r[lang].label },
+    })),
+  );
+}
+
+interface PageProps {
+  routeKey: RouteKey;
+  lang: Lang;
+  label: string;
+}
+const { routeKey, lang, label } = Astro.props as PageProps;
+const t = useTranslations(lang);
+
+// route → i18n bölüm anahtarı (başlık/açıklama için)
+const SECTION_KEY: Record<RouteKey, keyof typeof t> = {
+  platform: "platform",
+  devops: "devops",
+  app: "app",
+  start: "start",
+  references: "refs",
+  resources: "resources",
+  about: "about",
+  contact: "contact",
+};
+const data = t[SECTION_KEY[routeKey]] as Record<string, string>;
+const desc = data.lede ?? data.d ?? data.h2 ?? "";
+const title = `${label} · Chimera AI`;
+
+const site = SITE.url;
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Chimera AI", item: `${site}${homeSlug(lang)}`.replace(/\/$/, "") || site },
+    { "@type": "ListItem", position: 2, name: label, item: `${site}${ROUTES.find((r) => r.key === routeKey)![lang].slug}` },
+  ],
+};
+---
+
+<Base title={title} description={desc} translated={true} routeKey={routeKey} jsonLd={[breadcrumb]}>
+  {routeKey === "platform" && <Platform t={t} />}
+  {routeKey === "devops" && <DevOps t={t} />}
+  {routeKey === "app" && <App t={t} />}
+  {routeKey === "start" && <Start t={t} ctaHref={contactSlug(lang)} />}
+  {routeKey === "references" && <Refs t={t} />}
+  {routeKey === "resources" && <Resources t={t} />}
+  {routeKey === "about" && <About t={t} />}
+  {routeKey === "contact" && <Contact t={t} />}
+</Base>

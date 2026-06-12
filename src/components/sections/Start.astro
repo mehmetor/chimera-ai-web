@@ -5,8 +5,10 @@ import type { Dict } from "@i18n/tr";
 
 interface Props {
   t: Dict;
+  /** CTA hedefi — ana sayfada "#iletisim" (kaydır), bağımsız sayfada iletişim route'u. */
+  ctaHref?: string;
 }
-const { t } = Astro.props;
+const { t, ctaHref = "#iletisim" } = Astro.props;
 ---
 
 <section id="nasil-baslariz" class="section">
@@ -39,7 +41,7 @@ const { t } = Astro.props;
           <span class="body-dim" style="font-size:calc(15px * var(--ts))"> — {t.start.kobiD}</span>
         </div>
       </Frame>
-      <a class="btn btn-primary" href="#iletisim">{t.start.cta}</a>
+      <a class="btn btn-primary" href={ctaHref}>{t.start.cta}</a>
     </div>
   </div>
 </section>

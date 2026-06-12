@@ -1,7 +1,8 @@
 ---
 // CHIMERA AI — <head> SEO/GEO bileşeni (IA §4)
 // meta + OG/Twitter + öz-referans canonical + hreflang + JSON-LD.
-import { alternateUrl, type Lang } from "@i18n/utils";
+import type { Lang } from "@i18n/utils";
+import { hreflangFor, type RouteKey } from "@i18n/routes";
 
 interface Props {
   title: string;
@@ -9,6 +10,8 @@ interface Props {
   lang: Lang;
   /** EN/TR karşılığı var mı? hreflang alternatifleri yalnızca varsa yayılır. */
   translated?: boolean;
+  /** hreflang slug eşlemesi için route anahtarı (yerelleştirilmiş slug'lar). */
+  routeKey?: RouteKey | "home";
   image?: string;
   ogType?: "website" | "article";
   noindex?: boolean;
@@ -21,6 +24,7 @@ const {
   description,
   lang,
   translated = false,
+  routeKey = "home",
   image = "/og/default.png",
   ogType = "website",
   noindex = false,
@@ -31,12 +35,13 @@ const site = Astro.site ?? new URL("https://chimera-ai.com.tr");
 const canonical = new URL(Astro.url.pathname, site).href.replace(/\/$/, "") || site.href;
 const ogImage = new URL(image, site).href;
 
-// hreflang çiftleri (yalnız iki dilde de yayımlanan sayfalarda)
+// hreflang çiftleri — route haritasından (yerelleştirilmiş slug'lar)
+const pair = hreflangFor(routeKey);
 const alts = translated
   ? [
-      { hreflang: "tr", href: new URL(alternateUrl(Astro.url, "tr"), site).href },
-      { hreflang: "en", href: new URL(alternateUrl(Astro.url, "en"), site).href },
-      { hreflang: "x-default", href: new URL(alternateUrl(Astro.url, "tr"), site).href },
+      { hreflang: "tr", href: new URL(pair.tr, site).href.replace(/\/$/, "") || site.href },
+      { hreflang: "en", href: new URL(pair.en, site).href.replace(/\/$/, "") },
+      { hreflang: "x-default", href: new URL(pair.tr, site).href.replace(/\/$/, "") || site.href },
     ]
   : [];
 
