@@ -25,6 +25,11 @@ Web sitesi geliştirme + içerik hattının canlı takip dokümanı.
 
 > **Platform alt sayfaları tamam:** moduller · nasil-calisir · guvenlik (hepsi Platform bölümünden + birbirinden linkli).
 
+## 🎨 UI/UX — görsel & navigasyon cila (planlandı, sonraki oturum)
+
+- [ ] **Dokümanlar + blog sayfaları:** iç navigasyon (sidebar · breadcrumb · sayfa-içi gezinme) + görsel düzenlemeler.
+- [ ] **Ana sayfa:** görsel düzenlemeler.
+
 ## ⏳ DCN içeriği / karar bekleyen
 
 - [x] **Benchmark Raporu sayfası** (`/kaynaklar/rapor/2026-06`) — Haziran raporundan **public-safe damıtım** yapıldı: `reports` koleksiyonu + indeks + detay (TechArticle JSON-LD), ana sayfa Kaynaklar'a kart. Tüketici GPU sokak fiyatı göreceli rehbere indirildi, LaTeX düzeltildi, "her ay yayımlanan rapor" iddiasının **kanonik dayanağı** kuruldu. ⚠️ **Yayın (deploy) öncesi Demet onayı gerekir.**
