@@ -1,0 +1,35 @@
+---
+// CHIMERA AI — Hakkında. Kaynak: chimera-sections-b.jsx (AboutSection)
+import SealMark from "../SealMark.astro";
+import type { Dict } from "@i18n/tr";
+
+interface Props {
+  t: Dict;
+  markVariant?: "denge" | "cimasi" | "dugum";
+}
+const { t, markVariant = "dugum" } = Astro.props;
+---
+
+<section id="hakkinda" class="section" style="padding-bottom:calc(72px * var(--ts))">
+  <div class="wrap about-grid" style="display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center">
+    <SealMark size={120} variant={markVariant} color="var(--n-300)" />
+    <div style="display:flex;flex-direction:column;gap:14px;max-width:640px">
+      <div class="mono-label">{t.about.label}</div>
+      <h2
+        class="h-section"
+        style="font-size:calc(28px * var(--ts));font-family:var(--font-mono);font-weight:500;letter-spacing:0.03em"
+      >
+        {t.about.h2}
+      </h2>
+      <p class="body-dim" style="font-size:calc(16px * var(--ts))">{t.about.d}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 700px) {
+    .about-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

@@ -1,0 +1,28 @@
+# Chimera AI
+
+> Kurumun kendi sınırları içinde (on-premise, kapalı devre) çalışan, dış buluta veri sızdırmayan ve kurumun kendi bilgisinden beslenen kurumsal yapay zeka platformu. Açık kaynak yığını üzerine kurulur — abonelik değil, kurumun kalıcı mülkü. "bir DC NEXTGEN ürünüdür."
+
+Chimera AI çatı markadır; altında üç hat yaşar: **Platform** (kapalı devre AI — kurum sunucusunda model + kurumun bilgisi/RAG + sohbet/kod asistanı), **DevOps** (self-hosted yazılım üretim hattı), **App** (AI-hızlandırılmış uygulama geliştirme). Vaat: "Yapay zeka. Sizin sınırlarınızda, sizin denetiminizde."
+
+## Sayfalar
+
+- [Ana sayfa](https://chimera-ai.com.tr/): Hero, üç hat, sorun/çözüm, kanıt, CTA.
+- [Platform](https://chimera-ai.com.tr/platform): Kapalı devre AI platformu; M0–M6 modül kataloğu.
+- [DevOps](https://chimera-ai.com.tr/devops): Self-hosted yazılım üretim hattı (Git, CI/CD, test, dağıtım, eğitim).
+- [App](https://chimera-ai.com.tr/app): Fikirden ürüne 5 fazlı geliştirme süreci.
+- [Nasıl Başlarız](https://chimera-ai.com.tr/nasil-baslariz): Mimari Ön-Analiz → FAZ-0 pilot → kurulum (mahsup modeli).
+- [Referanslar](https://chimera-ai.com.tr/referanslar): Anonim saha vakaları.
+- [Kaynaklar](https://chimera-ai.com.tr/kaynaklar): Blog, sözlük, SSS.
+- [Hakkında](https://chimera-ai.com.tr/hakkinda): DC NEXTGEN.
+- [İletişim](https://chimera-ai.com.tr/iletisim): Mimari Ön-Analiz talebi.
+
+## English
+
+- [Home (EN)](https://chimera-ai.com.tr/en): Closed-circuit enterprise AI, on-premise.
+- [Platform (EN)](https://chimera-ai.com.tr/en/platform)
+- [On-premise AI in Turkey (EN)](https://chimera-ai.com.tr/en/on-premise-ai-turkey)
+
+## Notlar
+
+- Kanonik alan adı: chimera-ai.com.tr (diğer alanlar 301 yönlendirir).
+- Müşteri adları dışa dönük materyalde anonimdir; isim kullanımı yazılı onaya bağlıdır.

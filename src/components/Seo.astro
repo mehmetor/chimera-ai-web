@@ -1,0 +1,75 @@
+---
+// CHIMERA AI — <head> SEO/GEO bileşeni (IA §4)
+// meta + OG/Twitter + öz-referans canonical + hreflang + JSON-LD.
+import { alternateUrl, type Lang } from "@i18n/utils";
+
+interface Props {
+  title: string;
+  description: string;
+  lang: Lang;
+  /** EN/TR karşılığı var mı? hreflang alternatifleri yalnızca varsa yayılır. */
+  translated?: boolean;
+  image?: string;
+  ogType?: "website" | "article";
+  noindex?: boolean;
+  /** Sayfaya özel JSON-LD nesneleri (Organization, Product, FAQPage, Article…). */
+  jsonLd?: Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  lang,
+  translated = false,
+  image = "/og/default.png",
+  ogType = "website",
+  noindex = false,
+  jsonLd = [],
+} = Astro.props;
+
+const site = Astro.site ?? new URL("https://chimera-ai.com.tr");
+const canonical = new URL(Astro.url.pathname, site).href.replace(/\/$/, "") || site.href;
+const ogImage = new URL(image, site).href;
+
+// hreflang çiftleri (yalnız iki dilde de yayımlanan sayfalarda)
+const alts = translated
+  ? [
+      { hreflang: "tr", href: new URL(alternateUrl(Astro.url, "tr"), site).href },
+      { hreflang: "en", href: new URL(alternateUrl(Astro.url, "en"), site).href },
+      { hreflang: "x-default", href: new URL(alternateUrl(Astro.url, "tr"), site).href },
+    ]
+  : [];
+
+const ogLocale = lang === "tr" ? "tr_TR" : "en_US";
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+{alts.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+
+{/* Open Graph */}
+<meta property="og:type" content={ogType} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:locale" content={ogLocale} />
+<meta property="og:site_name" content="Chimera AI" />
+
+{/* Twitter */}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+{/* JSON-LD (GEO çapraz-doğrulama için) */}
+{
+  jsonLd.map((obj) => (
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(obj)} />
+  ))
+}

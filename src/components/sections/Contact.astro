@@ -1,0 +1,116 @@
+---
+// CHIMERA AI — İletişim / Mimari Ön-Analiz formu.
+// Kaynak: chimera-sections-b.jsx (ContactSection). React state → statik form +
+// progressive enhancement: endpoint varsa fetch POST, yoksa mailto'ya düşer.
+import Frame from "../Frame.astro";
+import { SITE } from "../../site";
+import type { Dict } from "@i18n/tr";
+
+interface Props {
+  t: Dict;
+}
+const { t } = Astro.props;
+
+const inputStyle =
+  "font-family:var(--font-sans);font-size:calc(15.5px * var(--ts));padding:13px 14px;border-radius:var(--radius-sm);border:1.5px solid rgba(21,19,14,0.25);background:var(--card-light);color:var(--n-900);width:100%";
+---
+
+<section id="iletisim" class="section on-light">
+  <div class="wrap contact-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:56px">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div class="mono-label">{t.contact.label}</div>
+      <h2 class="h-section">{t.contact.h2}</h2>
+      <p class="lede">{t.contact.lede}</p>
+      <p class="body-dim" style="font-size:calc(15px * var(--ts))">
+        {t.contact.alt}{" "}
+        <a
+          href={`mailto:${SITE.email}`}
+          style="font-family:var(--font-mono);font-size:14px;color:var(--bronze-ink)">{SITE.email}</a
+        >
+      </p>
+    </div>
+    <Frame style="padding:32px">
+      <form
+        id="preanaliz-form"
+        method="POST"
+        action={SITE.formEndpoint || "#"}
+        data-endpoint={SITE.formEndpoint}
+        data-email={SITE.email}
+        style="display:flex;flex-direction:column;gap:14px"
+      >
+        <div class="grid-2" style="gap:14px">
+          <input style={inputStyle} name="name" required placeholder={t.contact.fName} aria-label={t.contact.fName} />
+          <input style={inputStyle} name="org" required placeholder={t.contact.fOrg} aria-label={t.contact.fOrg} />
+        </div>
+        <input
+          style={inputStyle}
+          type="email"
+          name="email"
+          required
+          placeholder={t.contact.fMail}
+          aria-label={t.contact.fMail}
+        />
+        <textarea
+          style={`${inputStyle};min-height:96px;resize:vertical`}
+          name="message"
+          placeholder={t.contact.fMsg}
+          aria-label={t.contact.fMsg}></textarea>
+        {/* spam tuzağı — botlar doldurur, gerçek kullanıcı görmez */}
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true" />
+        <button class="btn btn-primary" type="submit" style="border:none;align-self:flex-start">{t.contact.send}</button>
+      </form>
+      <div id="preanaliz-sent" hidden style="display:flex;flex-direction:column;gap:14px;align-items:flex-start">
+        <span style="width:10px;height:10px;background:var(--ok)"></span>
+        <p style="font-weight:600">{t.contact.sent}</p>
+      </div>
+    </Frame>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    var form = document.getElementById("preanaliz-form");
+    if (!form) return;
+    var sent = document.getElementById("preanaliz-sent");
+    form.addEventListener("submit", function (e) {
+      if (form.querySelector('[name="_gotcha"]').value) {
+        e.preventDefault();
+        return;
+      }
+      var endpoint = form.getAttribute("data-endpoint");
+      if (!endpoint) {
+        // Endpoint yoksa: mailto'ya düş (form servisi deploy'da bağlanır).
+        e.preventDefault();
+        var fd = new FormData(form);
+        var body =
+          "Ad Soyad: " + (fd.get("name") || "") + "\nKurum: " + (fd.get("org") || "") +
+          "\nE-posta: " + (fd.get("email") || "") + "\n\n" + (fd.get("message") || "");
+        location.href =
+          "mailto:" + form.getAttribute("data-email") +
+          "?subject=" + encodeURIComponent("Mimari Ön-Analiz talebi") +
+          "&body=" + encodeURIComponent(body);
+        return;
+      }
+      // Endpoint varsa: sayfada kal, AJAX gönder, başarı mesajı göster.
+      e.preventDefault();
+      fetch(endpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } })
+        .then(function (r) {
+          if (!r.ok) throw new Error("bad status");
+          form.setAttribute("hidden", "");
+          if (sent) sent.removeAttribute("hidden");
+        })
+        .catch(function () {
+          form.removeAttribute("data-endpoint");
+          form.requestSubmit();
+        });
+    });
+  })();
+</script>
+
+<style>
+  @media (max-width: 860px) {
+    .contact-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

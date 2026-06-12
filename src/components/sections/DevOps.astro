@@ -1,0 +1,60 @@
+---
+// CHIMERA AI — DevOps (Çelik aksanı). Kaynak: chimera-sections-b.jsx (DevOpsSection)
+import Frame from "../Frame.astro";
+import type { Dict } from "@i18n/tr";
+
+interface Props {
+  t: Dict;
+}
+const { t } = Astro.props;
+---
+
+<section
+  id="devops"
+  class="section"
+  style="--accent:var(--steel);--accent-ink:var(--steel-ink);--accent-on-dark:var(--steel-on-dark)"
+>
+  <div class="wrap" style="display:flex;flex-direction:column;gap:44px">
+    <div style="max-width:660px;display:flex;flex-direction:column;gap:18px">
+      <div class="mono-label">{t.devops.label}</div>
+      <h2 class="h-section">{t.devops.h2}</h2>
+      <p class="lede">{t.devops.lede}</p>
+    </div>
+
+    {/* üretim hattı — devre dili: tek hat üzerinde kare düğümler */}
+    <Frame style="padding:40px 36px">
+      <div style="display:flex;align-items:center;justify-content:space-between;position:relative;flex-wrap:wrap;gap:24px">
+        <div style="position:absolute;left:16px;right:16px;top:50%;height:0;border-top:1.5px solid var(--n-600);z-index:0"></div>
+        {
+          t.devops.stages.map((s) => (
+            <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px">
+              <span style="width:10px;height:10px;background:var(--steel-on-dark)" />
+              <span style="font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.07em;text-transform:uppercase;color:var(--n-200);background:var(--bg-dark);padding:2px 6px">
+                {s}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+    </Frame>
+
+    <div class="grid-2">
+      <div class="card">
+        <span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--steel-on-dark)">
+          {t.devops.refsH}
+        </span>
+        {
+          t.devops.refs.map((r) => (
+            <p class="body-dim" style="font-size:calc(15.5px * var(--ts));display:flex;gap:12px">
+              <span style="width:7px;height:7px;background:var(--steel-on-dark);flex:none;margin-top:8px" />
+              <span>{r}</span>
+            </p>
+          ))
+        }
+      </div>
+      <div class="card" style="justify-content:center">
+        <p class="body-dim" style="font-size:calc(15.5px * var(--ts))">{t.devops.boundary}</p>
+      </div>
+    </div>
+  </div>
+</section>

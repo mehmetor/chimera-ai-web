@@ -1,0 +1,45 @@
+---
+// CHIMERA AI — site navigasyonu (sticky). Kaynak: chimera-sections-a.jsx (SiteNav)
+import SealMark from "./SealMark.astro";
+import { alternateUrl, type Lang } from "@i18n/utils";
+import type { Dict } from "@i18n/tr";
+
+interface Props {
+  lang: Lang;
+  t: Dict;
+}
+const { lang, t } = Astro.props;
+
+const home = lang === "tr" ? "/" : "/en";
+const contactHref = lang === "tr" ? "/iletisim" : "/en/contact";
+const current = Astro.url.pathname.replace(/\/$/, "") || "/";
+const trUrl = alternateUrl(Astro.url, "tr");
+const enUrl = alternateUrl(Astro.url, "en");
+---
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand-lockup" href={home} aria-label="Chimera AI — ana sayfa">
+      <SealMark size={30} variant="dugum" color="var(--n-100)" />
+      <span class="brand-word">CHIMERA <span class="ai">AI</span></span>
+    </a>
+    <div class="nav-links">
+      {
+        t.nav.links.map(([href, label]) => (
+          <a
+            class="nav-link"
+            href={href}
+            aria-current={current === href.replace(/\/$/, "") ? "page" : undefined}
+          >
+            {label}
+          </a>
+        ))
+      }
+      <a class="nav-cta" href={contactHref} style="margin-left:8px">{t.nav.cta}</a>
+      <div class="lang-switch">
+        <a class={lang === "tr" ? "active" : ""} href={trUrl} hreflang="tr">TR</a>
+        <a class={lang === "en" ? "active" : ""} href={enUrl} hreflang="en">EN</a>
+      </div>
+    </div>
+  </div>
+</nav>

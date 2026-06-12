@@ -1,0 +1,33 @@
+---
+// CHIMERA AI — site footer. Kaynak: chimera-sections-b.jsx (SiteFooter)
+import SealMark from "./SealMark.astro";
+import type { Dict } from "@i18n/tr";
+import type { Lang } from "@i18n/utils";
+
+interface Props {
+  lang: Lang;
+  t: Dict;
+}
+const { t } = Astro.props;
+---
+
+<footer class="footer">
+  <div class="wrap" style="display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px">
+      <div class="brand-lockup">
+        <SealMark size={26} variant="dugum" color="var(--n-300)" />
+        <span class="brand-word" style="font-size:14.5px;color:var(--n-200)">CHIMERA <span class="ai">AI</span></span>
+      </div>
+      <div style="display:flex;gap:18px">
+        {t.footer.lines.map(([label, href]) => <a href={href} class="nav-link" style="padding:4px 6px">{label}</a>)}
+      </div>
+      <span class="endorsement">{t.footer.endorsement}</span>
+    </div>
+    <div
+      style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid rgba(232,227,215,0.1);padding-top:20px"
+    >
+      <span style="font-family:var(--font-mono);font-size:12.5px;letter-spacing:0.05em;color:var(--n-400)">{t.footer.domain}</span>
+      <span style="font-size:13px;color:var(--n-500)">{t.footer.note}</span>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,57 @@
+---
+// CHIMERA AI — ana sayfa (TR). Prototipin uzun sayfasının birebir karşılığı.
+// Kaynak: design/prototype/index.html (App) — bölüm sırası korundu.
+import Base from "@layouts/Base.astro";
+import Hero from "@components/sections/Hero.astro";
+import Problem from "@components/sections/Problem.astro";
+import Lines from "@components/sections/Lines.astro";
+import Platform from "@components/sections/Platform.astro";
+import DevOps from "@components/sections/DevOps.astro";
+import App from "@components/sections/App.astro";
+import Start from "@components/sections/Start.astro";
+import Refs from "@components/sections/Refs.astro";
+import Resources from "@components/sections/Resources.astro";
+import About from "@components/sections/About.astro";
+import Contact from "@components/sections/Contact.astro";
+import { useTranslations } from "@i18n/utils";
+import { SITE } from "../site";
+
+const t = useTranslations("tr");
+
+// Ana sayfa Product/Service JSON-LD (üç hat) — GEO (IA §4.1).
+const productLd = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: "Chimera AI",
+  brand: { "@type": "Brand", name: SITE.name },
+  manufacturer: { "@type": "Organization", name: SITE.org },
+  description:
+    "Kurumun kendi sunucularında çalışan, dış buluta veri sızdırmayan, açık kaynak yığını üzerine kurulu kapalı devre kurumsal yapay zeka platformu.",
+  category: "Enterprise AI Platform",
+  url: SITE.url,
+  hasVariant: t.lines.items.map((l) => ({
+    "@type": "Product",
+    name: `Chimera AI ${l.name}`,
+    description: l.d,
+  })),
+};
+---
+
+<Base
+  title="Chimera AI — Yapay zeka. Sizin sınırlarınızda, sizin denetiminizde."
+  description="Kurumunuzun kendi sunucularında çalışan, dış buluta veri sızdırmayan kapalı devre kurumsal yapay zeka platformu. Abonelik değil — kalıcı mülkünüz."
+  translated={true}
+  jsonLd={[productLd]}
+>
+  <Hero t={t} />
+  <Problem t={t} />
+  <Lines t={t} />
+  <Platform t={t} />
+  <DevOps t={t} />
+  <App t={t} />
+  <Start t={t} />
+  <Refs t={t} />
+  <Resources t={t} />
+  <About t={t} />
+  <Contact t={t} />
+</Base>

@@ -1,0 +1,47 @@
+---
+// CHIMERA AI — App (Terrakota aksanı). Kaynak: chimera-sections-b.jsx (AppSection)
+import Frame from "../Frame.astro";
+import type { Dict } from "@i18n/tr";
+
+interface Props {
+  t: Dict;
+}
+const { t } = Astro.props;
+---
+
+<section
+  id="app"
+  class="section on-light"
+  style="--accent:var(--terra);--accent-ink:var(--terra-ink);--accent-on-dark:var(--terra-on-dark)"
+>
+  <div class="wrap" style="display:flex;flex-direction:column;gap:44px">
+    <div style="max-width:660px;display:flex;flex-direction:column;gap:18px">
+      <div class="mono-label">{t.app.label}</div>
+      <h2 class="h-section">{t.app.h2}</h2>
+      <p class="lede">{t.app.lede}</p>
+    </div>
+
+    <div class="app-phases" style={`display:grid;grid-template-columns:repeat(${t.app.phases.length}, 1fr);gap:14px`}>
+      {
+        t.app.phases.map((p, i) => (
+          <Frame style="padding:22px 18px;display:flex;flex-direction:column;gap:8px">
+            <span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.08em;color:var(--terra-ink)">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <span style="font-weight:600;font-size:calc(17px * var(--ts))">{p}</span>
+          </Frame>
+        ))
+      }
+    </div>
+
+    <p class="body-dim" style="max-width:640px;font-size:calc(16px * var(--ts))">{t.app.closing}</p>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 1020px) {
+    .app-phases {
+      grid-template-columns: 1fr 1fr !important;
+    }
+  }
+</style>

@@ -1,0 +1,55 @@
+---
+// CHIMERA AI — Üç Hat (üç aksanın yan yana göründüğü TEK an, Brief §3.1)
+// Kaynak: chimera-sections-a.jsx (LinesSection)
+import SealMark from "../SealMark.astro";
+import Frame from "../Frame.astro";
+import type { Dict } from "@i18n/tr";
+
+interface Props {
+  t: Dict;
+  markVariant?: "denge" | "cimasi" | "dugum";
+}
+const { t, markVariant = "dugum" } = Astro.props;
+
+const accents = [
+  { id: "platform", on: "var(--bronze-on-dark)", ink: "var(--bronze-ink)" },
+  { id: "devops", on: "var(--steel-on-dark)", ink: "var(--steel-ink)" },
+  { id: "app", on: "var(--terra-on-dark)", ink: "var(--terra-ink)" },
+] as const;
+---
+
+<section id="uc-hat" class="section">
+  <div class="wrap" style="display:flex;flex-direction:column;gap:40px">
+    <div style="max-width:620px;display:flex;flex-direction:column;gap:18px">
+      <div class="mono-label">{t.lines.label}</div>
+      <h2 class="h-section">{t.lines.h2}</h2>
+      <p class="lede">{t.lines.lede}</p>
+    </div>
+    <div class="grid-3">
+      {
+        t.lines.items.map((it, i) => (
+          <Frame
+            class="line-card"
+            style={`padding:30px;display:flex;flex-direction:column;gap:14px;--accent-on-dark:${accents[i].on};--accent-ink:${accents[i].ink}`}
+          >
+            <SealMark size={56} variant={markVariant} accent={accents[i].id} color="var(--n-600)" />
+            <div style="display:flex;align-items:baseline;gap:10px;margin-top:6px">
+              <h3 class="h-card" style="font-size:calc(23px * var(--ts))">
+                Chimera AI <span style={`color:${accents[i].on}`}>{it.name}</span>
+              </h3>
+            </div>
+            <span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--n-400)">
+              {it.tag}
+            </span>
+            <p class="body-dim" style="font-size:calc(15.5px * var(--ts));flex:1">
+              {it.d}
+            </p>
+            <a class="btn-line" href={`/${accents[i].id}`} style={`color:${accents[i].on}`}>
+              {it.link} →
+            </a>
+          </Frame>
+        ))
+      }
+    </div>
+  </div>
+</section>
