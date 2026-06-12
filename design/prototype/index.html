@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chimera AI — Yapay zeka. Sizin sınırlarınızda, sizin denetiminizde.</title>
+<!--
+  CHIMERA AI — chimera-ai.com.tr (tek uzun sayfa, v1)
+  Kaynak: Tasarımcı Brief v2 (kilitli konsept "Alaşım — Mühürlü Devre") + Girdi Paketi 2026-06
+
+  Tasarım sistemi kararları:
+  · Koyu-öncelikli: Obsidyen hero/hat/footer, Kağıt içerik bölümleri (gradient yok, mat)
+  · Tek aksan/bölüm: çatı=Bronz; DevOps bölümü=Çelik; App bölümü=Terrakota;
+    üç aksan yalnız "Üç Hat" karşılaştırma anında yan yana
+  · Inter (başlık -1.5% tracking) + IBM Plex Mono (etiket/teknik), her ikisi OFL
+  · Çizgi dili: 1.5px, kare düğümler, çeper çerçevesi; ikonlar 1.5px stroke dolgusuz
+  · Mühür-işaret: 3 yay segmenti + kare düğümler, TAM KAPALI halka; hat mekaniği
+    segment yüklemesiyle; 3 işçilik varyantı Tweaks panelinden karşılaştırılabilir
+  · Hareket imzası: halkanın kapanışı, ~600ms ease-out, tek sefer; reduced-motion → statik mühür
+  · Fotoğraflar: boş slotlar + Obsidyen+Bronz duotone reçetesi (CSS) — gerçek saha
+    fotoğrafları sürüklenince otomatik işlenir
+
+  Uzman düzeltmeleri (brief referans değerleri kalibre edildi):
+  · Bronz #A87B3D açık zeminde AA kontrastı sağlamıyor → metin için bronze-ink #7A5A2C,
+    koyu zeminde bronze-on-dark #C99E63 (küçük mono etiketler için ≥6.5:1'e kalibre)
+  · Çeper: köşe düğümleri kaldırıldı — kapalı ince çerçeve; kare düğüm yalnız hat üzerinde
+  · Hareket imzası diyagram hero'da kurum sınırının çizilip mühürlenmesi olarak uygulanır
+  · "Inter Display optik kesim" web'de ayrı dosya gerektirir → variable Inter + tracking ile çözüldü
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="chimera.css">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%2315130E"/><circle cx="50" cy="50" r="34" fill="none" stroke="%23A87B3D" stroke-width="11"/><rect x="44" y="10" width="12" height="12" fill="%23A87B3D"/></svg>'>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="image-slot.js"></script>
+<script src="chimera-content.js"></script>
+<style>
+  /* aksan dozajı (tweak) */
+  .dose-olculu .mono-label::before { background: var(--n-500); }
+  /* responsive ek */
+  @media (max-width: 1020px) {
+    #hero .wrap, #iletisim .wrap, #hakkinda .wrap { grid-template-columns: 1fr !important; }
+    .app-phases { grid-template-columns: 1fr 1fr !important; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="chimera-mark.jsx"></script>
+<script type="text/babel" src="chimera-sections-a.jsx"></script>
+<script type="text/babel" src="chimera-sections-b.jsx"></script>
+
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "lang": "tr",
+  "heroVariant": "diyagram",
+  "markVariant": "dugum",
+  "dose": "standart",
+  "frameAlpha": 0.5,
+  "typeScale": 0.85,
+  "theme": "alasim"
+}/*EDITMODE-END*/;
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const dict = window.CHIMERA_I18N[t.lang] || window.CHIMERA_I18N.tr;
+
+  // text-transform: uppercase TR kurallarıyla EN metinde "İ" üretmesin
+  React.useEffect(() => {
+    document.documentElement.lang = t.lang;
+  }, [t.lang]);
+
+  // renk teması — body üzerinde, böylece zemin dahil her şey eşleşir
+  React.useEffect(() => {
+    document.body.className = "theme-" + (t.theme || "alasim");
+  }, [t.theme]);
+
+  return (
+    <div
+      className={"dose-" + t.dose}
+      style={{ "--ts": t.typeScale, "--frame-alpha": t.frameAlpha }}
+    >
+      <SiteNav t={dict} lang={t.lang} setLang={(v) => setTweak("lang", v)} markVariant={t.markVariant} />
+      <Hero key={t.heroVariant + t.markVariant} t={dict} variant={t.heroVariant} markVariant={t.markVariant} dose={t.dose} />
+      <ProblemSection t={dict} />
+      <LinesSection t={dict} markVariant={t.markVariant} />
+      <PlatformSection t={dict} />
+      <DevOpsSection t={dict} />
+      <AppSection t={dict} />
+      <StartSection t={dict} />
+      <RefsSection t={dict} />
+      <ResourcesSection t={dict} />
+      <AboutSection t={dict} markVariant={t.markVariant} />
+      <ContactSection t={dict} />
+      <SiteFooter t={dict} markVariant={t.markVariant} />
+
+      <TweaksPanel>
+        <TweakSection label="Renk teması" />
+        <TweakSelect
+          label="Tema"
+          value={t.theme}
+          options={[
+            { value: "alasim", label: "Alaşım — Bronz / Çelik / Terrakota (brief)" },
+            { value: "gece", label: "Gece Çeliği — mavi çelik / nikel / bakır" },
+            { value: "patine", label: "Patine — patina yeşili / pirinç / oksit" },
+            { value: "volkanik", label: "Volkanik — oksit kırmızı / kül / okra" },
+          ]}
+          onChange={(v) => setTweak("theme", v)}
+        />
+        <TweakSection label="Mühür-işaret (işçilik varyantları)" />
+        <TweakSelect
+          label="Varyant"
+          value={t.markVariant}
+          options={[
+            { value: "denge", label: "A — Denge (eşite yakın segmentler)" },
+            { value: "cimasi", label: "B — C-iması (ağır segment)" },
+            { value: "dugum", label: "C — Endüstriyel düğüm (iri portlar)" },
+          ]}
+          onChange={(v) => setTweak("markVariant", v)}
+        />
+        <TweakSection label="Hero" />
+        <TweakRadio
+          label="Varyant"
+          value={t.heroVariant}
+          options={[
+            { value: "tipografik", label: "Tipografik" },
+            { value: "diyagram", label: "Diyagram" },
+            { value: "fotograf", label: "Fotoğraf" },
+          ]}
+          onChange={(v) => setTweak("heroVariant", v)}
+        />
+        <TweakSection label="Sistem" />
+        <TweakRadio
+          label="Aksan dozajı"
+          value={t.dose}
+          options={[
+            { value: "olculu", label: "Ölçülü" },
+            { value: "standart", label: "Standart" },
+            { value: "yuksek", label: "Yüksek" },
+          ]}
+          onChange={(v) => setTweak("dose", v)}
+        />
+        <TweakSlider label="Çeper görünürlüğü" value={t.frameAlpha} min={0} max={1} step={0.1}
+          onChange={(v) => setTweak("frameAlpha", v)} />
+        <TweakSlider label="Tip ölçeği" value={t.typeScale} min={0.85} max={1.2} step={0.05}
+          onChange={(v) => setTweak("typeScale", v)} />
+      </TweaksPanel>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

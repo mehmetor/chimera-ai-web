@@ -1,0 +1,380 @@
+/* ============================================================
+   CHIMERA AI — web token'ları ve temel stil
+   Konsept: "Alaşım — Mühürlü Devre" (Brief v2, kilitli)
+   Koyu-öncelikli · mat · tek aksan/sayfa · çeper çerçevesi
+   ============================================================ */
+
+:root {
+  /* -- Zemin -- */
+  --bg-dark: #15130E;          /* Obsidyen */
+  --bg-dark-2: #1C1913;        /* Obsidyen yüzey (kart) */
+  --bg-light: #F4F1EA;         /* Kağıt */
+  --bg-light-2: #ECE8DE;       /* Kağıt yüzey */
+
+  /* -- Grafit skalası (Obsidyen ↔ Kağıt) -- */
+  --n-900: #15130E;
+  --n-800: #262219;
+  --n-700: #3B362A;
+  --n-600: #57503F;
+  --n-500: #736B58;
+  --n-400: #948B76;
+  --n-300: #B5AC97;
+  --n-200: #D6CFBE;
+  --n-100: #E8E3D7;
+
+  /* -- Aksanlar (mat, desature) — koyu/açık tema eşlemeli -- */
+  --bronze: #A87B3D;           /* referans — yalnız grafik/dolgu, küçük metinde KULLANILMAZ */
+  --bronze-deep: #6F4E22;      /* CTA dolgusu — açık metinle ≥6.5:1 (orta-ton bronz üzerinde
+                                  ne siyah ne beyaz yeterince okunur; dolgu koyulaştırıldı) */
+  --bronze-on-dark: #C99E63;   /* koyu zeminde metin/çizgi — 12-14px mono için kalibre (≥6.5:1) */
+  --bronze-ink: #7A5A2C;       /* açık zeminde metin (AA) */
+  --steel: #5C6B73;
+  --steel-on-dark: #93A5AE;
+  --steel-ink: #46545B;
+  --terra: #9C5239;
+  --terra-on-dark: #C17E64;
+  --terra-ink: #7E4029;
+
+  /* -- Durum (yalnız UI) -- */
+  --ok: #5E7D5A;
+  --warn: #9C7B2F;
+
+  /* -- Aktif aksan alias'ları body üzerinde bildirilir (aşağıda) —
+     :root'ta tanımlansa :root'un --bronze'uyla bir kez çözülüp tema
+     override'larını görmezdi. -- */
+
+  /* -- Tema yüzeyleri -- */
+  --card-light: #FBF9F4;       /* açık zemin kartı/form yüzeyi */
+  --duo-tint: #A87B3D;         /* duotone reçetesinin renk katmanı */
+
+  /* -- Tip -- */
+  --font-sans: "Inter", "Inter Fallback", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --ts: 1;                     /* tip ölçeği (tweak) */
+
+  /* -- Çizgi sistemi -- */
+  --line-w: 1.5px;
+  --radius: 8px;
+  --radius-sm: 4px;
+  --frame-line-dark: rgba(232, 227, 215, 0.22);
+  --frame-line-light: rgba(21, 19, 14, 0.22);
+  --frame-alpha: 1;            /* çeper görünürlüğü (tweak) */
+}
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+* { box-sizing: border-box; }
+
+body {
+  /* aktif aksan (bölüm bazında override edilir) — body'de çözülür ki
+     body.theme-* sınıfının --bronze override'ı zincire yansısın */
+  --accent: var(--bronze);
+  --accent-deep: var(--bronze-deep);
+  --accent-on-dark: var(--bronze-on-dark);
+  --accent-ink: var(--bronze-ink);
+  margin: 0;
+  background: var(--bg-dark);
+  color: var(--n-100);
+  font-family: var(--font-sans);
+  font-size: calc(17px * var(--ts));
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-sans);
+  letter-spacing: -0.015em;
+  line-height: 1.12;
+  margin: 0;
+  text-wrap: balance;
+}
+p { margin: 0; text-wrap: pretty; }
+a { color: inherit; }
+
+/* ---------- bölüm iskeleti ---------- */
+.section { padding: calc(96px * var(--ts)) 0; }
+.section.on-light { background: var(--bg-light); color: var(--n-800); }
+.section.on-light h1, .section.on-light h2, .section.on-light h3 { color: var(--n-900); }
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 32px; }
+
+/* mono etiket — "mühendislik enstrümanı" */
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-on-dark);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.on-light .mono-label { color: var(--accent-ink); }
+.mono-label::before {
+  content: "";
+  width: 7px; height: 7px;
+  background: currentColor;
+  flex: none;
+}
+
+.h-display { font-size: calc(58px * var(--ts)); font-weight: 600; }
+.h-section { font-size: calc(40px * var(--ts)); font-weight: 600; }
+.h-card { font-size: calc(21px * var(--ts)); font-weight: 600; letter-spacing: -0.01em; }
+.lede { font-size: calc(19.5px * var(--ts)); line-height: 1.65; color: var(--n-200); }
+.on-light .lede { color: var(--n-700); }
+.body-dim { color: var(--n-300); }
+.on-light .body-dim { color: var(--n-600); }
+
+/* ---------- çeper çerçevesi — ince KAPALI çizgi (Brief §3.3); köşe düğümü yok ---------- */
+.frame {
+  position: relative;
+  border: var(--line-w) solid rgba(232, 227, 215, calc(0.22 * var(--frame-alpha)));
+  border-radius: var(--radius);
+}
+.on-light .frame { border-color: rgba(21, 19, 14, calc(0.25 * var(--frame-alpha))); }
+
+/* ---------- butonlar ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: calc(16px * var(--ts));
+  font-weight: 600;
+  letter-spacing: 0;
+  padding: 14px 26px;
+  border-radius: var(--radius-sm);
+  border: var(--line-w) solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+  min-height: 48px;
+}
+.btn-primary {
+  background: var(--accent-deep);
+  color: var(--bg-light);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+}
+.btn-primary:hover { background: color-mix(in srgb, var(--accent-deep) 70%, var(--accent)); }
+.btn-ghost { background: transparent; color: var(--n-100); border-color: var(--n-600); }
+.btn-ghost:hover { border-color: var(--n-300); }
+.on-light .btn-ghost { color: var(--n-800); border-color: var(--n-300); }
+.on-light .btn-ghost:hover { border-color: var(--n-600); }
+.btn-line { /* sade metin-ok bağlantısı */
+  display: inline-flex; align-items: center; gap: 8px;
+  font-weight: 600; font-size: calc(15.5px * var(--ts));
+  color: var(--accent-on-dark); text-decoration: none;
+  border-bottom: var(--line-w) solid transparent;
+}
+.btn-line:hover { border-bottom-color: currentColor; }
+.on-light .btn-line { color: var(--accent-ink); }
+
+/* ---------- nav ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 60;
+  background: color-mix(in srgb, var(--bg-dark) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(232, 227, 215, 0.12);
+}
+.nav-inner {
+  max-width: 1240px; margin: 0 auto; padding: 0 32px;
+  display: flex; align-items: center; gap: 28px;
+  height: 64px;
+}
+.nav-links { display: flex; gap: 4px; margin-left: auto; align-items: center; }
+.nav-link {
+  font-size: 14.5px; font-weight: 500; color: var(--n-200);
+  text-decoration: none; padding: 8px 11px; border-radius: var(--radius-sm);
+  transition: color 150ms ease, background-color 150ms ease;
+  white-space: nowrap;
+}
+.nav-link:hover { color: var(--bg-light); background: rgba(232, 227, 215, 0.07); }
+.nav-cta {
+  font-size: 13.5px; font-weight: 600; color: var(--bg-light);
+  background: var(--accent-deep); border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  border-radius: var(--radius-sm);
+  padding: 9px 16px; text-decoration: none; white-space: nowrap;
+  transition: background-color 150ms ease;
+}
+.nav-cta:hover { background: color-mix(in srgb, var(--accent-deep) 70%, var(--accent)); }
+.lang-switch {
+  display: flex; border: var(--line-w) solid var(--n-700); border-radius: var(--radius-sm);
+  overflow: hidden; margin-left: 8px;
+}
+.lang-switch button {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.04em; padding: 7px 11px; border: none; cursor: pointer;
+  background: transparent; color: var(--n-400);
+}
+.lang-switch button.active { background: var(--n-100); color: var(--bg-dark); }
+
+.brand-lockup { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--n-100); }
+.brand-word { font-size: 16.5px; font-weight: 600; letter-spacing: 0.045em; }
+.brand-word .ai { color: var(--bronze-on-dark); }
+
+/* ---------- mühür animasyonu ---------- */
+.seal-arc { fill: none; stroke-linecap: butt; }
+.seal-anim .seal-arc {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.seal-anim .seal-node { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .seal-anim.seal-go .seal-arc { animation: sealDraw 560ms cubic-bezier(0.22, 0.7, 0.3, 1) forwards; }
+  .seal-anim.seal-go .seal-arc:nth-of-type(2) { animation-delay: 90ms; }
+  .seal-anim.seal-go .seal-arc:nth-of-type(3) { animation-delay: 180ms; }
+  .seal-anim.seal-go .seal-node {
+    transform-box: fill-box; transform-origin: center;
+    transform: scale(0);
+    animation: sealNode 220ms cubic-bezier(0.22, 0.7, 0.3, 1) 560ms forwards;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .seal-anim .seal-arc { stroke-dasharray: none; stroke-dashoffset: 0; }
+  .seal-anim .seal-node { opacity: 1; }
+}
+@keyframes sealDraw { to { stroke-dashoffset: 0; } }
+@keyframes sealNode { to { transform: scale(1); opacity: 1; } }
+
+/* ---------- kartlar / grid ---------- */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.card {
+  padding: 28px;
+  border-radius: var(--radius);
+  border: var(--line-w) solid rgba(232, 227, 215, calc(0.18 * var(--frame-alpha)));
+  background: var(--bg-dark-2);
+  display: flex; flex-direction: column; gap: 12px;
+}
+.on-light .card {
+  background: var(--card-light);
+  border-color: rgba(21, 19, 14, calc(0.18 * var(--frame-alpha)));
+}
+
+/* modül satırı */
+.module-row {
+  display: grid;
+  grid-template-columns: 64px 200px 1fr;
+  gap: 24px;
+  align-items: center;
+  padding: 20px 24px;
+  border-top: var(--line-w) solid rgba(21, 19, 14, calc(0.16 * var(--frame-alpha)));
+}
+.module-row:last-child { border-bottom: var(--line-w) solid rgba(21, 19, 14, calc(0.16 * var(--frame-alpha))); }
+.module-code {
+  font-family: var(--font-mono); font-size: 13px; font-weight: 500;
+  letter-spacing: 0.06em; color: var(--accent-ink);
+}
+.icon-tile {
+  width: 52px; height: 52px; border-radius: var(--radius-sm);
+  border: var(--line-w) solid rgba(21, 19, 14, 0.22);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--n-800);
+}
+
+/* tablo dili */
+.spec-table { width: 100%; border-collapse: collapse; font-size: calc(15.5px * var(--ts)); }
+.spec-table th {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.07em; text-transform: uppercase; text-align: left;
+  color: var(--n-500); padding: 10px 16px;
+  border-bottom: var(--line-w) solid rgba(21, 19, 14, 0.3);
+}
+.spec-table td { padding: 14px 16px; border-bottom: 1px solid rgba(21, 19, 14, 0.12); vertical-align: top; }
+
+/* duotone fotoğraf slotu — Obsidyen+Bronz reçete */
+.duotone {
+  position: relative; border-radius: var(--radius); overflow: hidden;
+  isolation: isolate; background: var(--bg-dark-2);
+}
+.duotone image-slot { display: block; filter: grayscale(1) contrast(1.06) brightness(0.92); }
+.duotone::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: var(--duo-tint); mix-blend-mode: color; opacity: 0.55;
+}
+.duotone::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background: var(--bg-dark); mix-blend-mode: multiply; opacity: 0.18;
+}
+.duotone .duo-caption {
+  position: absolute; left: 14px; bottom: 12px; z-index: 2;
+  font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.07em;
+  text-transform: uppercase; color: rgba(244, 241, 234, 0.85);
+  background: rgba(21, 19, 14, 0.65); padding: 5px 9px; border-radius: 3px;
+  pointer-events: none;
+}
+
+/* footer */
+.footer { background: var(--bg-dark); border-top: 1px solid rgba(232, 227, 215, 0.12); padding: 56px 0 40px; }.footer .endorsement {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.07em;
+  text-transform: uppercase; color: var(--n-400);
+}
+
+/* responsive */
+@media (max-width: 1020px) {
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .h-display { font-size: calc(40px * var(--ts)); }
+  .h-section { font-size: calc(31px * var(--ts)); }
+  .module-row { grid-template-columns: 52px 1fr; }
+  .module-row .module-desc { grid-column: 1 / -1; }
+  .nav-links { display: none; }
+}
+
+/* ============================================================
+   RENK TEMALARI — tümü mat ve desature, aynı kontrast kalibrasyon
+   mantığıyla (on-dark ≥ ~6:1 küçük mono, ink ≥ 4.5:1 açık zemin).
+   theme-alasim = :root varsayılanları (Bronz / Çelik / Terrakota).
+   Slot adları sabit kalır: --bronze = Platform, --steel = DevOps,
+   --terra = App aksanı — temalar yalnız değerleri yeniden eşler.
+   ============================================================ */
+
+/* -- Gece Çeliği: soğuk grafit zemin · mavi çelik / nikel / bakır -- */
+body.theme-gece {
+  --bg-dark: #11151A;
+  --bg-dark-2: #171C23;
+  --bg-light: #EFF1F3;
+  --bg-light-2: #E5E8EC;
+  --card-light: #FAFBFC;
+  --n-900: #11151A; --n-800: #1D232B; --n-700: #2F3843; --n-600: #49545F;
+  --n-500: #65707B; --n-400: #87919B; --n-300: #ACB5BD; --n-200: #D0D6DC; --n-100: #E6EAEE;
+  --bronze: #587A94;          --bronze-on-dark: #97B6CC;  --bronze-ink: #3E5A70;
+  --bronze-deep: #36546C;
+  --steel: #6E7B72;           --steel-on-dark: #A3B2A8;   --steel-ink: #515C55;
+  --terra: #A05C38;           --terra-on-dark: #C68B66;   --terra-ink: #7C4628;
+  --duo-tint: #587A94;
+}
+
+/* -- Patine: yeşile çalan obsidyen · patina / pirinç / oksit -- */
+body.theme-patine {
+  --bg-dark: #101411;
+  --bg-dark-2: #161C17;
+  --bg-light: #F1F2EB;
+  --bg-light-2: #E7E9DF;
+  --card-light: #FAFBF5;
+  --n-900: #101411; --n-800: #1B211C; --n-700: #2D362F; --n-600: #475247;
+  --n-500: #636E63; --n-400: #859084; --n-300: #AAB4A8; --n-200: #CFD6CC; --n-100: #E5EAE2;
+  --bronze: #5E8268;          --bronze-on-dark: #97BCA2;  --bronze-ink: #41604A;
+  --bronze-deep: #3E6049;
+  --steel: #A18348;           --steel-on-dark: #C4A76C;   --steel-ink: #755E30;
+  --terra: #A4553C;           --terra-on-dark: #C8826A;   --terra-ink: #7E4029;
+  --duo-tint: #5E8268;
+}
+
+/* -- Volkanik: nötr grafit · oksit kırmızı / kül mavisi / okra -- */
+body.theme-volkanik {
+  --bg-dark: #151414;
+  --bg-dark-2: #1C1A1A;
+  --bg-light: #F3F0ED;
+  --bg-light-2: #EAE6E1;
+  --card-light: #FBF9F7;
+  --n-900: #151414; --n-800: #232020; --n-700: #393434; --n-600: #554E4E;
+  --n-500: #716968; --n-400: #928A88; --n-300: #B4ACAA; --n-200: #D6CFCC; --n-100: #E8E3E0;
+  --bronze: #A8503A;          --bronze-on-dark: #D08A75;  --bronze-ink: #843E2C;
+  --bronze-deep: #7B3826;
+  --steel: #66707B;           --steel-on-dark: #9AA6B1;   --steel-ink: #4C545E;
+  --terra: #9A7B33;           --terra-on-dark: #BFA059;   --terra-ink: #6F5824;
+  --duo-tint: #A8503A;
+}
