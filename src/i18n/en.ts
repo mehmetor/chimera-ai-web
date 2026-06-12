@@ -200,7 +200,9 @@ const en: Dict = {
     fMail: "E-mail",
     fMsg: "Briefly, your need (optional)",
     send: "Send request",
+    sending: "Sending…",
     sent: "Request received — we will respond within 2 business days.",
+    error: "Couldn't send. Please try again or write directly:",
     alt: "Or write directly:",
   },
   footer: {

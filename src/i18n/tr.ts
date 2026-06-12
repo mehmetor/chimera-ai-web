@@ -201,7 +201,9 @@ const tr = {
     fMail: "E-posta",
     fMsg: "Kısaca ihtiyacınız (isteğe bağlı)",
     send: "Talep gönder",
+    sending: "Gönderiliyor…",
     sent: "Talebiniz alındı — 2 iş günü içinde dönüş yapacağız.",
+    error: "Gönderilemedi. Lütfen tekrar deneyin ya da doğrudan yazın:",
     alt: "Veya doğrudan yazın:",
   },
   footer: {
