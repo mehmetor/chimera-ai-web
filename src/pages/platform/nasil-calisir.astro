@@ -1,0 +1,146 @@
+---
+// CHIMERA AI — Platform · Nasıl Çalışır (TR). Dürüst mimari anlatımı.
+// Akıl (LLM) + Hafıza (RAG) bugün teslim · El (MCP) yol haritası.
+import Base from "@layouts/Base.astro";
+import Frame from "@components/Frame.astro";
+import ClosedCircuitDiagram from "@components/ClosedCircuitDiagram.astro";
+import { useTranslations } from "@i18n/utils";
+import { contactSlug } from "@i18n/routes";
+import { ARCHITECTURE_HONESTY } from "@/data/modules";
+import { SITE } from "../../site";
+
+const t = useTranslations("tr");
+
+const layers = [
+  {
+    layer: "Akıl",
+    tech: "LLM",
+    href: "/kaynaklar/sozluk/llm",
+    status: "Bugün teslim",
+    state: "ok",
+    desc: "Açık kaynak büyük dil modeli, kurumun kendi sunucusunda çalışır. Soruları anlar, metin üretir, kod yazar — hepsi kurum sınırı içinde. Dış buluta bağlanmaz.",
+  },
+  {
+    layer: "Hafıza",
+    tech: "RAG",
+    href: "/kaynaklar/sozluk/rag",
+    status: "Bugün teslim",
+    state: "ok",
+    desc: "Kurumun belgelerini (prosedür, sözleşme, arşiv) yapay zekanın “açık kitabı” yapar. Model ezberinden değil, kurumun gerçek bilgisinden ve kaynak göstererek yanıtlar.",
+  },
+  {
+    layer: "El",
+    tech: "MCP",
+    href: undefined,
+    status: "Yol haritası",
+    state: "roadmap",
+    desc: "Modelin kurum sistemlerine (ERP, veritabanı) bağlanıp iş yaptığı katman. Bu yetenek yol haritasında ileri fazda gelir — bugünün teslimi gibi sunmuyoruz.",
+  },
+];
+
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Chimera AI", item: SITE.url },
+    { "@type": "ListItem", position: 2, name: "Platform", item: `${SITE.url}/platform` },
+    { "@type": "ListItem", position: 3, name: "Nasıl Çalışır", item: `${SITE.url}/platform/nasil-calisir` },
+  ],
+};
+---
+
+<Base
+  title="Nasıl Çalışır — Akıl, Hafıza, El · Chimera AI Platform"
+  description="Chimera AI'ın üçlü mimarisi: Akıl (LLM) + Hafıza (RAG) bugün teslim edilir, El (MCP) yol haritasındadır. Veri kurum sınırından çıkmaz; doğruluk modelden değil mimariden gelir."
+  routeKey="platform"
+  jsonLd={[breadcrumb]}
+>
+  <section class="section on-light" style="--accent:var(--bronze);--accent-ink:var(--bronze-ink);--accent-on-dark:var(--bronze-on-dark)">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:44px">
+      <a class="btn-line" href="/platform" style="align-self:flex-start">← Platform</a>
+
+      <div style="max-width:720px;display:flex;flex-direction:column;gap:16px">
+        <div class="mono-label">Platform · Nasıl Çalışır</div>
+        <h1 class="h-section">Akıl, Hafıza, El — ve bugün hangisi hazır.</h1>
+        <p class="lede">
+          Chimera AI'ın anlatısı üç katmandır. Dürüst olalım: ikisi bugün teslim ediliyor, biri yol
+          haritasında. Pazarlama değil, mühendislik konuşuyoruz.
+        </p>
+      </div>
+
+      {/* Üçlü mimari — katman kartları */}
+      <div class="grid-3">
+        {
+          layers.map((l) => (
+            <Frame style="padding:28px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+                <span style="font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--bronze-ink)">
+                  {l.tech}
+                </span>
+                <span style={`font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;padding:3px 9px;border-radius:3px;border:1.5px solid ${l.state === "ok" ? "var(--ok)" : "var(--terra)"};color:${l.state === "ok" ? "var(--ok)" : "var(--terra-ink)"}`}>
+                  {l.status}
+                </span>
+              </div>
+              <h2 class="h-card" style="font-size:calc(22px * var(--ts))">{l.layer}</h2>
+              <p class="body-dim" style="font-size:calc(15px * var(--ts));flex:1">{l.desc}</p>
+              {l.href && <a class="btn-line" href={l.href} style="font-size:calc(14.5px * var(--ts))">{l.tech} nedir? →</a>}
+            </Frame>
+          ))
+        }
+      </div>
+
+      <p class="body-dim" style="max-width:760px;font-size:calc(15.5px * var(--ts))">
+        Bugün teslim edilen yetenekler: <strong style="color:var(--n-900)">{ARCHITECTURE_HONESTY.shippedToday}</strong>.
+        {" "}{ARCHITECTURE_HONESTY.roadmap}
+      </p>
+
+      {/* Kapalı devre */}
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <h2 class="h-card" style="font-size:calc(24px * var(--ts))">Veri kurum sınırından çıkmaz</h2>
+        <p class="body-dim" style="max-width:720px;font-size:calc(16px * var(--ts))">
+          Model de, kurum bilgisi de, kullanıcı sohbetleri de kurum sınırının içindedir. Dış bulutla
+          bağlantı kesiktir — en katı senaryoda sistem internetten tümüyle yalıtılır
+          (<a href="/kaynaklar/sozluk/air-gap" style="color:var(--bronze-ink);text-decoration:underline">air-gap</a>).
+        </p>
+        <Frame style="padding:32px 28px;background:var(--card-light)">
+          <ClosedCircuitDiagram t={t.platform.diagram} dark={false} />
+        </Frame>
+      </div>
+
+      {/* Doğruluk mimariden gelir — KEP kanıtı */}
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <h2 class="h-card" style="font-size:calc(24px * var(--ts))">Doğruluk modelden değil, mimariden gelir</h2>
+        <p class="body-dim" style="max-width:720px;font-size:calc(16px * var(--ts))">
+          Bir model tek başına Türkçe kurumsal kısaltmalarda güvenilir değildir. Aynı modele aynı soru,
+          <a href="/kaynaklar/sozluk/rag" style="color:var(--bronze-ink);text-decoration:underline">RAG</a> ile ve RAG'siz:
+        </p>
+        <table class="spec-table" style="max-width:820px">
+          <thead>
+            <tr><th>Kurulum</th><th>“KEP nedir?” yanıtı</th><th>Sonuç</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Model tek başına (RAG yok)</td>
+              <td>“KEP = Kamu Görevlisi Elektronik Posta”</td>
+              <td style="color:var(--terra-ink);font-weight:600">Yanlış — halüsinasyon</td>
+            </tr>
+            <tr>
+              <td>Model + RAG (kurum dokümanı)</td>
+              <td>“KEP = Kayıtlı Elektronik Posta…” + kaynak referansı</td>
+              <td style="color:var(--ok);font-weight:600">Doğru</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="max-width:720px;font-size:calc(16.5px * var(--ts));font-weight:600">
+          Modeli değil, mimariyi satıyoruz. Halüsinasyon “yok” demiyoruz — mimariyle yönetiyoruz.
+        </p>
+      </div>
+
+      {/* CTA */}
+      <div style="display:flex;gap:14px;flex-wrap:wrap">
+        <a class="btn btn-primary" href={contactSlug("tr")}>Mimari Ön-Analiz talep edin</a>
+        <a class="btn btn-ghost" href="/platform/moduller">Modülleri inceleyin</a>
+      </div>
+    </div>
+  </section>
+</Base>

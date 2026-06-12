@@ -9,8 +9,10 @@ interface Props {
   t: Dict;
   /** Verilirse modül başlığında "Tüm modüller →" linki gösterilir (TR /platform/moduller). */
   modulesHref?: string;
+  /** Verilirse diyagram altında "Bu mimari nasıl çalışır? →" linki (TR /platform/nasil-calisir). */
+  howHref?: string;
 }
-const { t, modulesHref } = Astro.props;
+const { t, modulesHref, howHref } = Astro.props;
 type ModCode = "M0" | "M1" | "M2" | "M3" | "M4" | "M5" | "M6";
 ---
 
@@ -29,6 +31,7 @@ type ModCode = "M0" | "M1" | "M2" | "M3" | "M4" | "M5" | "M6";
     <Frame style="padding:36px 32px;background:var(--card-light)">
       <ClosedCircuitDiagram t={t.platform.diagram} dark={false} />
     </Frame>
+    {howHref && <a class="btn-line" href={howHref} style="align-self:flex-start;margin-top:-24px">Bu mimari nasıl çalışır? →</a>}
 
     <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
       <div style="display:flex;flex-direction:column;gap:10px">
