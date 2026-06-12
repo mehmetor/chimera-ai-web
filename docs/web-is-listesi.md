@@ -39,6 +39,18 @@ Web sitesi geliştirme + içerik hattının canlı takip dokümanı.
 - [x] **Analitik — CANLI.** Umami (self-host, Railway; çerezsiz, tek instance tüm Simetri/DCN siteleri) → `https://analytics.simetri.app`. Site `PUBLIC_ANALYTICS_WEBSITE_ID`/`_SRC` env'leri bağlandı; pazarlama (`Base.astro`) **ve** dokümanlar (`DocsShell.astro` — blog/sözlük/SSS) bölgelerinin ikisi de izleniyor. Canlı doğrulandı: snippet + `script.js` 200 + **Set-Cookie yok** (rıza banner'ı gerekmez). GSC'den ayrı (Umami=trafik, GSC=arama/indeks).
 - [x] **SEO — Search Console + Bing kuruldu.** GSC: Domain property Cloudflare DNS ile doğrulandı; `sitemap-index.xml` artık başarıyla okunuyor (57 URL = 41 TR + 16 EN; build 58 − 404 = 57. GSC son fetch'te 54 gösteriyor, sonraki taramada 3 yeni makaleyle 57'ye çıkar). URL İnceleme ile 4 çekirdek sayfa (ana sayfa · nasil-calisir · #1 kapalı devre · #2 on-premise vs bulut) dizine ekleme isteğine alındı. **Bing Webmaster:** GSC'den import + `sitemap-index.xml` gönderildi (57 URL bulundu, "Processing") — ChatGPT/Copilot Bing indeksini kullanır, GEO için kritik. `PUBLIC_GSC_VERIFICATION` atıl yedek. (GA kullanılmıyor.)
 
+## 📣 Pazarlama / edinim — değerlendirme
+
+- [ ] **Google Ads (Arama) — değerlendir.** Organik GEO ramp ederken yüksek-niyetli sorguları ücretli aramayla yakalayıp lead'i hızlandırmak. **Karar bekliyor.** Somut bütçe/teklif rakamları DCN'de kalır (public repo'ya girmez); burada yalnız kanal + kurulum iskeleti.
+
+  *Nasıl yapılır (kısa):*
+  1. **Hesap + dönüşüm:** Google Ads hesabı (Workspace ile). Dönüşüm olayı = Mimari Ön-Analiz form gönderimi. Ölçüm: ya Google Ads dönüşüm etiketi (yalnız "teşekkür" durumunda; +1 Google scripti — veri-egemenliği duruşuyla küçük gerilim, sadece dönüşümde tetiklenir) ya da düşük hacimde offline/manuel dönüşüm.
+  2. **Kampanya tipi:** Search (Türkiye, Türkçe). Performance Max/Display başta değil (niyet düşük, israf riski).
+  3. **Reklam grupları (niyete göre):** (a) kurumsal/on-premise AI · (b) Copilot / güvenli kod asistanı alternatifi · (c) KVKK / veri egemenliği · (d) Türkçe LLM. Phrase/exact match + negatif liste (ücretsiz, indir, kurs, öğrenci, nedir-ödev…).
+  4. **Landing eşleme:** her grubu ilgili GEO sayfasına düşür (kod asistanı → ilgili blog/platform · KVKK → KVKK yazısı · genel → ana sayfa). Reklam metni sayfanın vaadiyle örtüşsün (Quality Score = düşük tıklama maliyeti).
+  5. **Metin (RSA):** marka dürüstlük çizgisi geçerli — "devrim" yok; "veri kurum içinde kalır", "kapalı devre", "KVKK zemini" gibi somut başlık/açıklamalar.
+  6. **Ölçüm:** UTM'li hedef URL'ler (Umami referrer/UTM'i görür) + GSC ile organik/ücretli ayrımı. Düşük bütçeyle başla, dönüşüm verisi birikince ölçekle.
+
 ## 📚 İçerik kaynakları (DCN — kanonik, repo dışı)
 
 Konum: `~/DCN/URUNLER/chimera-ai/`
