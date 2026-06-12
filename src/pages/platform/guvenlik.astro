@@ -1,0 +1,118 @@
+---
+// CHIMERA AI — Platform · Güvenlik (TR). Kaynak: ozellik-katalogu.md (M0 güvenlik, air-gap 3-faz, KVKK).
+import Base from "@layouts/Base.astro";
+import Frame from "@components/Frame.astro";
+import { contactSlug } from "@i18n/routes";
+import { SITE } from "../../site";
+
+const pillars = [
+  {
+    k: "01",
+    t: "Sıfır dış veri çıkışı",
+    d: "Sistem kapalı ağ kuralına göre yapılandırılır: TLS/SSL, erişim logları ve dış servise hiçbir veri gönderilmediğinin teyidi. Sohbetler, belgeler ve kod kurum sınırında kalır.",
+  },
+  {
+    k: "02",
+    t: "Erişim denetimi",
+    d: "Yerel hesaplar ve rol tanımları; istenirse LDAP/AD entegrasyonu. Rol bazlı bilgi izolasyonu: İK dokümanını yalnız İK, mevzuatı yalnız hukuk görür.",
+  },
+  {
+    k: "03",
+    t: "İzleme ve loglama",
+    d: "Kaynak kullanımı, yanıt süresi, sorgu ve aktif kullanıcı sayısı, hata logları kurum panelinde. Kim neye eriştiği izlenir — denetlenebilirlik kurumun kendi politikasında.",
+  },
+  {
+    k: "04",
+    t: "Veri bütünlüğü",
+    d: "Veri analizi salt-okunur bağlantıyla çalışır (yazma yetkisi verilmez). Dışa açık chatbot'larda sıkı guardrail; üretilen kodda derleme öncesi statik analiz şarttır.",
+  },
+];
+
+const airgap = [
+  ["1 · Hazırlık", "İnternet erişimiyle (DC NEXTGEN tarafında)", "Docker imajları yerel registry'e, model ağırlıkları ve paketler offline cache'e alınır."],
+  ["2 · Kurulum", "Kapalı ağda (kurum sahası)", "İşletim sistemi + Docker + GPU araç takımı; tüm servisler docker-compose ile; ters vekil + TLS."],
+  ["3 · Doğrulama", "Kapalı ağda", "Model yanıt testleri, LDAP/AD testi, performans testi, izleme paneli ve dış servise sıfır veri çıkışı teyidi."],
+];
+
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Chimera AI", item: SITE.url },
+    { "@type": "ListItem", position: 2, name: "Platform", item: `${SITE.url}/platform` },
+    { "@type": "ListItem", position: 3, name: "Güvenlik", item: `${SITE.url}/platform/guvenlik` },
+  ],
+};
+---
+
+<Base
+  title="Güvenlik ve Veri Egemenliği · Chimera AI Platform"
+  description="Kapalı ağ, sıfır dış veri çıkışı, rol bazlı erişim, air-gap kurulum ve KVKK. Chimera AI'da güvenlik bir özellik değil, mimarinin tabanıdır."
+  routeKey="platform"
+  jsonLd={[breadcrumb]}
+>
+  <section class="section on-light" style="--accent:var(--bronze);--accent-ink:var(--bronze-ink);--accent-on-dark:var(--bronze-on-dark)">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:44px">
+      <a class="btn-line" href="/platform" style="align-self:flex-start">← Platform</a>
+
+      <div style="max-width:720px;display:flex;flex-direction:column;gap:16px">
+        <div class="mono-label">Platform · Güvenlik</div>
+        <h1 class="h-section">Güvenlik bir özellik değil, mimarinin tabanı.</h1>
+        <p class="lede">
+          Veri egemenliği sonradan eklenen bir ayar değil; sistemin kurgusunun kendisidir. Veri kurum
+          sınırından çıkmaz — bunu yapılandırma, izleme ve doğrulamayla garanti ederiz.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        {
+          pillars.map((p) => (
+            <div class="card" style="gap:10px">
+              <span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:0.08em;color:var(--bronze-ink)">{p.k}</span>
+              <h2 class="h-card" style="font-size:calc(19px * var(--ts))">{p.t}</h2>
+              <p class="body-dim" style="font-size:calc(15px * var(--ts))">{p.d}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      {/* Air-gap kurulum */}
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <h2 class="h-card" style="font-size:calc(24px * var(--ts))">Air-gap kurulum: üç faz</h2>
+        <p class="body-dim" style="max-width:720px;font-size:calc(16px * var(--ts))">
+          En katı senaryoda sistem internetten tümüyle yalıtılır
+          (<a href="/kaynaklar/sozluk/air-gap" style="color:var(--bronze-ink);text-decoration:underline">air-gap</a>).
+          Kurulum, veri hiç dışarı çıkmadan üç fazda yapılır:
+        </p>
+        <table class="spec-table" style="max-width:860px">
+          <thead>
+            <tr><th>Faz</th><th>Ortam</th><th>İçerik</th></tr>
+          </thead>
+          <tbody>
+            {airgap.map(([f, o, i]) => <tr><td style="font-weight:600;white-space:nowrap">{f}</td><td>{o}</td><td>{i}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+
+      {/* KVKK */}
+      <Frame style="padding:28px 30px;display:flex;flex-direction:column;gap:12px;background:var(--card-light)">
+        <span class="mono-label" style="color:var(--bronze-ink)">KVKK</span>
+        <p style="font-size:calc(16px * var(--ts));color:var(--n-800)">
+          Veri yurt dışına çıkmadığı için aktarım sorunu büyük ölçüde ortadan kalkar; işleme kurum
+          denetiminde olduğundan hesap verebilirlik ve veri minimizasyonu daha kolay gösterilir.
+        </p>
+        <p class="body-dim" style="font-size:calc(14.5px * var(--ts))">
+          <strong style="color:var(--n-900)">Dürüst sınır:</strong> teknik altyapı KVKK uyumludur; veri
+          sorumlusu kurumdur ve hukuki değerlendirme kurumun sorumluluğundadır. Ayrıntı:
+          {" "}<a href="/kaynaklar/sozluk/kvkk-yapay-zeka" style="color:var(--bronze-ink);text-decoration:underline">KVKK ve yapay zeka</a>.
+        </p>
+      </Frame>
+
+      {/* CTA */}
+      <div style="display:flex;gap:14px;flex-wrap:wrap">
+        <a class="btn btn-primary" href={contactSlug("tr")}>Mimari Ön-Analiz talep edin</a>
+        <a class="btn btn-ghost" href="/platform/nasil-calisir">Nasıl çalışır</a>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -17,8 +17,10 @@ Web sitesi geliştirme + içerik hattının canlı takip dokümanı.
 - [ ] **`/platform/moduller`** — özellik kataloğundan modül kataloğu (ne yapar / kime / bileşenler / teslim / sınırlar). *Kaynak: `ozellik-katalogu.md`.*
 - [x] **`/platform/nasil-calisir`** — üçlü mimari dürüst anlatımı (Akıl/Hafıza=teslim, El/MCP=yol haritası) + kapalı devre diyagramı + KEP kanıtı.
 - [x] **Sözlük genişletme** — 8 yeni terim: embedding, reranker, vektör veritabanı, MoE, quantization, MCP, fine-tuning/LoRA, guardrail. (STT/TTS ileride eklenebilir.) Toplam 13 TR terim.
-- [ ] **Mobil nav menüsü** (linkler 1020px altında gizleniyor, hamburger yok).
-- [ ] `/platform/guvenlik` — güvenlik / KVKK / air-gap. *Kaynak: data-security içeriği.*
+- [x] **Mobil nav menüsü** — hamburger + açılır panel (erişilebilir, <1020px).
+- [x] **`/platform/guvenlik`** — sıfır dış veri çıkışı, erişim denetimi, izleme, veri bütünlüğü, air-gap 3-faz, KVKK dürüst sınır. *Kaynak: ozellik-katalogu (M0 güvenlik).*
+
+> **Platform alt sayfaları tamam:** moduller · nasil-calisir · guvenlik (hepsi Platform bölümünden + birbirinden linkli).
 
 ## ⏳ DCN içeriği / karar bekleyen
 

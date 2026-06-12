@@ -11,8 +11,10 @@ interface Props {
   modulesHref?: string;
   /** Verilirse diyagram altında "Bu mimari nasıl çalışır? →" linki (TR /platform/nasil-calisir). */
   howHref?: string;
+  /** Verilirse diyagram altında "Güvenlik →" linki (TR /platform/guvenlik). */
+  securityHref?: string;
 }
-const { t, modulesHref, howHref } = Astro.props;
+const { t, modulesHref, howHref, securityHref } = Astro.props;
 type ModCode = "M0" | "M1" | "M2" | "M3" | "M4" | "M5" | "M6";
 ---
 
@@ -31,7 +33,14 @@ type ModCode = "M0" | "M1" | "M2" | "M3" | "M4" | "M5" | "M6";
     <Frame style="padding:36px 32px;background:var(--card-light)">
       <ClosedCircuitDiagram t={t.platform.diagram} dark={false} />
     </Frame>
-    {howHref && <a class="btn-line" href={howHref} style="align-self:flex-start;margin-top:-24px">Bu mimari nasıl çalışır? →</a>}
+    {
+      (howHref || securityHref) && (
+        <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:-24px">
+          {howHref && <a class="btn-line" href={howHref}>Bu mimari nasıl çalışır? →</a>}
+          {securityHref && <a class="btn-line" href={securityHref}>Güvenlik →</a>}
+        </div>
+      )
+    }
 
     <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
       <div style="display:flex;flex-direction:column;gap:10px">
