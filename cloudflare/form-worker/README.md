@@ -26,24 +26,21 @@ Ziyaretçi → form POST → Cloudflare Worker (chimera-ai.com.tr/api/on-analiz)
 
 ## Adımlar
 
-### 1. Email Routing'i `chimera-ai.com.tr`'de aç
+### ✅ 1. Email Routing'i `chimera-ai.com.tr`'de aç
 Cloudflare Dashboard → ilgili hesap → **`chimera-ai.com.tr`** → **Email** → **Email Routing** → **Get started / Enable**.
 Cloudflare gerekli **MX + TXT (SPF/DKIM)** kayıtlarını otomatik ekler. (Site A/CNAME kayıtları, Railway proxy'si etkilenmez — yalnız e-posta kayıtları.)
 
-### 2. Hedef (gelen kutusu) adresini doğrula
-Email Routing → **Destination addresses** → **Add** → Workspace kutunu gir (örn. `info@dcnextgen.com.tr` ya da özel bir `lead@dcnextgen.com.tr`).
-Cloudflare o adrese **doğrulama maili** yollar → mailden linke tıkla. ✅
+### ✅ 2. Hedef (gelen kutusu) adresini doğrula
+Email Routing → **Destination addresses** → **Add** → doğruladığın Workspace hedef adresi girildi ve doğrulandı.
 > Bu adım `dcnextgen.com.tr`'nin MX'ini **değiştirmez** — sadece Cloudflare'in oraya yollamasına izin verir.
 
-### 3. (Önerilir) `info@chimera-ai.com.tr`'yi yönlendir
-Email Routing → **Routing rules** → `info@chimera-ai.com.tr` → **Send to** → doğruladığın Workspace kutusu. Böylece sitedeki `info@` adresi de sana ulaşır.
+### ✅ 3. (Önerilir) `info@chimera-ai.com.tr`'yi yönlendir
+Email Routing → **Routing rules** → Catch-all etkinleştirildi → doğrulanmış hedefe yönlendiriliyor.
 
-### 4. `wrangler.toml`'u düzenle
-`GELEN_KUTUSU@dcnextgen.com.tr` geçen **iki satırı** (2. adımda doğruladığın gerçek adresle) değiştir:
-- `[[send_email]] destination_address`
-- `[vars] LEAD_TO`
+### ✅ 4. `wrangler.toml`'u düzenle
+`destination_address` ve `LEAD_TO` → doğrulanmış hedef adresle güncellendi.
 
-### 5. Worker'ı deploy et
+### ✅ 5. Worker'ı deploy et
 ```bash
 cd cloudflare/form-worker
 npm install
@@ -53,12 +50,8 @@ npx wrangler deploy
 `routes` tanımı sayesinde `chimera-ai.com.tr/api/on-analiz` otomatik bağlanır.
 > Hesapta birden çok zone varsa: `npx wrangler deploy` doğru hesabı seçili istersen `CLOUDFLARE_ACCOUNT_ID` ver.
 
-### 6. Siteye endpoint'i tanıt
-Railway (site) ortam değişkeni:
-```
-PUBLIC_FORM_ENDPOINT=https://chimera-ai.com.tr/api/on-analiz
-```
-Kaydet → siteyi yeniden deploy et. Artık form **AJAX** gönderir (mailto fallback devre dışı).
+### ✅ 6. Siteye endpoint'i tanıt
+Railway (site) ortam değişkeni `PUBLIC_FORM_ENDPOINT=https://chimera-ai.com.tr/api/on-analiz` eklendi, site yeniden deploy edildi.
 
 ### 7. Test
 Formu doldur → gönder. Workspace kutuna **"Mimari Ön-Analiz talebi — <Kurum>"** başlıklı mail düşmeli. Yanıtla'ya basınca doğrudan ziyaretçiye gider (Reply-To).
