@@ -29,7 +29,7 @@ Web sitesi geliştirme + içerik hattının canlı takip dokümanı.
 
 - [x] **Benchmark Raporu sayfası** (`/kaynaklar/rapor/2026-06`) — Haziran raporundan **public-safe damıtım** yapıldı: `reports` koleksiyonu + indeks + detay (TechArticle JSON-LD), ana sayfa Kaynaklar'a kart. Tüketici GPU sokak fiyatı göreceli rehbere indirildi, LaTeX düzeltildi, "her ay yayımlanan rapor" iddiasının **kanonik dayanağı** kuruldu. ⚠️ **Yayın (deploy) öncesi Demet onayı gerekir.**
 - [x] **Rapordan odaklı blog yazıları** (IA §4.2): **#9 en iyi Türkçe LLM · #6 donanım seçimi · #5 LLM hazır mı ✅** (`/dokumanlar/blog/{turkce-icin-en-iyi-acik-kaynak-llm, on-premise-llm-donanim-secimi, acik-kaynak-llm-kuruma-hazir-mi}`). Tüm Türkçe içerik global `tr-humanizer` skill'iyle yazıldı (doğal Türkçe + AI-tell temizliği; noktadan-sonra-bağlaç kuralı dahil; her biri 3 mercekli adversaryal incelemeden geçti).
-- [ ] Diğer GEO makaleleri (IA §4.2 kalan başlıklar).
+- [~] GEO makaleleri (IA §4.2 — 10 çekirdek). Tamam: **#2 on-premise vs bulut · #5 LLM hazır mı · #6 donanım · #9 Türkçe LLM · #1 kapalı devre nedir · #4 RAG nedir · #7 kapalı ağda kod asistanı** (7/10). Kalan: #3 KVKK, #8 self-hosted DevOps, #10 halüsinasyon (KEP vakası).
 - [ ] Gerçek saha fotoğrafları (duotone slot'lar: hero, referanslar).
 - [ ] Referans vaka detayları (anonim — onaya bağlı).
 
